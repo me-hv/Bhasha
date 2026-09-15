@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-foundation: #090A0E;
+  --bg-sidebar: #0C0F14;
+  --bg-surface: #10141B;
+  --bg-elevated: #151A22;
+  --border-primary: #1D222D;
+  --border-interactive: #28303F;
+  --text-primary: #F3F4F6;
+  --text-secondary: #9CA3AF;
+  --text-muted: #626A78;
+  --accent-emerald: #10B981;
+}
+
+body {
+  background-color: #090A0E;
+  color: #F3F4F6;
+  font-family: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: rgba(16, 185, 129, 0.25);
+  color: #F3F4F6;
+}
+
+/* Custom Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1D222D;
+  border-radius: 2.5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #28303F;
+}
+
+/* Seamless Lyrics Canvas Editor */
+.lyrics-canvas-textarea {
+  tab-size: 2;
+  line-height: 2.1;
+  caret-color: #10B981;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  box-shadow: none;
+}
+
+.lyrics-canvas-textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Line number transition */
+.line-num-active {
+  color: #10B981;
+  font-weight: 600;
+}
+
+.line-num-idle {
+  color: #626A78;
+}
+
+/* Smooth micro-transitions */
+.transition-fast {
+  transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
