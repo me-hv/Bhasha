@@ -1,15 +1,20 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Song } from '../../types';
+import { Song, WritingMode } from '../../types';
 import {
   ArrowLeft,
   Copy,
   Download,
   Check,
-  Tag,
-  Share2
+  Layers,
+  BarChart3,
+  Sparkles,
+  PenTool,
+  Flame,
+  Activity,
+  Target
 } from 'lucide-react';
 import { copyToClipboard, downloadTextFile, formatSongMarkdown } from '../../lib/utils/export';
 
@@ -18,23 +23,30 @@ interface EditorHeaderProps {
   onUpdateSong: (updated: Partial<Song>) => void;
   onInsertSection: (sectionTag: string) => void;
   isSaving?: boolean;
+  mode: WritingMode;
+  onModeChange: (mode: WritingMode) => void;
+  targetSyllables: number;
+  onTargetSyllablesChange: (count: number) => void;
+  onOpenStructure?: () => void;
+  onOpenStats?: () => void;
+  onOpenStuck?: () => void;
 }
 
 const COMMON_KEYS = ['Am', 'Em', 'Dm', 'Cm', 'F#m', 'Gm', 'Bm', 'C', 'G', 'D', 'A', 'F'];
-const SECTION_TEMPLATES = [
-  '[Verse 1]',
-  '[Verse 2]',
-  '[Hook]',
-  '[Chorus]',
-  '[Bridge]',
-  '[Outro]',
-];
+const TARGET_SYLLABLE_OPTIONS = [8, 10, 12, 14, 16];
 
 export const EditorHeader: React.FC<EditorHeaderProps> = ({
   song,
   onUpdateSong,
   onInsertSection,
   isSaving = false,
+  mode,
+  onModeChange,
+  targetSyllables,
+  onTargetSyllablesChange,
+  onOpenStructure,
+  onOpenStats,
+  onOpenStuck,
 }) => {
   const router = useRouter();
   const [copied, setCopied] = useState(false);
@@ -52,11 +64,11 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
   };
 
   return (
-    <div className="border-b border-obsidian-700/60 bg-obsidian-950/90 px-6 sm:px-12 py-3.5 space-y-3 select-none">
+    <div className="border-b border-obsidian-700/60 bg-obsidian-950/95 px-4 sm:px-8 py-3 space-y-2.5 select-none">
       {/* Top Bar: Back Link, Title, Status, Saved, Export */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         {/* Left: Back to songs & Title */}
-        <div className="flex items-center gap-4 flex-1 min-w-0">
+        <div className="flex items-center gap-3.5 flex-1 min-w-0">
           <button
             onClick={() => router.push('/library/songs')}
             className="flex items-center gap-1.5 text-xs font-mono text-obsidian-500 hover:text-obsidian-200 transition-fast"
@@ -73,12 +85,12 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
             value={song.title}
             onChange={(e) => onUpdateSong({ title: e.target.value })}
             placeholder="UNTITLED SONG"
-            className="text-base sm:text-lg font-mono font-semibold text-obsidian-50 bg-transparent focus:outline-none placeholder-obsidian-600 truncate max-w-sm"
+            className="text-sm sm:text-base font-mono font-semibold text-obsidian-50 bg-transparent focus:outline-none placeholder-obsidian-600 truncate max-w-xs sm:max-w-sm"
           />
         </div>
 
         {/* Right: Key, Status, Saved indicator, Actions */}
-        <div className="flex items-center gap-3 self-end sm:self-auto">
+        <div className="flex items-center gap-2.5 self-end sm:self-auto flex-wrap">
           {/* Key Picker */}
           <div className="flex items-center gap-1 text-xs font-mono text-obsidian-500">
             <span>Key:</span>
@@ -110,7 +122,7 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
           {/* Autosave Status */}
           <div className="flex items-center gap-1.5 text-xs font-mono text-obsidian-500">
             <span className={`w-1.5 h-1.5 rounded-full ${isSaving ? 'bg-amber-400 animate-ping' : 'bg-accent'}`} />
-            <span>{isSaving ? 'Saving...' : 'Saved'}</span>
+            <span className="hidden md:inline">{isSaving ? 'Saving...' : 'Saved'}</span>
           </div>
 
           {/* Copy Button */}
@@ -122,12 +134,12 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
             {copied ? (
               <>
                 <Check className="w-3 h-3 text-accent" />
-                <span>Copied</span>
+                <span className="hidden sm:inline">Copied</span>
               </>
             ) : (
               <>
                 <Copy className="w-3 h-3" />
-                <span>Copy</span>
+                <span className="hidden sm:inline">Copy</span>
               </>
             )}
           </button>
@@ -139,25 +151,110 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
             title="Download Song Markdown (.md)"
           >
             <Download className="w-3 h-3" />
-            <span>Export</span>
+            <span className="hidden sm:inline">Export</span>
           </button>
         </div>
       </div>
 
-      {/* Structure Quick Insertion Chips */}
-      <div className="flex items-center gap-1.5 overflow-x-auto text-xs font-mono">
-        <span className="text-[11px] text-obsidian-600 whitespace-nowrap mr-1">
-          + Structure:
-        </span>
-        {SECTION_TEMPLATES.map((section) => (
+      {/* Second Row: Mode Switcher (WRITE / RHYME / FLOW), Target Syllables, Structure & Stuck buttons */}
+      <div className="flex items-center justify-between gap-3 pt-1 border-t border-obsidian-800/60 overflow-x-auto">
+        {/* Left: Mode Switcher (WRITE, RHYME, FLOW) */}
+        <div className="flex items-center gap-1 bg-obsidian-900/90 border border-obsidian-700/60 rounded p-0.5">
           <button
-            key={section}
-            onClick={() => onInsertSection(`\n${section}\n`)}
-            className="px-2 py-0.5 rounded bg-obsidian-925 hover:bg-obsidian-900 border border-obsidian-700/50 hover:border-obsidian-600 text-obsidian-400 hover:text-obsidian-100 text-[11px] whitespace-nowrap transition-fast"
+            onClick={() => onModeChange('write')}
+            className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-mono transition-fast ${
+              mode === 'write'
+                ? 'bg-obsidian-800 text-white font-semibold border border-obsidian-600 shadow-sm'
+                : 'text-obsidian-400 hover:text-obsidian-200'
+            }`}
+            title="Pure Writing Canvas"
           >
-            {section}
+            <PenTool className="w-3 h-3" />
+            <span>WRITE</span>
           </button>
-        ))}
+
+          <button
+            onClick={() => onModeChange('rhyme')}
+            className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-mono transition-fast ${
+              mode === 'rhyme'
+                ? 'bg-rhyme-perfect/20 text-rhyme-perfect font-semibold border border-rhyme-perfect/50 shadow-sm'
+                : 'text-obsidian-400 hover:text-obsidian-200'
+            }`}
+            title="Rhyme Chains & Internal Rhyme Discovery (⌘Shift+R)"
+          >
+            <Flame className="w-3 h-3" />
+            <span>RHYME</span>
+          </button>
+
+          <button
+            onClick={() => onModeChange('flow')}
+            className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-mono transition-fast ${
+              mode === 'flow'
+                ? 'bg-cyan-500/20 text-cyan-400 font-semibold border border-cyan-500/50 shadow-sm'
+                : 'text-obsidian-400 hover:text-obsidian-200'
+            }`}
+            title="Syllable Meter & Flow Density (⌘Shift+F)"
+          >
+            <Activity className="w-3 h-3" />
+            <span>FLOW</span>
+          </button>
+        </div>
+
+        {/* Right Controls: Target Syllables, Structure, Stats, I'M STUCK */}
+        <div className="flex items-center gap-2">
+          {/* Target Syllables (Flow / Rhyme mode) */}
+          <div className="flex items-center gap-1.5 bg-obsidian-900 border border-obsidian-700/60 rounded px-2 py-0.5 text-xs font-mono text-obsidian-400">
+            <Target className="w-3 h-3 text-obsidian-500" />
+            <span className="text-[11px] text-obsidian-500">Target:</span>
+            <select
+              value={targetSyllables}
+              onChange={(e) => onTargetSyllablesChange(Number(e.target.value))}
+              className="bg-transparent text-accent font-bold focus:outline-none cursor-pointer"
+            >
+              {TARGET_SYLLABLE_OPTIONS.map((count) => (
+                <option key={count} value={count} className="bg-obsidian-900 text-obsidian-100">
+                  {count} syls
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* I'M STUCK Catalyst */}
+          {onOpenStuck && (
+            <button
+              onClick={onOpenStuck}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-accent/15 hover:bg-accent/25 border border-accent/40 text-xs font-mono text-accent transition-fast active:scale-95"
+              title="Creative Catalyst & Idea Seeds (⌘Shift+I)"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>+ I&apos;M STUCK</span>
+            </button>
+          )}
+
+          {/* Structure Drawer Toggle */}
+          {onOpenStructure && (
+            <button
+              onClick={onOpenStructure}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-obsidian-900 hover:bg-obsidian-850 border border-obsidian-700/60 text-xs font-mono text-obsidian-300 hover:text-white transition-fast"
+              title="Toggle Song Structure (⌘Shift+S)"
+            >
+              <Layers className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">Structure</span>
+            </button>
+          )}
+
+          {/* Stats Modal Toggle */}
+          {onOpenStats && (
+            <button
+              onClick={onOpenStats}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-obsidian-900 hover:bg-obsidian-850 border border-obsidian-700/60 text-xs font-mono text-obsidian-300 hover:text-white transition-fast"
+              title="Writing Analytics & Rhyme Density"
+            >
+              <BarChart3 className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">Stats</span>
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

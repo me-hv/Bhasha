@@ -14,7 +14,8 @@ import {
 } from 'lucide-react';
 import { getRhymes, getWord } from '../../lib/language-engine/rhyme-engine';
 import { useLexicon } from '../../hooks/useLexicon';
-import { RhymeResult, WordEntry } from '../../types';
+import { RhymeResult, WordEntry, RhymeTarget } from '../../types';
+import { Target } from 'lucide-react';
 
 interface RhymeDrawerProps {
   isOpen: boolean;
@@ -22,6 +23,9 @@ interface RhymeDrawerProps {
   selectedWord: string;
   onInsertWord: (word: string) => void;
   onViewWordDetails?: (word: WordEntry) => void;
+  pinnedTarget?: RhymeTarget | null;
+  onSetRhymeTarget?: (word: string) => void;
+  onClearRhymeTarget?: () => void;
 }
 
 export const RhymeDrawer: React.FC<RhymeDrawerProps> = ({
@@ -30,6 +34,9 @@ export const RhymeDrawer: React.FC<RhymeDrawerProps> = ({
   selectedWord,
   onInsertWord,
   onViewWordDetails,
+  pinnedTarget,
+  onSetRhymeTarget,
+  onClearRhymeTarget,
 }) => {
   const [searchTerm, setSearchTerm] = useState(selectedWord);
   const [rhymeData, setRhymeData] = useState<RhymeResult | null>(null);
@@ -135,6 +142,30 @@ export const RhymeDrawer: React.FC<RhymeDrawerProps> = ({
             </div>
 
             <div className="flex items-center gap-1.5">
+              {onSetRhymeTarget && (
+                <button
+                  onClick={() => {
+                    if (pinnedTarget?.devanagari === currentDevanagari && onClearRhymeTarget) {
+                      onClearRhymeTarget();
+                    } else {
+                      onSetRhymeTarget(currentDevanagari);
+                    }
+                  }}
+                  className={`p-1.5 rounded border transition-fast ${
+                    pinnedTarget?.devanagari === currentDevanagari
+                      ? 'bg-amber-500/20 border-amber-500 text-amber-400'
+                      : 'bg-obsidian-950 border-obsidian-700/60 text-obsidian-400 hover:text-amber-400 hover:bg-obsidian-850'
+                  }`}
+                  title={
+                    pinnedTarget?.devanagari === currentDevanagari
+                      ? 'Pinned as Rhyme Target (Click to unpin)'
+                      : 'Pin as Rhyme Target'
+                  }
+                >
+                  <Target className="w-4 h-4" />
+                </button>
+              )}
+
               <button
                 onClick={toggleSave}
                 className={`p-1.5 rounded border transition-fast ${

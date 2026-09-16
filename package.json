@@ -10,7 +10,8 @@
     "build-corpus": "tsx scripts/corpus/build-corpus.ts",
     "audit": "tsx scripts/corpus/coverage-audit.ts",
     "test:linguistic": "tsx src/tests/linguistic-correctness.test.ts",
-    "test": "tsx src/tests/language-engine.test.ts && tsx src/tests/corpus-regression.test.ts && tsx src/tests/rhyme-quality.test.ts && tsx src/tests/linguistic-correctness.test.ts"
+    "test:verse": "tsx src/tests/verse-analysis.test.ts",
+    "test": "tsx src/tests/language-engine.test.ts && tsx src/tests/corpus-regression.test.ts && tsx src/tests/rhyme-quality.test.ts && tsx src/tests/linguistic-correctness.test.ts && tsx src/tests/verse-analysis.test.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

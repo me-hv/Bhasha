@@ -251,3 +251,93 @@ export interface AppPreferences {
   zenMode: boolean;
   focusLineOnly: boolean;
 }
+
+// =========================================================================
+// PHASE 7: RAP WRITING OS & STUDIO TYPES
+// =========================================================================
+
+export type WritingMode = 'write' | 'rhyme' | 'flow';
+
+export interface RhymeTarget {
+  word: string;
+  devanagari: string;
+  roman?: string;
+  lineIndex?: number;
+  isPinned?: boolean;
+}
+
+export interface RhymeGroup {
+  id: string;
+  letter: string; // 'A', 'B', 'C', 'D'...
+  color: string;  // Hex/tailwind color
+  lines: number[]; // 0-indexed line numbers in the song/section
+  anchorWord: string;
+}
+
+export interface InternalRhymeMatch {
+  wordA: string;
+  wordB: string;
+  lineIndex: number;
+  score: number;
+  type: RhymeType;
+  spanA?: [number, number];
+  spanB?: [number, number];
+}
+
+export interface FlowAnalysis {
+  syllables: number;
+  targetSyllables?: number;
+  density?: number; // Syllables per beat (based on 4 beats per bar)
+  cadencePattern: string; // e.g. "● — ● ● — ●"
+  isDense?: boolean;
+}
+
+export interface ParsedLine {
+  index: number;
+  line: string;
+  rawText: string;
+  isHeader: boolean;
+  headerTitle?: string;
+  isBlank: boolean;
+  barNumber: number | null;
+  words: string[];
+  endWord: string | null;
+  syllables: number | null;
+  rhymeGroup?: string;
+  rhymeGroupColor?: string;
+  flow?: FlowAnalysis;
+  internalRhymes: InternalRhymeMatch[];
+}
+
+export interface ParsedSection {
+  id: string;
+  title: string;
+  type: string;
+  startLineIndex: number;
+  endLineIndex: number;
+  lines: ParsedLine[];
+  barCount: number;
+}
+
+export interface SongStats {
+  totalWords: number;
+  totalBars: number;
+  totalSyllables: number;
+  avgSyllables: number;
+  rhymeGroups: number;
+  internalRhymes: number;
+  rhymeDensity: number; // 0 to 100 percentage
+}
+
+export interface IdeaSeed {
+  id: string;
+  category: 'CONCEPT' | 'IMAGE' | 'CONTRAST' | 'EMOTION';
+  title?: string;
+  concept: string;
+  image: string;
+  contrast: string;
+  emotion: string;
+  keywords?: { devanagari: string; roman: string }[];
+  sampleBar?: string;
+}
+

@@ -13,7 +13,7 @@ import {
   ArrowRight,
   X
 } from 'lucide-react';
-import { getRhymes, getWordDetails, searchLexicon } from '../../lib/rhyme-engine';
+import { getRhymes, getWord, searchDictionary } from '../../lib/language-engine';
 import { useSongs } from '../../hooks/useSongs';
 import { WordEntry, RhymeResult } from '../../types';
 
@@ -56,8 +56,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     const rhymes = getRhymes(query);
     setRhymeResult(rhymes);
 
-    const words = searchLexicon(query);
-    setMatchingWords(words.slice(0, 5));
+    const words = searchDictionary(query, 5);
+    setMatchingWords(words);
   }, [query]);
 
   if (!isOpen) return null;
@@ -157,7 +157,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                           key={r.word}
                           onClick={() => {
                             if (onSelectRhyme) onSelectRhyme(r.word);
-                            const w = getWordDetails(r.word);
+                            const w = getWord(r.word);
                             if (w && onSelectWord) onSelectWord(w);
                             onClose();
                           }}
@@ -181,7 +181,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                           key={r.word}
                           onClick={() => {
                             if (onSelectRhyme) onSelectRhyme(r.word);
-                            const w = getWordDetails(r.word);
+                            const w = getWord(r.word);
                             if (w && onSelectWord) onSelectWord(w);
                             onClose();
                           }}
