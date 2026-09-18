@@ -21,7 +21,7 @@ export function downloadTextFile(filename: string, content: string): void {
 }
 
 export function formatSongMarkdown(song: Song): string {
-  const lines = song.content.split('\n');
+  const lines = (song.content || '').split('\n');
   let currentBar = 0;
   const formattedLines: string[] = [];
 
@@ -34,7 +34,8 @@ export function formatSongMarkdown(song: Song): string {
 
     if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
       currentBar = 0; // Reset bar counter per section
-      formattedLines.push(`\n${trimmed.toUpperCase()}\n`);
+      const sectionName = trimmed.slice(1, -1).trim();
+      formattedLines.push(`\n## ${sectionName}\n`);
       continue;
     }
 
@@ -56,4 +57,3 @@ ${song.scratchpadNotes ? `\n### Scratchpad & Notes\n${song.scratchpadNotes}\n` :
 *Written in BHASHA — Hindi/Hinglish Rap Writing OS*
 `;
 }
-

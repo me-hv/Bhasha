@@ -312,6 +312,7 @@ export interface ParsedLine {
   syllables: number | null;
   rhymeGroup?: string;
   rhymeGroupColor?: string;
+  isUnrhymed?: boolean;
   flow?: FlowAnalysis;
   internalRhymes: InternalRhymeMatch[];
 }

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Song, WordEntry, WritingMode, RhymeTarget } from '../../types';
@@ -77,14 +77,16 @@ export const SongEditor: React.FC<SongEditorProps> = ({
     }, 400);
   };
 
-  // Helper to extract clean word at or near cursor
+  const [explicitSelectedWord, setExplicitSelectedWord] = useState<string | null>(null);
+
+  // Helper to extract clean word at or near cursor with explicit selection detection
   const extractWordAtCursor = useCallback((text: string, selectionStart: number, selectionEnd: number) => {
     // 1. Explicit selection takes highest precedence
     if (selectionStart !== selectionEnd) {
       const selected = text.substring(selectionStart, selectionEnd).trim();
       const cleaned = selected.replace(/^[.,/#!$%^&*;:{}=\-_`~()?"'<>।॥]+|[.,/#!$%^&*;:{}=\-_`~()?"'<>।॥]+$/g, '');
       if (cleaned.length > 0 && cleaned.length < 35) {
-        return cleaned;
+        return { word: cleaned, isExplicit: true };
       }
     }
 
@@ -123,7 +125,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
         end++;
       }
       const rawWord = currentLine.substring(start, end).trim();
-      if (rawWord) return rawWord;
+      if (rawWord) return { word: rawWord, isExplicit: false };
     }
 
     // 4. Fallback: find the last word on the line before the cursor
@@ -132,7 +134,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
       const words = lineUpToCursor.split(/\s+/).filter(Boolean);
       if (words.length > 0) {
         const last = words[words.length - 1].replace(/^[.,/#!$%^&*;:{}=\-_`~()?"'<>।॥]+|[.,/#!$%^&*;:{}=\-_`~()?"'<>।॥]+$/g, '');
-        if (last) return last;
+        if (last) return { word: last, isExplicit: false };
       }
     }
 
@@ -140,7 +142,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
     const allWordsOnLine = currentLine.split(/\s+/).filter(Boolean);
     if (allWordsOnLine.length > 0) {
       const last = allWordsOnLine[allWordsOnLine.length - 1].replace(/^[.,/#!$%^&*;:{}=\-_`~()?"'<>।॥]+|[.,/#!$%^&*;:{}=\-_`~()?"'<>।॥]+$/g, '');
-      if (last) return last;
+      if (last) return { word: last, isExplicit: false };
     }
 
     return null;
@@ -158,7 +160,15 @@ export const SongEditor: React.FC<SongEditorProps> = ({
 
     const detected = extractWordAtCursor(content, textarea.selectionStart, textarea.selectionEnd);
     if (detected) {
-      setCursorWord(detected);
+      if (detected.isExplicit) {
+        setExplicitSelectedWord(detected.word);
+        setCursorWord(detected.word);
+      } else {
+        setExplicitSelectedWord(null);
+        setCursorWord(detected.word);
+      }
+    } else {
+      setExplicitSelectedWord(null);
     }
   }, [content, extractWordAtCursor]);
 
@@ -221,8 +231,8 @@ export const SongEditor: React.FC<SongEditorProps> = ({
     return parseSongContent(content, song.bpm, targetSyllables, pinnedTarget || undefined);
   }, [content, song.bpm, targetSyllables, pinnedTarget]);
 
-  // Top fast rhymes for the active cursor word or pinned target
-  const effectiveSearchWord = pinnedTarget ? pinnedTarget.devanagari : cursorWord;
+  // Priority: 1. Explicit selection -> 2. Pinned Target -> 3. Cursor word / Line ending
+  const effectiveSearchWord = explicitSelectedWord || (pinnedTarget ? pinnedTarget.devanagari : cursorWord);
   const activeRhymes = useMemo(() => {
     if (!effectiveSearchWord) return [];
     const res = getRhymes(effectiveSearchWord);
@@ -367,8 +377,28 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                       isCurrent ? 'text-accent font-medium' : 'text-obsidian-500'
                     }`}
                   >
-                    {/* Rhyme Group Badge (A, B, C...) */}
-                    {item.rhymeGroup ? (
+                    {/* Rhyme Group Badge (A, B, C...) or Unrhymed (—) in Rhyme Mode */}
+                    {writingMode === 'rhyme' ? (
+                      item.rhymeGroup ? (
+                        <span
+                          className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded border shadow-sm ${
+                            item.rhymeGroupColor || 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50'
+                          }`}
+                          title={`Rhyme Group ${item.rhymeGroup}`}
+                        >
+                          {item.rhymeGroup}
+                        </span>
+                      ) : item.barNumber !== null ? (
+                        <span
+                          className="text-[10px] font-mono text-obsidian-600 px-1 rounded border border-obsidian-800/40 bg-obsidian-950/60"
+                          title="Unrhymed bar"
+                        >
+                          —
+                        </span>
+                      ) : (
+                        <span className="w-4" />
+                      )
+                    ) : item.rhymeGroup ? (
                       <span
                         className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded border shadow-sm ${
                           item.rhymeGroupColor || 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50'
@@ -408,7 +438,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                             : `${item.syllables} syllables`
                         }
                       >
-                        {writingMode === 'flow' ? `${item.syllables}/${targetSyllables}` : item.syllables}
+                        {writingMode === 'flow' ? `${item.syllables}/${targetSyllables}` : writingMode === 'write' && !isCurrent ? '' : item.syllables}
                       </span>
                     ) : (
                       <span className="w-3" />

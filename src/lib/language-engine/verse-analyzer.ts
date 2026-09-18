@@ -446,6 +446,7 @@ export function parseSongContent(
       syllables: l.syllables,
       rhymeGroup: groupLetter,
       rhymeGroupColor: colorData?.badge,
+      isUnrhymed: !groupLetter && l.isBar,
       flow: l.flow,
       internalRhymes: l.internalRhymes,
     };

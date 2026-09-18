@@ -11,7 +11,12 @@ import {
   Bookmark,
   Music,
   ArrowRight,
-  X
+  X,
+  Layers,
+  Activity,
+  PenTool,
+  Save,
+  Download
 } from 'lucide-react';
 import { getRhymes, getWord, searchDictionary } from '../../lib/language-engine';
 import { useSongs } from '../../hooks/useSongs';
@@ -22,6 +27,7 @@ interface CommandPaletteProps {
   onClose: () => void;
   onSelectWord?: (word: WordEntry) => void;
   onSelectRhyme?: (rhyme: string) => void;
+  onTriggerAction?: (action: string) => void;
 }
 
 export const CommandPalette: React.FC<CommandPaletteProps> = ({
@@ -29,6 +35,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   onClose,
   onSelectWord,
   onSelectRhyme,
+  onTriggerAction,
 }) => {
   const router = useRouter();
   const { songs, createSong, selectSong } = useSongs();
@@ -80,11 +87,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   };
 
   return (
-    <div 
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 p-4 bg-black/80 backdrop-blur-sm animate-fade-in"
+    <div
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 p-4 bg-black/80 backdrop-blur-sm animate-fade-in select-none"
       onClick={onClose}
     >
-      <div 
+      <div
         className="w-full max-w-xl bg-obsidian-925 border border-obsidian-700/80 rounded-lg shadow-panel overflow-hidden text-obsidian-50"
         onClick={(e) => e.stopPropagation()}
       >
@@ -96,11 +103,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search Hindi or Roman Hindi... (e.g. raat, dil, pyaar, khwaab)"
+            placeholder="Search commands, rhymes or words... (e.g. raat, new, flow)"
             className="flex-1 bg-transparent text-sm text-obsidian-100 placeholder-obsidian-500 focus:outline-none font-mono"
           />
           {query ? (
-            <button 
+            <button
               onClick={() => setQuery('')}
               className="p-1 text-obsidian-500 hover:text-white rounded"
             >
@@ -120,7 +127,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             <div className="p-3 rounded bg-obsidian-950 border border-obsidian-700/60">
               <div className="flex items-baseline justify-between mb-2">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-xs font-mono text-obsidian-500">Root:</span>
+                  <span className="text-xs font-mono text-obsidian-500">Rhyme Root:</span>
                   <span className="text-lg font-bold font-devanagari text-white">
                     {rhymeResult.resolvedDevanagari}
                   </span>
@@ -233,10 +240,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             </div>
           )}
 
-          {/* Quick Actions Navigation */}
+          {/* Core Studio Actions */}
           <div>
             <span className="text-[9px] font-mono font-semibold text-obsidian-500 uppercase tracking-wider px-2 block mb-1">
-              ACTIONS
+              STUDIO COMMANDS
             </span>
             <div className="space-y-0.5">
               <button
@@ -251,36 +258,103 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               </button>
 
               <button
-                onClick={() => handleNavigate('/explore/rhymes')}
+                onClick={() => {
+                  onTriggerAction?.('toggleRhymeRack');
+                  onClose();
+                }}
                 className="w-full flex items-center justify-between px-3 py-2 rounded hover:bg-obsidian-900 text-xs text-obsidian-300 hover:text-white transition-fast group"
               >
                 <div className="flex items-center gap-2.5">
                   <Flame className="w-3.5 h-3.5 text-rhyme-perfect" />
-                  <span>Explore Rhymes</span>
+                  <span>Toggle Rhyme Rack</span>
+                </div>
+                <span className="text-[10px] font-mono text-obsidian-500">⌘B</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  onTriggerAction?.('toggleRhymeMode');
+                  onClose();
+                }}
+                className="w-full flex items-center justify-between px-3 py-2 rounded hover:bg-obsidian-900 text-xs text-obsidian-300 hover:text-white transition-fast group"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Flame className="w-3.5 h-3.5 text-rhyme-strong" />
+                  <span>Toggle Rhyme Mode</span>
+                </div>
+                <span className="text-[10px] font-mono text-obsidian-500">⌘⇧R</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  onTriggerAction?.('toggleFlowMode');
+                  onClose();
+                }}
+                className="w-full flex items-center justify-between px-3 py-2 rounded hover:bg-obsidian-900 text-xs text-obsidian-300 hover:text-white transition-fast group"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Activity className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Toggle Flow & Syllable Mode</span>
+                </div>
+                <span className="text-[10px] font-mono text-obsidian-500">⌘⇧F</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  onTriggerAction?.('toggleStuck');
+                  onClose();
+                }}
+                className="w-full flex items-center justify-between px-3 py-2 rounded hover:bg-obsidian-900 text-xs text-obsidian-300 hover:text-white transition-fast group"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Sparkles className="w-3.5 h-3.5 text-accent" />
+                  <span>I&apos;m Stuck · Creative Catalyst</span>
+                </div>
+                <span className="text-[10px] font-mono text-obsidian-500">⌘⇧I</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  onTriggerAction?.('toggleStructure');
+                  onClose();
+                }}
+                className="w-full flex items-center justify-between px-3 py-2 rounded hover:bg-obsidian-900 text-xs text-obsidian-300 hover:text-white transition-fast group"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Layers className="w-3.5 h-3.5 text-obsidian-400" />
+                  <span>Toggle Song Structure</span>
+                </div>
+                <span className="text-[10px] font-mono text-obsidian-500">⌘⇧S</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Directory Navigation */}
+          <div>
+            <span className="text-[9px] font-mono font-semibold text-obsidian-500 uppercase tracking-wider px-2 block mb-1">
+              EXPLORE
+            </span>
+            <div className="space-y-0.5">
+              <button
+                onClick={() => handleNavigate('/explore/rhymes')}
+                className="w-full flex items-center justify-between px-3 py-1.5 rounded hover:bg-obsidian-900 text-xs text-obsidian-300 hover:text-white transition-fast group"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Flame className="w-3.5 h-3.5 text-rhyme-perfect" />
+                  <span>Explore Rhymes Directory</span>
                 </div>
                 <span className="text-[10px] font-mono text-obsidian-500">Phonetics</span>
               </button>
 
               <button
                 onClick={() => handleNavigate('/explore/words')}
-                className="w-full flex items-center justify-between px-3 py-2 rounded hover:bg-obsidian-900 text-xs text-obsidian-300 hover:text-white transition-fast group"
+                className="w-full flex items-center justify-between px-3 py-1.5 rounded hover:bg-obsidian-900 text-xs text-obsidian-300 hover:text-white transition-fast group"
               >
                 <div className="flex items-center gap-2.5">
                   <BookOpen className="w-3.5 h-3.5 text-rhyme-strong" />
-                  <span>Word Directory</span>
+                  <span>Word Dictionary</span>
                 </div>
                 <span className="text-[10px] font-mono text-obsidian-500">150+ Words</span>
-              </button>
-
-              <button
-                onClick={() => handleNavigate('/explore/prompts')}
-                className="w-full flex items-center justify-between px-3 py-2 rounded hover:bg-obsidian-900 text-xs text-obsidian-300 hover:text-white transition-fast group"
-              >
-                <div className="flex items-center gap-2.5">
-                  <Sparkles className="w-3.5 h-3.5 text-rhyme-near" />
-                  <span>Songwriting Ideas</span>
-                </div>
-                <span className="text-[10px] font-mono text-obsidian-500">Prompts</span>
               </button>
             </div>
           </div>
@@ -289,7 +363,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           {songs.length > 0 && (
             <div>
               <span className="text-[9px] font-mono font-semibold text-obsidian-500 uppercase tracking-wider px-2 block mb-1">
-                SONGS
+                RECENT SONGS
               </span>
               <div className="space-y-0.5">
                 {songs.slice(0, 3).map((song) => (

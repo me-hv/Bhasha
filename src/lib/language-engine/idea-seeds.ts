@@ -1,6 +1,32 @@
-﻿import { IdeaSeed } from '../../types';
+import { IdeaSeed } from '../../types';
 import { lexicalDatabase } from './lexical-database';
 import { normalizeRomanHindi } from './normalizer';
+
+export interface WordSpark {
+  devanagari: string;
+  roman: string;
+  category: 'OBJECT' | 'SETTING' | 'EMOTION' | 'STREET' | 'ABSTRACT';
+  meaning: string;
+}
+
+export const WORD_SPARKS: WordSpark[] = [
+  { devanagari: 'आईना', roman: 'aaina', category: 'OBJECT', meaning: 'Mirror / Truth' },
+  { devanagari: 'खिड़की', roman: 'khidki', category: 'OBJECT', meaning: 'Window / Perspective' },
+  { devanagari: 'धुआँ', roman: 'dhuaan', category: 'OBJECT', meaning: 'Smoke / Illusion' },
+  { devanagari: 'सीढ़ियाँ', roman: 'seedhiyan', category: 'SETTING', meaning: 'Stairwell / Climb' },
+  { devanagari: 'सन्नाटा', roman: 'sannata', category: 'SETTING', meaning: 'Silence / Void' },
+  { devanagari: 'ज़ंजीर', roman: 'zanjeer', category: 'OBJECT', meaning: 'Chains / Bondage' },
+  { devanagari: 'साया', roman: 'saaya', category: 'ABSTRACT', meaning: 'Shadow / Past' },
+  { devanagari: 'अंगार', roman: 'angaar', category: 'STREET', meaning: 'Burning Ember / Fire' },
+  { devanagari: 'क़दम', roman: 'qadam', category: 'STREET', meaning: 'Footsteps / Journey' },
+  { devanagari: 'नक़ाब', roman: 'naqaab', category: 'OBJECT', meaning: 'Mask / Persona' },
+  { devanagari: 'तूफ़ान', roman: 'toofan', category: 'ABSTRACT', meaning: 'Storm / Chaos' },
+  { devanagari: 'शिखर', roman: 'shikhar', category: 'SETTING', meaning: 'Peak / Solitude' },
+  { devanagari: 'पसीना', roman: 'paseena', category: 'STREET', meaning: 'Sweat / Grind' },
+  { devanagari: 'ज़ख़्म', roman: 'zakhm', category: 'EMOTION', meaning: 'Scars / Resilience' },
+  { devanagari: 'मंज़िल', roman: 'manzil', category: 'SETTING', meaning: 'Destination' },
+  { devanagari: 'हक़ीक़त', roman: 'haqeeqat', category: 'ABSTRACT', meaning: 'Raw Reality' },
+];
 
 export const IDEA_SEEDS: IdeaSeed[] = [
   // --- CONCEPT SEEDS ---
@@ -278,4 +304,12 @@ export function getWordAssociationSeed(wordStr: string): IdeaSeed | null {
     ],
     sampleBar: entry.sampleBars?.[0] || undefined,
   };
+}
+
+/**
+ * Returns a quick batch of spark vocabulary words
+ */
+export function getQuickWordSparks(count = 6): WordSpark[] {
+  const shuffled = [...WORD_SPARKS].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
 }
