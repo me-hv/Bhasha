@@ -6,6 +6,7 @@ interface ShortcutHandlers {
   onSearch?: () => void;
   onNewSong?: () => void;
   onSave?: () => void;
+  onSaveVersion?: () => void;
   onEscape?: () => void;
   onToggleMetronome?: () => void;
   onToggleRhymeDrawer?: () => void;
@@ -25,10 +26,17 @@ export function useKeyboardShortcuts(handlers: ShortcutHandlers) {
       const isInput =
         target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
 
-      // ⌘/Ctrl + K -> Global Command / Search Palette
-      if (isCmdOrCtrl && !e.shiftKey && (e.key === 'k' || e.key === 'K')) {
+      // ⌘/Ctrl + K or ⌘/Ctrl + P -> Global Command / Search Palette
+      if (isCmdOrCtrl && !e.shiftKey && (e.key === 'k' || e.key === 'K' || e.key === 'p' || e.key === 'P')) {
         e.preventDefault();
         handlers.onSearch?.();
+        return;
+      }
+
+      // ⌘/Ctrl + Shift + V -> Save Version Snapshot
+      if (isCmdOrCtrl && e.shiftKey && (e.key === 'v' || e.key === 'V')) {
+        e.preventDefault();
+        handlers.onSaveVersion?.();
         return;
       }
 

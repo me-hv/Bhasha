@@ -203,9 +203,13 @@ export interface SavedWord {
   meaning: string;
   pronunciation?: string;
   notes?: string;
+  personalNote?: string;
   tags: string[];
   savedAt: string;
   sourceSongId?: string;
+  sourceContext?: string;
+  collections?: string[];
+  register?: WordRegister[];
   perfectRhymes?: string[];
   strongRhymes?: string[];
   nearRhymes?: string[];
@@ -219,6 +223,8 @@ export interface SongSection {
   content: string;
 }
 
+export type SongStatus = 'DRAFT' | 'IN PROGRESS' | 'COMPLETE' | 'ARCHIVED' | 'Draft' | 'In Progress' | 'Finished' | 'Recorded';
+
 export interface Song {
   id: string;
   title: string;
@@ -226,13 +232,89 @@ export interface Song {
   bpm: number;
   key: string;
   timeSignature: string;
-  status: 'Draft' | 'In Progress' | 'Finished' | 'Recorded';
+  status: SongStatus;
+  genre?: string;
+  mood?: string;
   tags: string[];
+  notes?: string; // Private creative notes / theme / hook / emotional direction
+  sectionNotes?: Record<string, string>; // Section-level notes keyed by section header or ID
+  songVocabulary?: string[]; // Words intentionally saved for this specific song
   scratchpadNotes: string;
   stashedRhymes: string[];
   pinnedPromptId?: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface SongVersion {
+  id: string;
+  songId: string;
+  label: string;
+  timestamp: string;
+  content: string;
+  notes?: string;
+  sectionNotes?: Record<string, string>;
+  songVocabulary?: string[];
+  bpm?: number;
+  key?: string;
+  tags?: string[];
+  isAutoSafetySnapshot?: boolean;
+}
+
+export type IdeaType = 'CONCEPT' | 'IMAGE' | 'EMOTION' | 'CONTRAST' | 'SCENE' | 'PHRASE' | 'THEME';
+export type IdeaStatus = 'UNUSED' | 'IN PROGRESS' | 'USED';
+
+export interface CreativeIdea {
+  id: string;
+  title: string;
+  type: IdeaType;
+  content: string;
+  tags: string[];
+  createdAt: string;
+  updatedAt: string;
+  status: IdeaStatus;
+  attachedSongIds?: string[];
+  relatedWords?: string[];
+}
+
+export interface BhashaProjectBackup {
+  schemaVersion: number;
+  exportedAt: string;
+  bhashaVersion: string;
+  songs: Song[];
+  versions: SongVersion[];
+  lexicon: SavedWord[];
+  collections: string[];
+  ideas: CreativeIdea[];
+  recentWords?: string[];
+}
+
+export type DiffChangeType = 'added' | 'removed' | 'changed' | 'unchanged';
+
+export interface DiffLine {
+  type: DiffChangeType;
+  lineA?: string;
+  lineB?: string;
+  lineIndexA?: number;
+  lineIndexB?: number;
+  highlightWordsA?: string[];
+  highlightWordsB?: string[];
+}
+
+export interface SongDiffResult {
+  versionA: SongVersion | { label: string; timestamp: string; content: string };
+  versionB: SongVersion | { label: string; timestamp: string; content: string };
+  lines: DiffLine[];
+  summary: {
+    addedLines: number;
+    removedLines: number;
+    changedLines: number;
+    unchangedLines: number;
+  };
+  hasDifferences: boolean;
+  addedCount: number;
+  removedCount: number;
+  changedCount: number;
 }
 
 export interface SongPrompt {

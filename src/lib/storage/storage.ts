@@ -6,6 +6,10 @@ export const STORAGE_KEYS = {
   SONGS: 'bhasha_songs_v1',
   ACTIVE_SONG_ID: 'bhasha_active_song_id_v1',
   SAVED_LEXICON: 'bhasha_lexicon_v1',
+  VERSIONS: 'bhasha_versions_v1',
+  IDEAS: 'bhasha_ideas_v1',
+  COLLECTIONS: 'bhasha_collections_v1',
+  RECENT_WORDS: 'bhasha_recent_words_v1',
   PREFERENCES: 'bhasha_preferences_v1',
   RECENT_SEARCHES: 'bhasha_recent_searches_v1',
 };

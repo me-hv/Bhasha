@@ -14,7 +14,9 @@ import {
   ArrowRight,
   BookOpen,
   Zap,
-  Target
+  Target,
+  Bookmark,
+  Check
 } from 'lucide-react';
 import { IdeaSeed, WordEntry } from '../../types';
 import {
@@ -24,11 +26,13 @@ import {
   WordSpark
 } from '../../lib/language-engine/idea-seeds';
 import { getWord, getRhymes } from '../../lib/language-engine/rhyme-engine';
+import { saveIdea } from '../../lib/storage/ideas';
 
 interface StuckModalProps {
   isOpen: boolean;
   onClose: () => void;
   activeWord?: string;
+  songId?: string;
   onInsertText: (text: string) => void;
   onSearchRhymes?: (word: string) => void;
   onViewWordDetails?: (word: WordEntry) => void;
@@ -40,6 +44,7 @@ export const StuckModal: React.FC<StuckModalProps> = ({
   isOpen,
   onClose,
   activeWord,
+  songId,
   onInsertText,
   onSearchRhymes,
   onViewWordDetails,
@@ -47,9 +52,11 @@ export const StuckModal: React.FC<StuckModalProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<StuckCategory>('ALL');
   const [currentSeed, setCurrentSeed] = useState<IdeaSeed>(() => getIdeaSeed(undefined, activeWord));
   const [wordSparks, setWordSparks] = useState<WordSpark[]>(() => getQuickWordSparks(8));
+  const [savedSeedId, setSavedSeedId] = useState<string | null>(null);
 
   // Refresh seed or sparks
   const handleCycleSeed = () => {
+    setSavedSeedId(null);
     if (selectedCategory === 'WORD') {
       setWordSparks(getQuickWordSparks(8));
       return;
@@ -70,6 +77,7 @@ export const StuckModal: React.FC<StuckModalProps> = ({
 
   const handleCategoryChange = (cat: StuckCategory) => {
     setSelectedCategory(cat);
+    setSavedSeedId(null);
     if (cat === 'WORD') {
       setWordSparks(getQuickWordSparks(8));
       return;
@@ -83,6 +91,29 @@ export const StuckModal: React.FC<StuckModalProps> = ({
     }
     const apiCat = cat === 'ALL' || cat === 'WORD_GRAPH' || cat === 'RHYME' ? undefined : cat;
     setCurrentSeed(getIdeaSeed(apiCat, activeWord));
+  };
+
+  const handleSaveToIdeas = () => {
+    const contentParts = [
+      `Concept: ${currentSeed.concept}`,
+      currentSeed.image ? `Image: ${currentSeed.image}` : '',
+      currentSeed.contrast ? `Contrast: ${currentSeed.contrast}` : '',
+      currentSeed.emotion ? `Emotion: ${currentSeed.emotion}` : '',
+      currentSeed.sampleBar ? `Sample Bar: "${currentSeed.sampleBar}"` : '',
+    ].filter(Boolean);
+
+    const words = (currentSeed.keywords || []).map((k) => k.devanagari);
+
+    const newIdeas = saveIdea({
+      title: currentSeed.title || `${currentSeed.category} Seed`,
+      content: contentParts.join('\n'),
+      type: currentSeed.category === 'IMAGE' ? 'IMAGE' : currentSeed.category === 'CONTRAST' ? 'CONTRAST' : 'CONCEPT',
+      tags: [currentSeed.category.toLowerCase(), 'catalyst', ...(currentSeed.keywords || []).map((k) => k.roman.toLowerCase())],
+      attachedSongIds: songId ? [songId] : [],
+      relatedWords: words,
+    });
+
+    setSavedSeedId(newIdeas[0]?.id || 'saved');
   };
 
   if (!isOpen) return null;
@@ -306,15 +337,30 @@ export const StuckModal: React.FC<StuckModalProps> = ({
                   )}
                 </div>
 
-                {/* Cycle Button */}
-                <button
-                  onClick={handleCycleSeed}
-                  className="flex items-center gap-1.5 px-3 py-1 rounded bg-obsidian-900 hover:bg-obsidian-850 border border-obsidian-700/60 text-xs font-mono text-obsidian-300 hover:text-accent transition-fast active:scale-95"
-                  title="Generate another idea seed"
-                >
-                  <RotateCw className="w-3.5 h-3.5" />
-                  <span>↻ Another</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleSaveToIdeas}
+                    className={`flex items-center gap-1.5 px-3 py-1 rounded border text-xs font-mono transition-fast active:scale-95 ${
+                      savedSeedId
+                        ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-400'
+                        : 'bg-accent/15 hover:bg-accent/25 border-accent/40 text-accent'
+                    }`}
+                    title="Save this structured concept to Creative Ideas"
+                  >
+                    {savedSeedId ? <Check className="w-3.5 h-3.5" /> : <Bookmark className="w-3.5 h-3.5" />}
+                    <span>{savedSeedId ? 'Saved to Ideas' : '+ Save to Ideas'}</span>
+                  </button>
+
+                  {/* Cycle Button */}
+                  <button
+                    onClick={handleCycleSeed}
+                    className="flex items-center gap-1.5 px-3 py-1 rounded bg-obsidian-900 hover:bg-obsidian-850 border border-obsidian-700/60 text-xs font-mono text-obsidian-300 hover:text-accent transition-fast active:scale-95"
+                    title="Generate another idea seed"
+                  >
+                    <RotateCw className="w-3.5 h-3.5" />
+                    <span>↻ Another</span>
+                  </button>
+                </div>
               </div>
 
               {/* Seed Attributes Grid */}

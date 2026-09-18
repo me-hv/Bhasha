@@ -12,9 +12,12 @@ import {
   Music,
   Disc3,
   Clock,
-  Loader2
+  Loader2,
+  PenTool,
+  Lightbulb
 } from 'lucide-react';
 import { useSongs } from '../hooks/useSongs';
+import { useLexicon } from '../hooks/useLexicon';
 import { Song } from '../types';
 
 function getTimeGreeting(): string {
@@ -53,8 +56,16 @@ function calculateBarCount(content: string): number {
 
 export default function StudioHomePage() {
   const router = useRouter();
-  const { songs, createSong, selectSong, isLoaded } = useSongs();
+  const { songs, createSong, selectSong, activeSong, isLoaded } = useSongs();
+  const { recentWords } = useLexicon();
   const greeting = useMemo(() => getTimeGreeting(), []);
+
+  // Most recently edited active song
+  const mostRecentSong = useMemo(() => {
+    const activeSongs = songs.filter(s => (s.status || '').toUpperCase() !== 'ARCHIVED');
+    if (activeSongs.length === 0) return null;
+    return [...activeSongs].sort((a, b) => new Date(b.updatedAt || 0).getTime() - new Date(a.updatedAt || 0).getTime())[0];
+  }, [songs]);
 
   const handleCreateNewSong = () => {
     const newSong = createSong('UNTITLED TRACK', 92, 'Am');
@@ -76,9 +87,9 @@ export default function StudioHomePage() {
 
   return (
     <div className="h-full w-full bg-obsidian-950 overflow-y-auto select-none px-6 sm:px-12 md:px-20 py-12 md:py-16 animate-fade-in">
-      <div className="max-w-3xl mx-auto space-y-12">
+      <div className="max-w-3xl mx-auto space-y-10">
         {/* Editorial Greeting Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-8 border-b border-obsidian-700/60">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-6 border-b border-obsidian-700/60">
           <div className="space-y-1.5">
             <span className="text-xs font-mono text-obsidian-500 uppercase tracking-widest">
               Writing Studio
@@ -100,11 +111,48 @@ export default function StudioHomePage() {
           </button>
         </div>
 
+        {/* Continue Writing Hero Card */}
+        {mostRecentSong && (
+          <div
+            onClick={() => handleOpenSong(mostRecentSong.id)}
+            className="p-6 rounded-lg bg-obsidian-925 border border-accent/40 hover:border-accent shadow-panel transition-fast cursor-pointer group flex flex-col justify-between space-y-4"
+          >
+            <div className="flex items-start justify-between">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-accent font-bold block">
+                  CONTINUE WRITING
+                </span>
+                <h2 className="text-xl sm:text-2xl font-mono font-bold text-white group-hover:text-accent transition-fast">
+                  {mostRecentSong.title}
+                </h2>
+                <div className="flex items-center gap-2 text-xs font-mono text-obsidian-400">
+                  <span>{calculateBarCount(mostRecentSong.content)} bars</span>
+                  <span>·</span>
+                  <span>{mostRecentSong.bpm} BPM</span>
+                  <span>·</span>
+                  <span>Key: {mostRecentSong.key}</span>
+                  <span>·</span>
+                  <span>Edited {formatRelativeTime(mostRecentSong.updatedAt)}</span>
+                </div>
+              </div>
+
+              <div className="w-10 h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-obsidian-950 transition-all">
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </div>
+
+            {/* Lyric Snippet */}
+            <div className="p-3 rounded bg-obsidian-950 border border-obsidian-800 text-xs font-devanagari text-obsidian-300 line-clamp-2">
+              {mostRecentSong.content.split('\n').filter(l => l.trim() && !l.trim().startsWith('[')).slice(0, 2).join(' · ') || 'Empty draft canvas...'}
+            </div>
+          </div>
+        )}
+
         {/* Recent Songs List */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs font-mono font-semibold text-obsidian-500 uppercase tracking-widest">
-              RECENT
+              RECENT SONGS
             </span>
             <a
               href="/library/songs"
@@ -116,7 +164,7 @@ export default function StudioHomePage() {
           </div>
 
           <div className="divide-y divide-obsidian-700/40 rounded-lg bg-obsidian-925 border border-obsidian-700/60 overflow-hidden">
-            {songs.slice(0, 4).map((song) => {
+            {songs.filter(s => (s.status || '').toUpperCase() !== 'ARCHIVED').slice(0, 4).map((song) => {
               const bars = calculateBarCount(song.content);
               return (
                 <div
@@ -141,7 +189,7 @@ export default function StudioHomePage() {
 
                   <div className="flex items-center gap-3">
                     <span className="text-xs font-mono px-2 py-0.5 rounded bg-obsidian-950 text-obsidian-400 border border-obsidian-700/50">
-                      {song.status}
+                      {song.status || 'DRAFT'}
                     </span>
                     <span className="text-xs font-mono text-obsidian-600 group-hover:text-accent group-hover:translate-x-1 transition-all">
                       →
@@ -153,10 +201,30 @@ export default function StudioHomePage() {
           </div>
         </div>
 
+        {/* Recent Vocabulary Strip */}
+        {recentWords && recentWords.length > 0 && (
+          <div className="space-y-2">
+            <span className="text-xs font-mono font-semibold text-obsidian-500 uppercase tracking-widest block">
+              RECENT VOCABULARY
+            </span>
+            <div className="flex items-center gap-2 overflow-x-auto pb-1">
+              {recentWords.slice(0, 8).map((word) => (
+                <a
+                  key={word}
+                  href={`/explore/rhymes?q=${encodeURIComponent(word)}`}
+                  className="px-3 py-1.5 rounded bg-obsidian-925 hover:bg-obsidian-900 border border-obsidian-700/60 hover:border-accent text-sm font-devanagari text-obsidian-200 hover:text-white transition-fast whitespace-nowrap"
+                >
+                  {word}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Quick Explore Triggers */}
-        <div className="space-y-4 pt-4">
+        <div className="space-y-3 pt-2">
           <span className="text-xs font-mono font-semibold text-obsidian-500 uppercase tracking-widest">
-            QUICK EXPLORE
+            QUICK ACTIONS
           </span>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -201,19 +269,19 @@ export default function StudioHomePage() {
             </a>
 
             <a
-              href="/explore/prompts"
+              href="/library/ideas"
               className="p-4 rounded-lg bg-obsidian-925 hover:bg-obsidian-900 border border-obsidian-700/60 hover:border-obsidian-600 transition-fast flex items-center justify-between group"
             >
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded bg-obsidian-950 border border-obsidian-700/60 flex items-center justify-center text-rhyme-near">
-                  <Sparkles className="w-4 h-4" />
+                <div className="w-8 h-8 rounded bg-obsidian-950 border border-obsidian-700/60 flex items-center justify-center text-accent">
+                  <Lightbulb className="w-4 h-4" />
                 </div>
                 <div>
                   <h4 className="text-sm font-mono font-medium text-obsidian-200 group-hover:text-white transition-fast">
-                    Give me an idea
+                    Ideas & Fragments
                   </h4>
                   <p className="text-[11px] text-obsidian-500 font-sans">
-                    Songwriting prompts & rhyme anchors
+                    Private creative memory bank
                   </p>
                 </div>
               </div>
@@ -233,7 +301,7 @@ export default function StudioHomePage() {
                     Open my lexicon
                   </h4>
                   <p className="text-[11px] text-obsidian-500 font-sans">
-                    Personal saved vocabulary bank
+                    Personal saved vocabulary collections
                   </p>
                 </div>
               </div>
@@ -243,9 +311,9 @@ export default function StudioHomePage() {
         </div>
 
         {/* Quiet Brand Footer */}
-        <div className="pt-8 border-t border-obsidian-700/40 flex items-center justify-between text-xs font-mono text-obsidian-500">
+        <div className="pt-6 border-t border-obsidian-700/40 flex items-center justify-between text-xs font-mono text-obsidian-500">
           <span>BHASHA OS · Songwriting Instrument</span>
-          <span>Find the word. Unlock the line.</span>
+          <span>Find the word. Unlock the line. Build the verse.</span>
         </div>
       </div>
     </div>

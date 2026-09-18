@@ -1,16 +1,24 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { Song, WordEntry, WritingMode, RhymeTarget } from '../../types';
+import { Song, WordEntry, WritingMode, RhymeTarget, SongVersion } from '../../types';
 import { EditorHeader } from './EditorHeader';
 import { RhymeDrawer } from './RhymeDrawer';
 import { Scratchpad } from './Scratchpad';
 import { SongStructureDrawer } from './SongStructureDrawer';
+import { SongNotesDrawer } from './SongNotesDrawer';
+import { SongVersionsDrawer } from './SongVersionsDrawer';
 import { WritingStatsModal } from './WritingStatsModal';
 import { StuckModal } from './StuckModal';
 import { WordDetailModal } from '../words/WordDetailModal';
 import { getRhymes, getWord } from '../../lib/language-engine/rhyme-engine';
 import { parseSongContent } from '../../lib/language-engine/verse-analyzer';
+import {
+  getStoredVersions,
+  saveVersionSnapshot,
+  restoreVersionSnapshot,
+  deleteVersionSnapshot,
+} from '../../lib/storage/songs';
 import {
   Flame,
   FileText,
@@ -22,7 +30,8 @@ import {
   Activity,
   Plus,
   X,
-  ArrowRight
+  ArrowRight,
+  History
 } from 'lucide-react';
 
 interface SongEditorProps {
@@ -50,16 +59,39 @@ export const SongEditor: React.FC<SongEditorProps> = ({
   const [isRhymeDrawerOpen, setIsRhymeDrawerOpen] = useState(false);
   const [isScratchpadOpen, setIsScratchpadOpen] = useState(false);
   const [isStructureDrawerOpen, setIsStructureDrawerOpen] = useState(false);
+  const [isNotesDrawerOpen, setIsNotesDrawerOpen] = useState(false);
+  const [isVersionsDrawerOpen, setIsVersionsDrawerOpen] = useState(false);
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false);
   const [isStuckModalOpen, setIsStuckModalOpen] = useState(false);
   const [inspectingWord, setInspectingWord] = useState<WordEntry | null>(null);
+  const [versions, setVersions] = useState<SongVersion[]>([]);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Sync state if active song changes from outside
+  // Sync state & versions if active song changes from outside
   useEffect(() => {
     setContent(song.content || '');
+    setVersions(getStoredVersions(song.id));
+  }, [song.id]);
+
+  const handleCreateVersion = useCallback((s: Song, label: string) => {
+    saveVersionSnapshot(s, label);
+    setVersions(getStoredVersions(s.id));
+  }, []);
+
+  const handleRestoreVersion = useCallback((snapshotId: string) => {
+    const result = restoreVersionSnapshot(snapshotId);
+    if (result) {
+      setContent(result.restoredSong.content || '');
+      onUpdateSong(result.restoredSong);
+      setVersions(getStoredVersions(song.id));
+    }
+  }, [song.id, onUpdateSong]);
+
+  const handleDeleteVersion = useCallback((versionId: string) => {
+    deleteVersionSnapshot(versionId);
+    setVersions(getStoredVersions(song.id));
   }, [song.id]);
 
   // Debounced Autosave
@@ -316,6 +348,22 @@ export const SongEditor: React.FC<SongEditorProps> = ({
             setIsStructureDrawerOpen((prev) => !prev);
             if (isRhymeDrawerOpen) setIsRhymeDrawerOpen(false);
             if (isScratchpadOpen) setIsScratchpadOpen(false);
+            if (isNotesDrawerOpen) setIsNotesDrawerOpen(false);
+            if (isVersionsDrawerOpen) setIsVersionsDrawerOpen(false);
+          }}
+          onOpenNotes={() => {
+            setIsNotesDrawerOpen((prev) => !prev);
+            if (isRhymeDrawerOpen) setIsRhymeDrawerOpen(false);
+            if (isScratchpadOpen) setIsScratchpadOpen(false);
+            if (isStructureDrawerOpen) setIsStructureDrawerOpen(false);
+            if (isVersionsDrawerOpen) setIsVersionsDrawerOpen(false);
+          }}
+          onOpenVersions={() => {
+            setIsVersionsDrawerOpen((prev) => !prev);
+            if (isRhymeDrawerOpen) setIsRhymeDrawerOpen(false);
+            if (isScratchpadOpen) setIsScratchpadOpen(false);
+            if (isStructureDrawerOpen) setIsStructureDrawerOpen(false);
+            if (isNotesDrawerOpen) setIsNotesDrawerOpen(false);
           }}
           onOpenStats={() => setIsStatsModalOpen(true)}
           onOpenStuck={() => setIsStuckModalOpen(true)}
@@ -535,22 +583,44 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                 <span className="hidden sm:inline">+ I&apos;M STUCK</span>
               </button>
 
-              {/* Scratchpad Toggle */}
+              {/* Notes & Vocab Toggle */}
               <button
                 onClick={() => {
-                  setIsScratchpadOpen(!isScratchpadOpen);
+                  setIsNotesDrawerOpen(!isNotesDrawerOpen);
                   if (isRhymeDrawerOpen) setIsRhymeDrawerOpen(false);
                   if (isStructureDrawerOpen) setIsStructureDrawerOpen(false);
+                  if (isVersionsDrawerOpen) setIsVersionsDrawerOpen(false);
+                  if (isScratchpadOpen) setIsScratchpadOpen(false);
                 }}
                 className={`flex items-center gap-1 px-2.5 py-1 rounded border text-xs font-mono transition-fast ${
-                  isScratchpadOpen
+                  isNotesDrawerOpen
                     ? 'bg-accent/15 border-accent text-accent'
                     : 'bg-obsidian-950 border-obsidian-700/60 text-obsidian-400 hover:text-white hover:bg-obsidian-900'
                 }`}
-                title="Toggle Notes & Scratchpad"
+                title="Toggle Song Notes & Vocabulary"
               >
                 <FileText className="w-3.5 h-3.5" />
-                <span className="hidden md:inline">Scratchpad</span>
+                <span className="hidden md:inline">Notes</span>
+              </button>
+
+              {/* Versions History Toggle */}
+              <button
+                onClick={() => {
+                  setIsVersionsDrawerOpen(!isVersionsDrawerOpen);
+                  if (isRhymeDrawerOpen) setIsRhymeDrawerOpen(false);
+                  if (isStructureDrawerOpen) setIsStructureDrawerOpen(false);
+                  if (isNotesDrawerOpen) setIsNotesDrawerOpen(false);
+                  if (isScratchpadOpen) setIsScratchpadOpen(false);
+                }}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded border text-xs font-mono transition-fast ${
+                  isVersionsDrawerOpen
+                    ? 'bg-accent/15 border-accent text-accent'
+                    : 'bg-obsidian-950 border-obsidian-700/60 text-obsidian-400 hover:text-white hover:bg-obsidian-900'
+                }`}
+                title="Version Snapshots & Compare (⌘⇧V to Save)"
+              >
+                <History className="w-3.5 h-3.5" />
+                <span className="hidden md:inline">Versions</span>
               </button>
 
               {/* Rhyme Rack Toggle */}
@@ -559,6 +629,8 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                   setIsRhymeDrawerOpen(!isRhymeDrawerOpen);
                   if (isScratchpadOpen) setIsScratchpadOpen(false);
                   if (isStructureDrawerOpen) setIsStructureDrawerOpen(false);
+                  if (isNotesDrawerOpen) setIsNotesDrawerOpen(false);
+                  if (isVersionsDrawerOpen) setIsVersionsDrawerOpen(false);
                 }}
                 className={`flex items-center gap-1 px-2.5 py-1 rounded border text-xs font-mono transition-fast ${
                   isRhymeDrawerOpen
@@ -603,6 +675,31 @@ export const SongEditor: React.FC<SongEditorProps> = ({
           onInsertSection={handleInsertSection}
           onScrollToLine={handleScrollToLine}
         />
+
+        {/* Song Notes & Vocabulary Drawer */}
+        <SongNotesDrawer
+          isOpen={isNotesDrawerOpen}
+          onClose={() => setIsNotesDrawerOpen(false)}
+          song={song}
+          onUpdateSong={onUpdateSong}
+          onInsertWordIntoCanvas={handleInsertWord}
+          onOpenRhymesForWord={(word) => {
+            setCursorWord(word);
+            setIsRhymeDrawerOpen(true);
+            setIsNotesDrawerOpen(false);
+          }}
+        />
+
+        {/* Song Versions & Diff Drawer */}
+        <SongVersionsDrawer
+          isOpen={isVersionsDrawerOpen}
+          onClose={() => setIsVersionsDrawerOpen(false)}
+          song={song}
+          versions={versions}
+          onCreateVersion={handleCreateVersion}
+          onRestoreVersion={handleRestoreVersion}
+          onDeleteVersion={handleDeleteVersion}
+        />
       </div>
 
       {/* Writing Analytics Modal */}
@@ -618,6 +715,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
         isOpen={isStuckModalOpen}
         onClose={() => setIsStuckModalOpen(false)}
         activeWord={effectiveSearchWord}
+        songId={song.id}
         onInsertText={handleInsertWord}
         onSearchRhymes={(word) => {
           setCursorWord(word);

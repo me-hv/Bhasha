@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { useSongs } from '../../hooks/useSongs';
 import { useLexicon } from '../../hooks/useLexicon';
+import { useIdeas } from '../../hooks/useIdeas';
 
 interface SidebarProps {
   onOpenSearch: () => void;
@@ -36,6 +37,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const router = useRouter();
   const { songs, createSong, activeSong } = useSongs();
   const { lexicon } = useLexicon();
+  const { ideas } = useIdeas();
 
   const handleCreateNewSong = () => {
     const newSong = createSong('UNTITLED TRACK', 92, 'Am');
@@ -101,7 +103,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded bg-obsidian-950 hover:bg-obsidian-900 border border-obsidian-700/60 hover:border-obsidian-600 text-xs font-mono text-obsidian-400 hover:text-white transition-fast group ${
               isCollapsed ? 'justify-center px-0' : ''
             }`}
-            title="Global Search (⌘K)"
+            title="Global Search (⌘P / ⌘K)"
           >
             <div className="flex items-center gap-2">
               <Search className="w-3.5 h-3.5 text-accent" />
@@ -109,7 +111,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </div>
             {!isCollapsed && (
               <kbd className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-obsidian-900 text-obsidian-500 border border-obsidian-700/40">
-                ⌘K
+                ⌘P
               </kbd>
             )}
           </button>
@@ -117,11 +119,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Navigation Sections */}
         <div className="px-3 space-y-4 overflow-y-auto max-h-[calc(100vh-220px)]">
-          {/* WRITE */}
+          {/* WRITING */}
           <div className="space-y-1">
             {!isCollapsed && (
               <span className="text-[10px] font-mono font-semibold text-obsidian-500 uppercase tracking-widest px-2 block">
-                WRITE
+                WRITING
               </span>
             )}
             <div className="space-y-0.5">
@@ -151,7 +153,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 title="Writing Studio"
               >
                 <Disc3 className={`w-3.5 h-3.5 ${isRouteActive('/write') ? 'text-accent' : 'text-obsidian-500'}`} />
-                {!isCollapsed && <span>Writing Studio</span>}
+                {!isCollapsed && <span>Studio</span>}
               </a>
 
               <a
@@ -161,12 +163,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     ? 'bg-obsidian-900 text-white font-semibold border-l-2 border-accent pl-2'
                     : 'text-obsidian-400 hover:text-white hover:bg-obsidian-900'
                 } ${isCollapsed ? 'justify-center px-0 border-none' : ''}`}
-                title="Drafts & Songs"
+                title="Song Library"
               >
                 <FileText className="w-3.5 h-3.5 text-obsidian-500" />
                 {!isCollapsed && (
                   <div className="flex items-center justify-between flex-1">
-                    <span>Drafts & Songs</span>
+                    <span>Songs</span>
                     <span className="text-[10px] font-mono text-obsidian-500">
                       {songs.length}
                     </span>
@@ -176,11 +178,61 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </div>
           </div>
 
-          {/* EXPLORE */}
+          {/* LIBRARY */}
           <div className="space-y-1">
             {!isCollapsed && (
               <span className="text-[10px] font-mono font-semibold text-obsidian-500 uppercase tracking-widest px-2 block">
-                EXPLORE
+                LIBRARY
+              </span>
+            )}
+            <div className="space-y-0.5">
+              <a
+                href="/library/lexicon"
+                className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded text-xs font-medium transition-fast ${
+                  isRouteActive('/library/lexicon')
+                    ? 'bg-obsidian-900 text-white font-semibold border-l-2 border-accent pl-2'
+                    : 'text-obsidian-400 hover:text-white hover:bg-obsidian-900'
+                } ${isCollapsed ? 'justify-center px-0 border-none' : ''}`}
+                title="My Lexicon"
+              >
+                <Bookmark className="w-3.5 h-3.5 text-accent" />
+                {!isCollapsed && (
+                  <div className="flex items-center justify-between flex-1">
+                    <span>Lexicon</span>
+                    <span className="text-[10px] font-mono text-accent">
+                      {lexicon.length}
+                    </span>
+                  </div>
+                )}
+              </a>
+
+              <a
+                href="/library/ideas"
+                className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded text-xs font-medium transition-fast ${
+                  isRouteActive('/library/ideas')
+                    ? 'bg-obsidian-900 text-white font-semibold border-l-2 border-accent pl-2'
+                    : 'text-obsidian-400 hover:text-white hover:bg-obsidian-900'
+                } ${isCollapsed ? 'justify-center px-0 border-none' : ''}`}
+                title="Ideas & Fragments"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-accent" />
+                {!isCollapsed && (
+                  <div className="flex items-center justify-between flex-1">
+                    <span>Ideas</span>
+                    <span className="text-[10px] font-mono text-obsidian-500">
+                      {ideas.length}
+                    </span>
+                  </div>
+                )}
+              </a>
+            </div>
+          </div>
+
+          {/* TOOLS */}
+          <div className="space-y-1">
+            {!isCollapsed && (
+              <span className="text-[10px] font-mono font-semibold text-obsidian-500 uppercase tracking-widest px-2 block">
+                TOOLS
               </span>
             )}
             <div className="space-y-0.5">
@@ -217,60 +269,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     ? 'bg-obsidian-900 text-white font-semibold border-l-2 border-rhyme-near pl-2'
                     : 'text-obsidian-400 hover:text-white hover:bg-obsidian-900'
                 } ${isCollapsed ? 'justify-center px-0 border-none' : ''}`}
-                title="Ideas & Prompts"
+                title="Song Prompts"
               >
                 <Sparkles className="w-3.5 h-3.5 text-rhyme-near" />
-                {!isCollapsed && <span>Ideas & Prompts</span>}
-              </a>
-            </div>
-          </div>
-
-          {/* LIBRARY */}
-          <div className="space-y-1">
-            {!isCollapsed && (
-              <span className="text-[10px] font-mono font-semibold text-obsidian-500 uppercase tracking-widest px-2 block">
-                LIBRARY
-              </span>
-            )}
-            <div className="space-y-0.5">
-              <a
-                href="/library/songs"
-                className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded text-xs font-medium transition-fast ${
-                  isRouteActive('/library/songs')
-                    ? 'bg-obsidian-900 text-white font-semibold border-l-2 border-accent pl-2'
-                    : 'text-obsidian-400 hover:text-white hover:bg-obsidian-900'
-                } ${isCollapsed ? 'justify-center px-0 border-none' : ''}`}
-                title="My Songs"
-              >
-                <Music className="w-3.5 h-3.5 text-obsidian-500" />
-                {!isCollapsed && (
-                  <div className="flex items-center justify-between flex-1">
-                    <span>My Songs</span>
-                    <span className="text-[10px] font-mono text-obsidian-500">
-                      {songs.length}
-                    </span>
-                  </div>
-                )}
-              </a>
-
-              <a
-                href="/library/lexicon"
-                className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded text-xs font-medium transition-fast ${
-                  isRouteActive('/library/lexicon')
-                    ? 'bg-obsidian-900 text-white font-semibold border-l-2 border-accent pl-2'
-                    : 'text-obsidian-400 hover:text-white hover:bg-obsidian-900'
-                } ${isCollapsed ? 'justify-center px-0 border-none' : ''}`}
-                title="My Lexicon"
-              >
-                <Bookmark className="w-3.5 h-3.5 text-accent" />
-                {!isCollapsed && (
-                  <div className="flex items-center justify-between flex-1">
-                    <span>My Lexicon</span>
-                    <span className="text-[10px] font-mono text-accent">
-                      {lexicon.length}
-                    </span>
-                  </div>
-                )}
+                {!isCollapsed && <span>Prompts</span>}
               </a>
             </div>
           </div>

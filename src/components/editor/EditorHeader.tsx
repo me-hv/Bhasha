@@ -1,8 +1,8 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Song, WritingMode } from '../../types';
+import { Song, WritingMode, SongStatus } from '../../types';
 import {
   ArrowLeft,
   Copy,
@@ -14,9 +14,11 @@ import {
   PenTool,
   Flame,
   Activity,
-  Target
+  Target,
+  History,
+  FileText
 } from 'lucide-react';
-import { copyToClipboard, downloadTextFile, formatSongMarkdown } from '../../lib/utils/export';
+import { copyToClipboard, downloadTextFile, formatSongMarkdown, formatSongTxt } from '../../lib/utils/export';
 
 interface EditorHeaderProps {
   song: Song;
@@ -30,6 +32,8 @@ interface EditorHeaderProps {
   onOpenStructure?: () => void;
   onOpenStats?: () => void;
   onOpenStuck?: () => void;
+  onOpenNotes?: () => void;
+  onOpenVersions?: () => void;
 }
 
 const COMMON_KEYS = ['Am', 'Em', 'Dm', 'Cm', 'F#m', 'Gm', 'Bm', 'C', 'G', 'D', 'A', 'F'];
@@ -47,9 +51,12 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
   onOpenStructure,
   onOpenStats,
   onOpenStuck,
+  onOpenNotes,
+  onOpenVersions,
 }) => {
   const router = useRouter();
   const [copied, setCopied] = useState(false);
+  const [isExportOpen, setIsExportOpen] = useState(false);
 
   const handleCopy = () => {
     copyToClipboard(song.content);
@@ -57,15 +64,25 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleDownload = () => {
+  const handleDownloadMd = () => {
     const markdown = formatSongMarkdown(song);
     const filename = `${song.title.toLowerCase().replace(/\s+/g, '_') || 'song'}.md`;
     downloadTextFile(filename, markdown);
+    setIsExportOpen(false);
   };
+
+  const handleDownloadTxt = () => {
+    const txt = formatSongTxt(song);
+    const filename = `${song.title.toLowerCase().replace(/\s+/g, '_') || 'song'}.txt`;
+    downloadTextFile(filename, txt);
+    setIsExportOpen(false);
+  };
+
+  const normalizedStatus = (song.status || 'DRAFT').toUpperCase();
 
   return (
     <div className="border-b border-obsidian-700/60 bg-obsidian-950/95 px-4 sm:px-8 py-3 space-y-2.5 select-none">
-      {/* Top Bar: Back Link, Title, Status, Saved, Export */}
+      {/* Top Bar: Back Link, Title, Status, Saved, Notes, Versions, Export */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         {/* Left: Back to songs & Title */}
         <div className="flex items-center gap-3.5 flex-1 min-w-0">
@@ -89,7 +106,7 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
           />
         </div>
 
-        {/* Right: Key, Status, Saved indicator, Actions */}
+        {/* Right: Key, Status, Saved indicator, Notes, Versions, Actions */}
         <div className="flex items-center gap-2.5 self-end sm:self-auto flex-wrap">
           {/* Key Picker */}
           <div className="flex items-center gap-1 text-xs font-mono text-obsidian-500">
@@ -109,14 +126,14 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
 
           {/* Status Dropdown */}
           <select
-            value={song.status}
-            onChange={(e) => onUpdateSong({ status: e.target.value as Song['status'] })}
+            value={normalizedStatus}
+            onChange={(e) => onUpdateSong({ status: e.target.value as SongStatus })}
             className="text-[11px] font-mono px-2 py-0.5 rounded bg-obsidian-900 border border-obsidian-700/60 text-obsidian-400 focus:border-accent focus:outline-none"
           >
-            <option value="Draft">Draft</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Finished">Finished</option>
-            <option value="Recorded">Recorded</option>
+            <option value="DRAFT">DRAFT</option>
+            <option value="IN PROGRESS">IN PROGRESS</option>
+            <option value="COMPLETE">COMPLETE</option>
+            <option value="ARCHIVED">ARCHIVED</option>
           </select>
 
           {/* Autosave Status */}
@@ -124,6 +141,30 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
             <span className={`w-1.5 h-1.5 rounded-full ${isSaving ? 'bg-amber-400 animate-ping' : 'bg-accent'}`} />
             <span className="hidden md:inline">{isSaving ? 'Saving...' : 'Saved'}</span>
           </div>
+
+          {/* Notes Drawer Toggle */}
+          {onOpenNotes && (
+            <button
+              onClick={onOpenNotes}
+              className="flex items-center gap-1 px-2.5 py-1 rounded bg-obsidian-900 hover:bg-obsidian-850 border border-obsidian-700/60 text-xs font-mono text-obsidian-300 hover:text-white transition-fast"
+              title="Creative Notes & Song Vocabulary"
+            >
+              <FileText className="w-3.5 h-3.5 text-accent" />
+              <span className="hidden sm:inline">Notes</span>
+            </button>
+          )}
+
+          {/* Versions History Toggle */}
+          {onOpenVersions && (
+            <button
+              onClick={onOpenVersions}
+              className="flex items-center gap-1 px-2.5 py-1 rounded bg-obsidian-900 hover:bg-obsidian-850 border border-obsidian-700/60 text-xs font-mono text-obsidian-300 hover:text-white transition-fast"
+              title="Version History & Snapshots (⌘⇧V to Save)"
+            >
+              <History className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Versions</span>
+            </button>
+          )}
 
           {/* Copy Button */}
           <button
@@ -144,15 +185,37 @@ export const EditorHeader: React.FC<EditorHeaderProps> = ({
             )}
           </button>
 
-          {/* Export Button */}
-          <button
-            onClick={handleDownload}
-            className="flex items-center gap-1 px-2.5 py-1 rounded bg-obsidian-900 hover:bg-obsidian-850 border border-obsidian-700/60 text-xs font-mono text-obsidian-300 hover:text-white transition-fast"
-            title="Download Song Markdown (.md)"
-          >
-            <Download className="w-3 h-3" />
-            <span className="hidden sm:inline">Export</span>
-          </button>
+          {/* Export Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setIsExportOpen(!isExportOpen)}
+              className="flex items-center gap-1 px-2.5 py-1 rounded bg-obsidian-900 hover:bg-obsidian-850 border border-obsidian-700/60 text-xs font-mono text-obsidian-300 hover:text-white transition-fast"
+              title="Export lyrics"
+            >
+              <Download className="w-3 h-3" />
+              <span className="hidden sm:inline">Export</span>
+            </button>
+
+            {isExportOpen && (
+              <div
+                className="absolute right-0 mt-1 w-36 bg-obsidian-900 border border-obsidian-700/80 rounded shadow-xl py-1 z-50 text-xs font-mono animate-fade-in"
+                onMouseLeave={() => setIsExportOpen(false)}
+              >
+                <button
+                  onClick={handleDownloadMd}
+                  className="w-full text-left px-3 py-1.5 hover:bg-obsidian-800 text-obsidian-200 hover:text-white"
+                >
+                  Markdown (.md)
+                </button>
+                <button
+                  onClick={handleDownloadTxt}
+                  className="w-full text-left px-3 py-1.5 hover:bg-obsidian-800 text-obsidian-200 hover:text-white"
+                >
+                  Plain Text (.txt)
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
