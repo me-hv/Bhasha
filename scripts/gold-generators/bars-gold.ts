@@ -1,0 +1,1221 @@
+export interface GoldBarCase {
+  id: string;
+  text: string;
+  expectedSyllables: number;
+  alternateSyllables?: number[];
+  notes: string;
+  category: 'Devanagari Classic' | 'Street / Slang' | 'Urdu / Perso-Arabic' | 'Hinglish Mix' | 'Compound Cadence';
+}
+
+export const GOLD_BARS: GoldBarCase[] = [
+  {
+    "id": "bar-001",
+    "text": "अंधेरी रात में भी चमकेगा सितारा",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "अं-धे-री (3) + रात (1) + में (1) + भी (1) + चम-के-गा (3) + सि-ता-रा (3) = 12-13",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-002",
+    "text": "काली रात का है गहरा सन्नाटा",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "का-ली (2) + रात (1) + का (1) + है (1) + गह-रा (2) + सन्-ना-टा (3) = 10-11",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-003",
+    "text": "दिल की बात जब जुबां पे आती है",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "दिल (1) + की (1) + बात (1) + जब (1) + जु-बां (2) + पे (1) + आ-ती (2) + है (1) = 10-12",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-004",
+    "text": "सच की राह पर अकेले ही चलना है",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "सच (1) + की (1) + राह (1) + पर (1) + अ-के-ले (3) + ही (1) + चल-ना (2) + है (1) = 11-13",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-005",
+    "text": "आँखों में ख़्वाब लिए शहर घूमता हूँ",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "आँ-खों (2) + में (1) + ख़्वाब (1) + लि-ए (2) + शह-र (2) + घूम-ता (2) + हूँ (1) = 11-12",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-006",
+    "text": "ज़िंदगी की इस दौड़ में कोई नहीं साथ",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "ज़िन-द-गी (3) + की (1) + इस (1) + दौड़ (1) + में (1) + को-ई (2) + न-हीं (2) + साथ (1)",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-007",
+    "text": "हर एक कदम पर बदलती है बात",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "हर (1) + एक (1) + क-दम (2) + पर (1) + ब-दल-ती (3) + है (1) + बात (1) = 10-11",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-008",
+    "text": "सूरज की किरण से जागेगा सवेरा",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "सू-रज (2) + की (1) + कि-रण (2) + से (1) + जा-गे-गा (3) + स-वे-रा (3) = 12",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-009",
+    "text": "मिट जाएगा पल में सारा ये अंधेरा",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "मिट (1) + जा-ए-गा (3) + पल (1) + में (1) + सा-रा (2) + ये (1) + अं-धे-रा (3) = 12-13",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-010",
+    "text": "पानी की लहरों पे बहती है कश्ती",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "पा-नी (2) + की (1) + लह-रों (2) + पे (1) + बह-ती (2) + है (1) + कश्-ती (2) = 11-12",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-011",
+    "text": "अपनी ही धुन में ये गाती है बस्ती",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "अप-नी (2) + ही (1) + धुन (1) + में (1) + ये (1) + गा-ती (2) + है (1) + बस्-ती (2) = 11-12",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-012",
+    "text": "आसमान छूने का इरादा है पक्का",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "आस-मान (2) + छू-ने (2) + का (1) + इ-रा-दा (3) + है (1) + पक्-का (2) = 11-13",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-013",
+    "text": "हारने वालों को लगेगा ये धक्का",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "हार-ने (2) + वा-लों (2) + को (1) + ल-गे-गा (3) + ये (1) + धक्-का (2) = 11-12",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-014",
+    "text": "कलम की धार से लिखता हूँ सच",
+    "expectedSyllables": 9,
+    "alternateSyllables": [
+      8,
+      10
+    ],
+    "notes": "क-लम (2) + की (1) + धार (1) + से (1) + लिख-ता (2) + हूँ (1) + सच (1) = 9-10",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-015",
+    "text": "झूठ के जाल से तू अब तो बच",
+    "expectedSyllables": 8,
+    "alternateSyllables": [
+      7,
+      9
+    ],
+    "notes": "झूठ (1) + के (1) + जाल (1) + से (1) + तू (1) + अब (1) + तो (1) + बच (1) = 8-10",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-016",
+    "text": "हौसलों की उड़ान अभी बाकी है",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "हौस-लों (2) + की (1) + उ-ड़ान (2) + अ-भी (2) + बा-की (2) + है (1) = 10-12",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-017",
+    "text": "मंजिल दूर नहीं बस एक झांकी है",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "मन्-जिल (2) + दूर (1) + न-हीं (2) + बस (1) + एक (1) + झां-की (2) + है (1) = 10-12",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-018",
+    "text": "धड़कनों की सदा में तेरा नाम है",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "धड़-क-नों (3) + की (1) + स-दा (2) + में (1) + ते-रा (2) + नाम (1) + है (1) = 11-12",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-019",
+    "text": "सुबह से लेकर ढलती ये शाम है",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "सु-बह (2) + से (1) + ले-कर (2) + ढल-ती (2) + ये (1) + शाम (1) + है (1) = 10-11",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-020",
+    "text": "माटी की खुशबू में बसा मेरा देश",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "मा-टी (2) + की (1) + खुश-बू (2) + में (1) + ब-सा (2) + मे-रा (2) + देश (1) = 11-12",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-021",
+    "text": "बदलता नहीं कभी मेरा ये भेष",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "ब-दल-ता (3) + न-हीं (2) + क-भी (2) + मे-रा (2) + ये (1) + भेष (1) = 11",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-022",
+    "text": "रास्तों की ठोकरें सिखाती हैं चलना",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "रास्-तों (2) + की (1) + ठो-क-रें (3) + सि-खा-ती (3) + हैं (1) + चल-ना (2) = 12-13",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-023",
+    "text": "गिर के भी संभल के आगे है बढ़ना",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "गिर (1) + के (1) + भी (1) + सं-भल (2) + के (1) + आ-गे (2) + है (1) + बढ़-ना (2) = 11-12",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-024",
+    "text": "आँखों में चमक दिल में तूफान है",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "आँ-खों (2) + में (1) + च-मक (2) + दिल (1) + में (1) + तू-फान (2) + है (1) = 10-11",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-025",
+    "text": "यही तो एक सच्चे आशिक की पहचान है",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "य-ही (2) + तो (1) + एक (1) + सच-चे (2) + आ-शिक (2) + की (1) + पह-चान (2) + है (1) = 12-14",
+    "category": "Devanagari Classic"
+  },
+  {
+    "id": "bar-026",
+    "text": "बंटाई की बोली में असली है जान",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "बन-टा-ई (3) + की (1) + बो-ली (2) + में (1) + अस-ली (2) + है (1) + जान (1) = 11",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-027",
+    "text": "हक से कमाया है अपना ये नाम",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "हक (1) + से (1) + क-मा-या (3) + है (1) + अप-ना (2) + ये (1) + नाम (1) = 10-11",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-028",
+    "text": "गली का ये लड़का मचाए बवाल",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "ग-ली (2) + का (1) + ये (1) + लड़-का (2) + म-चा-ए (3) + ब-वाल (2) = 11",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-029",
+    "text": "बीट पे उतरे तो पूछे सवाल",
+    "expectedSyllables": 9,
+    "alternateSyllables": [
+      8,
+      10
+    ],
+    "notes": "बीट (1) + पे (1) + उत-रे (2) + तो (1) + पू-छे (2) + स-वाल (2) + [है] = 9-10",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-030",
+    "text": "फालतू की हवाबाज़ी बंद कर तू भाई",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "फाल-तू (2) + की (1) + ह-वा-बा-ज़ी (4) + बंद (1) + कर (1) + तू (1) + भाई (2) = 12-13",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-031",
+    "text": "काम से दिखा अपनी सारी चतुराई",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "काम (1) + से (1) + दि-खा (2) + अप-नी (2) + सा-री (2) + च-तु-रा-ई (4) = 12",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-032",
+    "text": "सीन में जो आया वो खल्लास हो गया",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "सीन (1) + में (1) + जो (1) + आ-या (2) + वो (1) + खल-लास (2) + हो (1) + ग-या (2) = 11-12",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-033",
+    "text": "असली जो था वो भी खास हो गया",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "अस-ली (2) + जो (1) + था (1) + वो (1) + भी (1) + खास (1) + हो (1) + ग-या (2) = 10-11",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-034",
+    "text": "भौकाल अपना ऐसा कि सब हो गए शांत",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "भौ-काल (2) + अप-ना (2) + ऐ-सा (2) + कि (1) + सब (1) + हो (1) + ग-ए (2) + शांत (1) = 12-13",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-035",
+    "text": "जुगाड़ से बनाई हमने अपनी ये साख",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "जु-गाड़ (2) + से (1) + ब-ना-ई (3) + हम-ने (2) + अप-नी (2) + ये (1) + साख (1) = 12-13",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-036",
+    "text": "धूम मची है जब गिरा ये ड्रॉप",
+    "expectedSyllables": 9,
+    "alternateSyllables": [
+      8,
+      10
+    ],
+    "notes": "धूम (1) + म-ची (2) + है (1) + जब (1) + गि-रा (2) + ये (1) + ड्रॉप (1) = 9-10",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-037",
+    "text": "पहुंचेंगे सीधे हम तो ऑन द टॉप",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "प-हुँ-चें-गे (4) + सी-धे (2) + हम (1) + तो (1) + ऑन (1) + द (1) + टॉप (1) = 11-12",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-038",
+    "text": "पेटी खोखा की बातें मत कर यार",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "पे-टी (2) + खो-खा (2) + की (1) + बा-तें (2) + मत (1) + कर (1) + यार (1) = 10-11",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-039",
+    "text": "मेहनत से बनता है यहाँ पे कारोबार",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "मेह-नत (2) + से (1) + बन-ता (2) + है (1) + य-हाँ (2) + पे (1) + का-रो-बार (3) = 12-14",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-040",
+    "text": "झोल करने वाले सारे हो गए आउट",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "झोल (1) + कर-ने (2) + वा-ले (2) + सा-रे (2) + हो (1) + ग-ए (2) + आउट (1) = 11-12",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-041",
+    "text": "शोर मचाता है अब ये पूरा क्राउड",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "शोर (1) + म-चा-ता (3) + है (1) + अब (1) + ये (1) + पू-रा (2) + क्राउड (1) = 10-12",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-042",
+    "text": "काण्ड बड़ा है और खुला है मैदान",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "काण्ड (1) + ब-ड़ा (2) + है (1) + और (1) + खु-ला (2) + है (1) + मै-दान (2) = 10-12",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-043",
+    "text": "लड़के सारे अपने हैं बेपरवाह नौजवान",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "लड़-के (2) + सा-रे (2) + अप-ने (2) + हैं (1) + बे-पर-वाह (3) + नौ-ज-वान (3) = 13-14",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-044",
+    "text": "चालू लोगों से दूरी बना के रखी है",
+    "expectedSyllables": 13,
+    "alternateSyllables": [
+      12,
+      14
+    ],
+    "notes": "चा-लू (2) + लो-गों (2) + से (1) + दू-री (2) + ब-ना (2) + के (1) + रख-खी (2) + है (1) = 13-14",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-045",
+    "text": "अपनी ही महफ़िल हमने सजा के रखी है",
+    "expectedSyllables": 13,
+    "alternateSyllables": [
+      12,
+      14
+    ],
+    "notes": "अप-नी (2) + ही (1) + मह-फ़िल (2) + हम-ने (2) + स-जा (2) + के (1) + रख-खी (2) + है (1) = 13-15",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-046",
+    "text": "चमचों की फ़ौज यहाँ नहीं टिकती",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "चम-चों (2) + की (1) + फ़ौज (1) + य-हाँ (2) + न-हीं (2) + टिक-ती (2) = 10-11",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-047",
+    "text": "सच्ची जुबां कभी बाज़ार में नहीं बिकती",
+    "expectedSyllables": 13,
+    "alternateSyllables": [
+      12,
+      14
+    ],
+    "notes": "सच-ची (2) + जु-बां (2) + क-भी (2) + बा-ज़ार (2) + में (1) + न-हीं (2) + बिक-ती (2) = 13-14",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-048",
+    "text": "लोचा जो किया तो पड़ेगा भारी",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "लो-चा (2) + जो (1) + कि-या (2) + तो (1) + प-ड़े-गा (3) + भा-री (2) = 11",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-049",
+    "text": "तैयार खड़ी है अपनी पूरी टुकड़ी सारी",
+    "expectedSyllables": 13,
+    "alternateSyllables": [
+      12,
+      14
+    ],
+    "notes": "तै-यार (2) + ख-ड़ी (2) + है (1) + अप-नी (2) + पू-री (2) + तुक-ड़ी (2) + सा-री (2) = 13-14",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-050",
+    "text": "टोपी पहनाने वालों का पत्ता कट",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "टो-पी (2) + पह-ना-ने (3) + वा-लों (2) + का (1) + पत-ता (2) + कट (1) = 11-12",
+    "category": "Street / Slang"
+  },
+  {
+    "id": "bar-051",
+    "text": "फ़ुरसत की बात नहीं क़ुदरत का खेल है",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "फ़ुर-सत (2) + की (1) + बात (1) + न-हीं (2) + क़ुद-रत (2) + का (1) + खेल (1) + है (1) = 11-13",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-052",
+    "text": "इश्क़ और जुदाई का अजीब ये मेल है",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "इश्क़ (1) + और (1) + जु-दा-ई (3) + का (1) + अ-जीब (2) + ये (1) + मेल (1) + है (1) = 11-13",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-053",
+    "text": "तन्हाई में जब याद तुम्हारी आती है",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "तन-हा-ई (3) + में (1) + जब (1) + याद (1) + तुम्-हा-री (3) + आ-ती (2) + है (1) = 12-13",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-054",
+    "text": "दिल के ज़ख़्मों को और गहरा कर जाती है",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "दिल (1) + के (1) + ज़ख़-मों (2) + को (1) + और (1) + गह-रा (2) + कर (1) + जा-ती (2) + है (1) = 12-14",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-055",
+    "text": "शौक़-ए-सफ़र में हमने हर दर्द सहा",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "शौक़ (1) + ए (1) + स-फ़र (2) + में (1) + हम-ने (2) + हर (1) + दर्द (1) + स-हा (2) = 11-12",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-056",
+    "text": "अश्कों का दरिया आँखों से सदा बहा",
+    "expectedSyllables": 13,
+    "alternateSyllables": [
+      12,
+      14
+    ],
+    "notes": "अश्-कों (2) + का (1) + द-रि-या (3) + आँ-खों (2) + से (1) + स-दा (2) + ब-हा (2) = 13",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-057",
+    "text": "हक़ीक़त से रूबरू हुआ जब ये दीवाना",
+    "expectedSyllables": 13,
+    "alternateSyllables": [
+      12,
+      14
+    ],
+    "notes": "ह-क़ी-क़त (3) + से (1) + रू-ब-रू (3) + हु-आ (2) + जब (1) + ये (1) + दी-वा-ना (3) = 14",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-058",
+    "text": "याद आया उसे गुज़रा हुआ हर फ़साना",
+    "expectedSyllables": 13,
+    "alternateSyllables": [
+      12,
+      14
+    ],
+    "notes": "याद (1) + आ-या (2) + उ-से (2) + गुज़-रा (2) + हु-आ (2) + हर (1) + फ़-सा-ना (3) = 13-14",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-059",
+    "text": "वक़्त की सख़्ती ने सिखाया सब्र करना",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "वक़्त (1) + की (1) + सख़्-ती (2) + ने (1) + सि-खा-या (3) + सब्र (1) + कर-ना (2) = 11-13",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-060",
+    "text": "हक़ की राह में मौत से भी ना डरना",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "हक़ (1) + की (1) + राह (1) + में (1) + मौत (1) + से (1) + भी (1) + ना (1) + डर-ना (2) = 10-12",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-061",
+    "text": "ग़ैरत के बिना जीना भी कोई जीना है",
+    "expectedSyllables": 13,
+    "alternateSyllables": [
+      12,
+      14
+    ],
+    "notes": "ग़ै-रत (2) + के (1) + बि-ना (2) + जी-ना (2) + भी (1) + को-ई (2) + जी-ना (2) + है (1) = 13-14",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-062",
+    "text": "ज़हर-ए-ग़म को भी हँस के यहाँ पीना है",
+    "expectedSyllables": 13,
+    "alternateSyllables": [
+      12,
+      14
+    ],
+    "notes": "ज़ह-र (2) + ए (1) + ग़म (1) + को (1) + भी (1) + हँस (1) + के (1) + य-हाँ (2) + पी-ना (2) + है (1) = 13-14",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-063",
+    "text": "मयख़ाने में पैमाना छलकता रहा रात भर",
+    "expectedSyllables": 14,
+    "alternateSyllables": [
+      13,
+      15
+    ],
+    "notes": "मय-ख़ा-ने (3) + में (1) + पै-मा-ना (3) + छल-क-ता (3) + र-हा (2) + रात (1) + भर (1) = 14",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-064",
+    "text": "आशिक़ों का कारवां भटकता रहा दर-ब-दर",
+    "expectedSyllables": 14,
+    "alternateSyllables": [
+      13,
+      15
+    ],
+    "notes": "आ-शि-क़ों (3) + का (1) + कार-वां (2) + भ-टक-ता (3) + र-हा (2) + दर-ब-दर (3) = 14-15",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-065",
+    "text": "हुस्न और इश्क की ये दास्तान पुरानी है",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "हुस्न (1) + और (1) + इश्क़ (1) + की (1) + ये (1) + दास-तान (2) + पु-रा-नी (3) + है (1) = 11-14",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-066",
+    "text": "आँखों से बयां होती जो दिल की रवानी है",
+    "expectedSyllables": 14,
+    "alternateSyllables": [
+      13,
+      15
+    ],
+    "notes": "आँ-खों (2) + से (1) + ब-यां (2) + हो-ती (2) + जो (1) + दिल (1) + की (1) + र-वा-नी (3) + है (1) = 13-14",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-067",
+    "text": "दौलत और शोहरत की हवस में खो गया इंसान",
+    "expectedSyllables": 14,
+    "alternateSyllables": [
+      13,
+      15
+    ],
+    "notes": "दौ-लत (2) + और (1) + शोह-रत (2) + की (1) + ह-वस (2) + में (1) + खो (1) + ग-या (2) + इन्-सान (2) = 14-15",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-068",
+    "text": "भूल बैठा अपनी ही रूह और ईमान",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "भूल (1) + बैठ-ठा (2) + अप-नी (2) + ही (1) + रूह (1) + और (1) + ई-मान (2) = 10-12",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-069",
+    "text": "सलाम-ए-शौक़ भेजा है हमने बहारों को",
+    "expectedSyllables": 13,
+    "alternateSyllables": [
+      12,
+      14
+    ],
+    "notes": "स-लाम (2) + ए (1) + शौक़ (1) + भे-जा (2) + है (1) + हम-ने (2) + ब-हा-रों (3) + को (1) = 13-14",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-070",
+    "text": "सजाया है पलकों पे फलक के सितारों को",
+    "expectedSyllables": 14,
+    "alternateSyllables": [
+      13,
+      15
+    ],
+    "notes": "स-जा-या (3) + है (1) + पल-कों (2) + पे (1) + फ़-लक (2) + के (1) + सि-ता-रों (3) + को (1) = 14-15",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-071",
+    "text": "ज़ुल्म की हुकूमत का ख़ात्मा ज़रूरी है",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "ज़ुल्म (1) + की (1) + हु-कू-मत (3) + का (1) + ख़ात-मा (2) + ज़-रू-री (3) + है (1) = 12-14",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-072",
+    "text": "इंसाफ़ की जंग में हर क़ुरबानी पूरी है",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "इन्-साफ़ (2) + की (1) + जंग (1) + में (1) + हर (1) + क़ुर-बा-नी (3) + पू-री (2) + है (1) = 12-14",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-073",
+    "text": "क़ाफ़िया मिलाना ही सिर्फ़ शायरी नहीं",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "क़ा-फ़ि-या (3) + मि-ला-ना (3) + ही (1) + सिर्फ़ (1) + शा-य-री (3) + न-हीं (2) = 13",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-074",
+    "text": "दर्द-ए-दिल ना हो तो ये कोई बंदगी नहीं",
+    "expectedSyllables": 15,
+    "alternateSyllables": [
+      14,
+      16
+    ],
+    "notes": "दर्-द (1) + ए (1) + दिल (1) + ना (1) + हो (1) + तो (1) + ये (1) + को-ई (2) + बन-द-गी (3) + न-हीं (2) = 13-14",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-075",
+    "text": "मतला और मक़्ता में रदीफ़ का कमाल है",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "मत-ला (2) + और (1) + मक़-ता (2) + में (1) + र-दीफ़ (2) + का (1) + क-माल (2) + है (1) = 12-14",
+    "category": "Urdu / Perso-Arabic"
+  },
+  {
+    "id": "bar-076",
+    "text": "मेरे पास है माइक और फ्लो मेरा टाइट",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "मे-रे (2) + पास (1) + है (1) + माइक (1) + और (1) + फ्लो (1) + मे-रा (2) + टाइट (1) = 10-12",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-077",
+    "text": "स्टेज पे आते ही करता हूँ फाइट",
+    "expectedSyllables": 9,
+    "alternateSyllables": [
+      8,
+      10
+    ],
+    "notes": "स्टेज (1) + पे (1) + आ-ते (2) + ही (1) + कर-ता (2) + हूँ (1) + फाइट (1) = 9-11",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-078",
+    "text": "गेम में हम हैं अब नंबर वन",
+    "expectedSyllables": 8,
+    "alternateSyllables": [
+      7,
+      9
+    ],
+    "notes": "गेम (1) + में (1) + हम (1) + हैं (1) + अब (1) + नं-बर (2) + वन (1) = 8-9",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-079",
+    "text": "रैप में किया हमने पूरा फन",
+    "expectedSyllables": 9,
+    "alternateSyllables": [
+      8,
+      10
+    ],
+    "notes": "रैप (1) + में (1) + कि-या (2) + हम-ने (2) + पू-रा (2) + फन (1) = 9-10",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-080",
+    "text": "ट्रैक पे बीट बजी तो क्राउड हुआ क्रेजी",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "ट्रैक (1) + पे (1) + बीट (1) + ब-जी (2) + तो (1) + क्राउड (1) + हु-आ (2) + क्रे-ज़ी (2) = 11-13",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-081",
+    "text": "राइम मेरी हार्ड है फ्लो नहीं लेजी",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "राइम (1) + मे-री (2) + हार्ड (1) + है (1) + फ्लो (1) + न-हीं (2) + ले-ज़ी (2) = 10-11",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-082",
+    "text": "बॉस की तरह किया पूरे सीन को रूल",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "बॉस (1) + की (1) + त-रह (2) + कि-या (2) + पू-रे (2) + सीन (1) + को (1) + रूल (1) = 11-12",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-083",
+    "text": "दिमाग़ अपना शांत और वाइब अपनी कूल",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "दि-माग़ (2) + अप-ना (2) + शांत (1) + और (1) + वाइब (1) + अप-नी (2) + कूल (1) = 10-12",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-084",
+    "text": "हुक ऐसा डाला कि सब गाने लगे",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "हुक (1) + ऐ-सा (2) + डा-ला (2) + कि (1) + सब (1) + गा-ने (2) + ल-गे (2) = 11",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-085",
+    "text": "बीट के ड्रॉप पे सब झूमने लगे",
+    "expectedSyllables": 9,
+    "alternateSyllables": [
+      8,
+      10
+    ],
+    "notes": "बीट (1) + के (1) + ड्रॉप (1) + पे (1) + सब (1) + झूम-ने (2) + ल-गे (2) = 9-11",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-086",
+    "text": "क्लब में जब एंट्री ली तो स्पॉटलाइट ऑन",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "क्लब (1) + में (1) + जब (1) + एन्-ट्री (2) + ली (1) + तो (1) + स्पॉट-लाइट (2) + ऑन (1) = 10-13",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-087",
+    "text": "विरोधी सारे भाग गए सब हो गए गॉन",
+    "expectedSyllables": 13,
+    "alternateSyllables": [
+      12,
+      14
+    ],
+    "notes": "वि-रो-धी (3) + सा-रे (2) + भाग (1) + ग-ए (2) + सब (1) + हो (1) + ग-ए (2) + गॉन (1) = 13",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-088",
+    "text": "ड्रिप मेरी फ्रेश और स्टाइल मेरा क्लासिक",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "ड्रिप (1) + मे-री (2) + फ्रेश (1) + और (1) + स्टाइल (1) + मे-रा (2) + क्ला-सिक (2) = 10-13",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-089",
+    "text": "म्यूज़िक का नशा जैसे हो कोई मैजिक",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "म्यू-ज़िक (2) + का (1) + न-शा (2) + जै-से (2) + हो (1) + को-ई (2) + मै-जिक (2) = 12",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-090",
+    "text": "किंग की तरह बैठा हूँ मैं अपने थ्रोन पे",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "किंग (1) + की (1) + त-रह (2) + बैठ-ठा (2) + हूँ (1) + मैं (1) + अप-ने (2) + थ्रोन (1) + पे (1) = 12-13",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-091",
+    "text": "कॉल आ रहे हैं दिन भर मेरे फोन पे",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "कॉल (1) + आ (1) + र-हे (2) + हैं (1) + दिन (1) + भर (1) + मे-रे (2) + फोन (1) + पे (1) = 11-12",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-092",
+    "text": "क्रू मेरा रेडी है करने को धमाका",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "क्रू (1) + मे-रा (2) + रे-डी (2) + है (1) + कर-ने (2) + को (1) + ध-मा-का (3) = 12",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-093",
+    "text": "रैप का ये गेम नहीं किसी का मज़ाक था",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "रैप (1) + का (1) + ये (1) + गेम (1) + न-हीं (2) + कि-सी (2) + का (1) + म-ज़ाक (2) + था (1) = 12-13",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-094",
+    "text": "फिट मेरी बॉडी और माइंड मेरा एक्टिव",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "फिट (1) + मे-री (2) + बॉ-डी (2) + और (1) + माइंड (1) + मे-रा (2) + ऐक्-टिव (2) = 11-13",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-095",
+    "text": "गाने सारे अपने सुपर अट्रैक्टिव",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "गा-ने (2) + सा-रे (2) + अप-ने (2) + सु-पर (2) + अट-रैक-टिव (3) = 11-12",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-096",
+    "text": "ट्रैप बीट पे जब चढ़ता है नशा",
+    "expectedSyllables": 9,
+    "alternateSyllables": [
+      8,
+      10
+    ],
+    "notes": "ट्रैप (1) + बीट (1) + पे (1) + जब (1) + चढ़-ता (2) + है (1) + न-शा (2) = 9-11",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-097",
+    "text": "बदल जाती है फिर सबकी ये दिशा",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "ब-दल (2) + जा-ती (2) + है (1) + फिर (1) + सब-की (2) + ये (1) + दि-शा (2) = 11",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-098",
+    "text": "नो कैप ब्रो सिर्फ़ फैक्ट्स बोलते हैं",
+    "expectedSyllables": 8,
+    "alternateSyllables": [
+      7,
+      9
+    ],
+    "notes": "नो (1) + कैप (1) + ब्रो (1) + सिर्फ़ (1) + फैक्ट्स (1) + बोल-ते (2) + हैं (1) = 8-11",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-099",
+    "text": "अंदर के सारे राज़ अब हम खोलते हैं",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "अन-दर (2) + के (1) + सा-रे (2) + राज़ (1) + अब (1) + हम (1) + खोल-ते (2) + हैं (1) = 11-13",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-100",
+    "text": "हिट पे हिट गाने हमने गिराए",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "हिट (1) + पे (1) + हिट (1) + गा-ने (2) + हम-ने (2) + गि-रा-ए (3) = 10-11",
+    "category": "Hinglish Mix"
+  },
+  {
+    "id": "bar-101",
+    "text": "हवाबाज़ी करने वालों का पत्ता साफ",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "ह-वा-बा-ज़ी (4) + कर-ने (2) + वा-लों (2) + का (1) + पत-ता (2) + साफ (1) = 12",
+    "category": "Compound Cadence"
+  },
+  {
+    "id": "bar-102",
+    "text": "दगाबाज़ी का गुनाह नहीं होगा माफ",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "द-गा-बा-ज़ी (4) + का (1) + गु-नाह (2) + न-हीं (2) + हो-गा (2) + माफ (1) = 12",
+    "category": "Compound Cadence"
+  },
+  {
+    "id": "bar-103",
+    "text": "शानदार अंदाज में हमने की एंट्री",
+    "expectedSyllables": 10,
+    "alternateSyllables": [
+      9,
+      11
+    ],
+    "notes": "शान-दार (2) + अन्-दाज (2) + में (1) + हम-ने (2) + की (1) + एन्-ट्री (2) = 10-12",
+    "category": "Compound Cadence"
+  },
+  {
+    "id": "bar-104",
+    "text": "जानदार गानों से हिला दी ये कंट्री",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "जान-दार (2) + गा-नों (2) + से (1) + हि-ला (2) + दी (1) + ये (1) + कन्-ट्री (2) = 11-12",
+    "category": "Compound Cadence"
+  },
+  {
+    "id": "bar-105",
+    "text": "वफ़ादार साथी मेरे साथ खड़े हैं",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "व-फ़ा-दार (3) + सा-थी (2) + मे-रे (2) + साथ (1) + ख-ड़े (2) + हैं (1) + [यहाँ] = 11-12",
+    "category": "Compound Cadence"
+  },
+  {
+    "id": "bar-106",
+    "text": "असरदार बोल अपने सबसे बड़े हैं",
+    "expectedSyllables": 11,
+    "alternateSyllables": [
+      10,
+      12
+    ],
+    "notes": "अ-सर-दार (3) + बोल (1) + अप-ने (2) + सब-से (2) + ब-ड़े (2) + हैं (1) = 11-12",
+    "category": "Compound Cadence"
+  },
+  {
+    "id": "bar-107",
+    "text": "समंदर की गहराई में छिपा है ख़ज़ाना",
+    "expectedSyllables": 14,
+    "alternateSyllables": [
+      13,
+      15
+    ],
+    "notes": "स-मन्-दर (3) + की (1) + गह-रा-ई (3) + में (1) + छि-पा (2) + है (1) + ख़-ज़ा-ना (3) = 14",
+    "category": "Compound Cadence"
+  },
+  {
+    "id": "bar-108",
+    "text": "सिकंदर की तरह जीता हमने ज़माना",
+    "expectedSyllables": 13,
+    "alternateSyllables": [
+      12,
+      14
+    ],
+    "notes": "सि-कन्-दर (3) + की (1) + त-रह (2) + जी-ता (2) + हम-ने (2) + ज़-मा-ना (3) = 13",
+    "category": "Compound Cadence"
+  },
+  {
+    "id": "bar-109",
+    "text": "अंधेरों से लड़कर जो सवेरा लाया",
+    "expectedSyllables": 12,
+    "alternateSyllables": [
+      11,
+      13
+    ],
+    "notes": "अं-धे-रों (3) + से (1) + लड़-कर (2) + जो (1) + स-वे-रा (3) + ला-या (2) = 12",
+    "category": "Compound Cadence"
+  },
+  {
+    "id": "bar-110",
+    "text": "उसी शेर ने यहाँ अपना परचम लहराया",
+    "expectedSyllables": 13,
+    "alternateSyllables": [
+      12,
+      14
+    ],
+    "notes": "उ-सी (2) + शेर (1) + ने (1) + य-हाँ (2) + अप-ना (2) + पर-चम (2) + लह-रा-या (3) = 13-14",
+    "category": "Compound Cadence"
+  }
+];

@@ -58,8 +58,7 @@ export function stripDiacritics(text: string): string {
     .replace(/[ṭ]/g, 't')
     .replace(/[ḍ]/g, 'd')
     .replace(/[ṛ]/g, 'ri')
-    .replace(/[z़]/g, 'z')
-    .replace(/[q]/g, 'k');
+    .replace(/[z़]/g, 'z');
 }
 
 /**
@@ -111,23 +110,21 @@ export function resolveToDevanagari(query: string): { devanagari: string; isDire
   const normalized = normalizeRomanHindi(query);
   if (!normalized) return { devanagari: '', isDirectMatch: false };
 
-  // 1. Check in-memory indexed LexicalDatabase first (O(1))
-  const lexWord = isDevanagari(normalized)
-    ? lexicalDatabase.getByDevanagari(normalized)
-    : lexicalDatabase.getBySearchForm(normalized);
-
-  if (lexWord) {
-    return { devanagari: lexWord.devanagari, isDirectMatch: true };
-  }
-
-  // 2. If Devanagari without matching lexical entry, return cleaned Devanagari
+  // 1. If Devanagari, check database or return cleaned Devanagari
   if (isDevanagari(normalized)) {
-    return { devanagari: normalized, isDirectMatch: true };
+    const lexWord = lexicalDatabase.getByDevanagari(normalized);
+    return { devanagari: lexWord?.devanagari || normalized, isDirectMatch: true };
   }
 
-  // 3. Exact match in Roman Hindi mapping table
+  // 2. Exact match in Roman Hindi mapping table
   if (ROMAN_TO_HINDI_DICTIONARY[normalized]) {
     return { devanagari: ROMAN_TO_HINDI_DICTIONARY[normalized], isDirectMatch: true };
+  }
+
+  // 3. Check in-memory indexed LexicalDatabase
+  const lexWord = lexicalDatabase.getBySearchForm(normalized);
+  if (lexWord) {
+    return { devanagari: lexWord.devanagari, isDirectMatch: true };
   }
 
   // 4. Heuristic phonetic fallback variations:

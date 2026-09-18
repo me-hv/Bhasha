@@ -1,0 +1,1507 @@
+[
+  {
+    "id": "perf-001",
+    "word1": "रात",
+    "word2": "बात",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Identical nucleus /aː/ and unvoiced dental stop coda /t̪/"
+  },
+  {
+    "id": "perf-002",
+    "word1": "रात",
+    "word2": "साथ",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Exact nucleus /aː/ and dental stop coda (aspirated variant) /t̪ʰ/"
+  },
+  {
+    "id": "perf-003",
+    "word1": "रात",
+    "word2": "हाथ",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Equisyllabic classic bar anchor [aːt̪ʰ]"
+  },
+  {
+    "id": "perf-004",
+    "word1": "दिल",
+    "word2": "मिल",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Short front vowel /ɪ/ with lateral dental liquid /l/"
+  },
+  {
+    "id": "perf-005",
+    "word1": "दिल",
+    "word2": "खिल",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Short front vowel /ɪ/ with lateral dental liquid /l/"
+  },
+  {
+    "id": "perf-006",
+    "word1": "नाम",
+    "word2": "काम",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long open vowel /aː/ with bilabial nasal /m/"
+  },
+  {
+    "id": "perf-007",
+    "word1": "नाम",
+    "word2": "दाम",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long open vowel /aː/ with bilabial nasal /m/"
+  },
+  {
+    "id": "perf-008",
+    "word1": "नाम",
+    "word2": "जाम",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long open vowel /aː/ with bilabial nasal /m/"
+  },
+  {
+    "id": "perf-009",
+    "word1": "प्यार",
+    "word2": "यार",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long open vowel /aː/ with alveolar tap liquid /r/"
+  },
+  {
+    "id": "perf-010",
+    "word1": "प्यार",
+    "word2": "वार",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long open vowel /aː/ with alveolar tap liquid /r/"
+  },
+  {
+    "id": "perf-011",
+    "word1": "प्यार",
+    "word2": "हार",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long open vowel /aː/ with alveolar tap liquid /r/"
+  },
+  {
+    "id": "perf-012",
+    "word1": "आग",
+    "word2": "दाग",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long vowel /aː/ with voiced velar stop /ɡ/"
+  },
+  {
+    "id": "perf-013",
+    "word1": "आग",
+    "word2": "भाग",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long vowel /aː/ with voiced velar stop /ɡ/"
+  },
+  {
+    "id": "perf-014",
+    "word1": "आग",
+    "word2": "राग",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long vowel /aː/ with voiced velar stop /ɡ/"
+  },
+  {
+    "id": "perf-015",
+    "word1": "शोर",
+    "word2": "जोर",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Mid back vowel /oː/ with tap liquid /r/"
+  },
+  {
+    "id": "perf-016",
+    "word1": "शोर",
+    "word2": "मोर",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Mid back vowel /oː/ with tap liquid /r/"
+  },
+  {
+    "id": "perf-017",
+    "word1": "शोर",
+    "word2": "दौर",
+    "expectedTier": "PERFECT",
+    "minScore": 0.9,
+    "rationale": "Open/mid back diphthong /ɔːr/ vs /oːr/"
+  },
+  {
+    "id": "perf-018",
+    "word1": "सच",
+    "word2": "बच",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Central schwa /ə/ with palato-alveolar affricate /t͡ʃ/"
+  },
+  {
+    "id": "perf-019",
+    "word1": "चाल",
+    "word2": "हाल",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long open vowel /aː/ with liquid lateral /l/"
+  },
+  {
+    "id": "perf-020",
+    "word1": "चाल",
+    "word2": "जाल",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long open vowel /aː/ with liquid lateral /l/"
+  },
+  {
+    "id": "perf-021",
+    "word1": "चाल",
+    "word2": "साल",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long open vowel /aː/ with liquid lateral /l/"
+  },
+  {
+    "id": "perf-022",
+    "word1": "चाल",
+    "word2": "लाल",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long open vowel /aː/ with liquid lateral /l/"
+  },
+  {
+    "id": "perf-023",
+    "word1": "शर्म",
+    "word2": "गर्म",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Central schwa /ə/ with complex rhotic coda /rm/"
+  },
+  {
+    "id": "perf-024",
+    "word1": "शर्म",
+    "word2": "नर्म",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Central schwa /ə/ with complex rhotic coda /rm/"
+  },
+  {
+    "id": "perf-025",
+    "word1": "आस",
+    "word2": "प्यास",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long open vowel /aː/ with voiceless alveolar sibilant /s/"
+  },
+  {
+    "id": "perf-026",
+    "word1": "आस",
+    "word2": "सास",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Long open vowel /aː/ with voiceless alveolar sibilant /s/"
+  },
+  {
+    "id": "perf-027",
+    "word1": "दिन",
+    "word2": "गिन",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Short front vowel /ɪ/ with alveolar nasal /n/"
+  },
+  {
+    "id": "perf-028",
+    "word1": "दिन",
+    "word2": "पिन",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Short front vowel /ɪ/ with alveolar nasal /n/"
+  },
+  {
+    "id": "perf-029",
+    "word1": "दम",
+    "word2": "ग़म",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Central schwa /ə/ with bilabial nasal /m/"
+  },
+  {
+    "id": "perf-030",
+    "word1": "दम",
+    "word2": "कम",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "Central schwa /ə/ with bilabial nasal /m/"
+  },
+  {
+    "id": "perf-031",
+    "word1": "हौसला",
+    "word2": "फ़ैसला",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "2-syllable equisyllabic open cadence [-sə.laː]"
+  },
+  {
+    "id": "perf-032",
+    "word1": "मंज़िल",
+    "word2": "साहिल",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "2-syllable equisyllabic liquid coda [ɪl]"
+  },
+  {
+    "id": "perf-033",
+    "word1": "मंज़िल",
+    "word2": "महफ़िल",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "2-syllable equisyllabic liquid coda [ɪl]"
+  },
+  {
+    "id": "perf-034",
+    "word1": "साहिल",
+    "word2": "क़ातिल",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "2-syllable equisyllabic liquid coda [ɪl]"
+  },
+  {
+    "id": "perf-035",
+    "word1": "सुकून",
+    "word2": "कानून",
+    "expectedTier": "PERFECT",
+    "minScore": 0.95,
+    "rationale": "2-syllable equisyllabic high-back nasal [-uːn]"
+  },
+  {
+    "id": "strong-001",
+    "word1": "रात",
+    "word2": "जज़्बात",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "1-to-2 syllable root rhyme anchor [-aːt̪]"
+  },
+  {
+    "id": "strong-002",
+    "word1": "रात",
+    "word2": "हालात",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "1-to-2 syllable root rhyme anchor [-aːt̪]"
+  },
+  {
+    "id": "strong-003",
+    "word1": "रात",
+    "word2": "बरसात",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "1-to-2 syllable root rhyme anchor [-aːt̪]"
+  },
+  {
+    "id": "strong-004",
+    "word1": "रात",
+    "word2": "मुलाक़ात",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "1-to-3 syllable root rhyme anchor [-aːt̪]"
+  },
+  {
+    "id": "strong-005",
+    "word1": "रात",
+    "word2": "औक़ात",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "1-to-2 syllable root rhyme anchor [-aːt̪]"
+  },
+  {
+    "id": "strong-006",
+    "word1": "बात",
+    "word2": "जज़्बात",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "1-to-2 syllable root rhyme anchor [-aːt̪]"
+  },
+  {
+    "id": "strong-007",
+    "word1": "बात",
+    "word2": "हालात",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "1-to-2 syllable root rhyme anchor [-aːt̪]"
+  },
+  {
+    "id": "strong-008",
+    "word1": "साथ",
+    "word2": "बरसात",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "1-to-2 syllable root rhyme anchor [-aːt̪]"
+  },
+  {
+    "id": "strong-009",
+    "word1": "हाथ",
+    "word2": "मुलाक़ात",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "1-to-3 syllable root rhyme anchor [-aːt̪]"
+  },
+  {
+    "id": "strong-010",
+    "word1": "जज़्बात",
+    "word2": "मुलाक़ात",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-3 syllable cross-length rhyme [-aːt̪]"
+  },
+  {
+    "id": "strong-011",
+    "word1": "हालात",
+    "word2": "मुलाक़ात",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-3 syllable cross-length rhyme [-aːt̪]"
+  },
+  {
+    "id": "strong-012",
+    "word1": "जुनून",
+    "word2": "खून",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable cross-length rhyme [-uːn]"
+  },
+  {
+    "id": "strong-013",
+    "word1": "सुकून",
+    "word2": "खून",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable cross-length rhyme [-uːn]"
+  },
+  {
+    "id": "strong-014",
+    "word1": "ज़िंदगी",
+    "word2": "सादगी",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "3-to-2 syllable cross-length cadence [-ɡiː]"
+  },
+  {
+    "id": "strong-015",
+    "word1": "ज़िंदगी",
+    "word2": "ताज़गी",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "3-to-2 syllable cross-length cadence [-ɡiː]"
+  },
+  {
+    "id": "strong-016",
+    "word1": "बंदगी",
+    "word2": "सादगी",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "3-to-2 syllable cross-length cadence [-ɡiː]"
+  },
+  {
+    "id": "strong-017",
+    "word1": "बंदगी",
+    "word2": "ताज़गी",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "3-to-2 syllable cross-length cadence [-ɡiː]"
+  },
+  {
+    "id": "strong-018",
+    "word1": "आसमान",
+    "word2": "शान",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable root rhyme [-aːn]"
+  },
+  {
+    "id": "strong-019",
+    "word1": "आसमान",
+    "word2": "जान",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable root rhyme [-aːn]"
+  },
+  {
+    "id": "strong-020",
+    "word1": "जहान",
+    "word2": "जान",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable root rhyme [-aːn]"
+  },
+  {
+    "id": "strong-021",
+    "word1": "इंसान",
+    "word2": "शान",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable root rhyme [-aːn]"
+  },
+  {
+    "id": "strong-022",
+    "word1": "शैतान",
+    "word2": "जान",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable root rhyme [-aːn]"
+  },
+  {
+    "id": "strong-023",
+    "word1": "सवाल",
+    "word2": "चाल",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable root rhyme [-aːl]"
+  },
+  {
+    "id": "strong-024",
+    "word1": "जवाब",
+    "word2": "ख़्वाब",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable root rhyme [-aːb]"
+  },
+  {
+    "id": "strong-025",
+    "word1": "हिसाब",
+    "word2": "ख़्वाब",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable root rhyme [-aːb]"
+  },
+  {
+    "id": "strong-026",
+    "word1": "किताब",
+    "word2": "ख़्वाब",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable root rhyme [-aːb]"
+  },
+  {
+    "id": "strong-027",
+    "word1": "गुलाब",
+    "word2": "ख़्वाब",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable root rhyme [-aːb]"
+  },
+  {
+    "id": "strong-028",
+    "word1": "तस्वीर",
+    "word2": "तीर",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable root rhyme [-iːr]"
+  },
+  {
+    "id": "strong-029",
+    "word1": "तक़दीर",
+    "word2": "तीर",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable root rhyme [-iːr]"
+  },
+  {
+    "id": "strong-030",
+    "word1": "ज़ंजीर",
+    "word2": "तीर",
+    "expectedTier": "STRONG",
+    "minScore": 0.88,
+    "rationale": "2-to-1 syllable root rhyme [-iːr]"
+  },
+  {
+    "id": "multi-001",
+    "word1": "तन्हाई",
+    "word2": "जुदाई",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching vowel sequence [-aː.iː]"
+  },
+  {
+    "id": "multi-002",
+    "word1": "तन्हाई",
+    "word2": "रुसवाई",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching vowel sequence [-aː.iː]"
+  },
+  {
+    "id": "multi-003",
+    "word1": "तन्हाई",
+    "word2": "गहराई",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching vowel sequence [-aː.iː]"
+  },
+  {
+    "id": "multi-004",
+    "word1": "तन्हाई",
+    "word2": "सच्चाई",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching vowel sequence [-aː.iː]"
+  },
+  {
+    "id": "multi-005",
+    "word1": "जुदाई",
+    "word2": "रुसवाई",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching vowel sequence [-aː.iː]"
+  },
+  {
+    "id": "multi-006",
+    "word1": "जुदाई",
+    "word2": "गहराई",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching vowel sequence [-aː.iː]"
+  },
+  {
+    "id": "multi-007",
+    "word1": "जुदाई",
+    "word2": "सच्चाई",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching vowel sequence [-aː.iː]"
+  },
+  {
+    "id": "multi-008",
+    "word1": "ज़िंदगी",
+    "word2": "बंदगी",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "3-to-3 equisyllabic full cadence match [-ɪn.d̪ə.ɡiː]"
+  },
+  {
+    "id": "multi-009",
+    "word1": "दीवाना",
+    "word2": "परवाना",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching tail [-ʋaː.naː]"
+  },
+  {
+    "id": "multi-010",
+    "word1": "दीवाना",
+    "word2": "मस्ताना",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching tail [-aː.naː]"
+  },
+  {
+    "id": "multi-011",
+    "word1": "दीवाना",
+    "word2": "फ़साना",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching tail [-aː.naː]"
+  },
+  {
+    "id": "multi-012",
+    "word1": "दीवाना",
+    "word2": "ज़माना",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching tail [-aː.naː]"
+  },
+  {
+    "id": "multi-013",
+    "word1": "दीवाना",
+    "word2": "निशाना",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching tail [-aː.naː]"
+  },
+  {
+    "id": "multi-014",
+    "word1": "दीवाना",
+    "word2": "बहाना",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching tail [-aː.naː]"
+  },
+  {
+    "id": "multi-015",
+    "word1": "दीवाना",
+    "word2": "तराना",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching tail [-aː.naː]"
+  },
+  {
+    "id": "multi-016",
+    "word1": "दीवाना",
+    "word2": "आशियाना",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching tail [-aː.naː]"
+  },
+  {
+    "id": "multi-017",
+    "word1": "परवाना",
+    "word2": "मस्ताना",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching tail [-aː.naː]"
+  },
+  {
+    "id": "multi-018",
+    "word1": "मयख़ाना",
+    "word2": "पैमाना",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching tail [-aː.naː]"
+  },
+  {
+    "id": "multi-019",
+    "word1": "सिकंदर",
+    "word2": "समंदर",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching nasal-liquid tail [-ən.d̪ər]"
+  },
+  {
+    "id": "multi-020",
+    "word1": "सिकंदर",
+    "word2": "कलंदर",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching nasal-liquid tail [-ən.d̪ər]"
+  },
+  {
+    "id": "multi-021",
+    "word1": "समंदर",
+    "word2": "कलंदर",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching nasal-liquid tail [-ən.d̪ər]"
+  },
+  {
+    "id": "multi-022",
+    "word1": "जवानी",
+    "word2": "कहानी",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching open-vowel tail [-aː.niː]"
+  },
+  {
+    "id": "multi-023",
+    "word1": "जवानी",
+    "word2": "रवानी",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching open-vowel tail [-aː.niː]"
+  },
+  {
+    "id": "multi-024",
+    "word1": "कहानी",
+    "word2": "निशानी",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching open-vowel tail [-aː.niː]"
+  },
+  {
+    "id": "multi-025",
+    "word1": "रूहानी",
+    "word2": "ज़ुबानी",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching open-vowel tail [-aː.niː]"
+  },
+  {
+    "id": "multi-026",
+    "word1": "किनारा",
+    "word2": "सहारा",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching open-rhotic tail [-aː.raː]"
+  },
+  {
+    "id": "multi-027",
+    "word1": "सितारा",
+    "word2": "इशारा",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching open-rhotic tail [-aː.raː]"
+  },
+  {
+    "id": "multi-028",
+    "word1": "इशारा",
+    "word2": "नज़ारा",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable matching open-rhotic tail [-aː.raː]"
+  },
+  {
+    "id": "multi-029",
+    "word1": "हवाबाज़ी",
+    "word2": "दगाबाज़ी",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable compound suffix match [-baː.ziː]"
+  },
+  {
+    "id": "multi-030",
+    "word1": "शानदार",
+    "word2": "जानदार",
+    "expectedTier": "MULTISYLLABIC",
+    "minScore": 0.9,
+    "rationale": "2-syllable compound suffix match [-daːr]"
+  },
+  {
+    "id": "near-001",
+    "word1": "रात",
+    "word2": "याद",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Identical vowel /aː/, voiced /d̪/ vs unvoiced /t̪/"
+  },
+  {
+    "id": "near-002",
+    "word1": "बात",
+    "word2": "याद",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Identical vowel /aː/, voiced /d̪/ vs unvoiced /t̪/"
+  },
+  {
+    "id": "near-003",
+    "word1": "दर्द",
+    "word2": "मर्ज़",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Central schwa /ə/ with complex codas /rd̪/ vs /rz/"
+  },
+  {
+    "id": "near-004",
+    "word1": "दर्द",
+    "word2": "फ़र्ज़",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Central schwa /ə/ with complex codas /rd̪/ vs /rz/"
+  },
+  {
+    "id": "near-005",
+    "word1": "हवा",
+    "word2": "सज़ा",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Open vowel ending /aː/ with differing onsets"
+  },
+  {
+    "id": "near-006",
+    "word1": "दवा",
+    "word2": "मज़ा",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Open vowel ending /aː/ with differing onsets"
+  },
+  {
+    "id": "near-007",
+    "word1": "दुआ",
+    "word2": "ख़ुदा",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Open vowel ending /aː/ with differing onsets"
+  },
+  {
+    "id": "near-008",
+    "word1": "वफ़ा",
+    "word2": "ख़ुदा",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Open vowel ending /aː/ with differing onsets"
+  },
+  {
+    "id": "near-009",
+    "word1": "अदा",
+    "word2": "सज़ा",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Open vowel ending /aː/ with differing onsets"
+  },
+  {
+    "id": "near-010",
+    "word1": "फ़ना",
+    "word2": "दवा",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Open vowel ending /aː/ with differing onsets"
+  },
+  {
+    "id": "near-011",
+    "word1": "शहर",
+    "word2": "सफ़र",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "2-syllable schwa-liquid cadence [-ər] with differing medial consonants /ɦ/ vs /f/"
+  },
+  {
+    "id": "near-012",
+    "word1": "ज़हर",
+    "word2": "ख़बर",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "2-syllable schwa-liquid cadence [-ər] with differing medial consonants /ɦ/ vs /b/"
+  },
+  {
+    "id": "near-013",
+    "word1": "क़हर",
+    "word2": "नज़र",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "2-syllable schwa-liquid cadence [-ər] with differing medial consonants /ɦ/ vs /z/"
+  },
+  {
+    "id": "near-014",
+    "word1": "लहर",
+    "word2": "असर",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "2-syllable schwa-liquid cadence [-ər] with differing medial consonants /ɦ/ vs /s/"
+  },
+  {
+    "id": "near-015",
+    "word1": "सड़क",
+    "word2": "चमक",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "2-syllable schwa-velar cadence [-ək] with differing medial consonants /ɽ/ vs /m/"
+  },
+  {
+    "id": "near-016",
+    "word1": "पलक",
+    "word2": "झलक",
+    "expectedTier": "NEAR",
+    "minScore": 0.75,
+    "rationale": "2-syllable schwa-velar cadence [-ək] with differing medial consonants /l/"
+  },
+  {
+    "id": "near-017",
+    "word1": "धड़कन",
+    "word2": "दुश्मन",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "2-syllable schwa-nasal cadence [-ən] with differing medial consonants /ɽk/ vs /ʃm/"
+  },
+  {
+    "id": "near-018",
+    "word1": "अमन",
+    "word2": "वतन",
+    "expectedTier": "NEAR",
+    "minScore": 0.75,
+    "rationale": "2-syllable schwa-nasal cadence [-ən] with differing medial consonants /m/ vs /t̪/"
+  },
+  {
+    "id": "near-019",
+    "word1": "सोचा",
+    "word2": "धोखा",
+    "expectedTier": "NEAR",
+    "minScore": 0.65,
+    "rationale": "2-syllable open vowel ending [-aː] with differing preceding vowels/consonants"
+  },
+  {
+    "id": "near-020",
+    "word1": "मौका",
+    "word2": "लोचा",
+    "expectedTier": "NEAR",
+    "minScore": 0.65,
+    "rationale": "2-syllable open vowel ending [-aː]"
+  },
+  {
+    "id": "near-021",
+    "word1": "तड़प",
+    "word2": "झलक",
+    "expectedTier": "NEAR",
+    "minScore": 0.65,
+    "rationale": "2-syllable central schwa with stop codas /p/ vs /k/"
+  },
+  {
+    "id": "near-022",
+    "word1": "प्यार",
+    "word2": "हाल",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Identical long vowel /aː/, tap liquid /r/ vs lateral liquid /l/"
+  },
+  {
+    "id": "near-023",
+    "word1": "यार",
+    "word2": "साल",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Identical long vowel /aː/, tap liquid /r/ vs lateral liquid /l/"
+  },
+  {
+    "id": "near-024",
+    "word1": "हार",
+    "word2": "जाल",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Identical long vowel /aː/, tap liquid /r/ vs lateral liquid /l/"
+  },
+  {
+    "id": "near-025",
+    "word1": "बार",
+    "word2": "गाल",
+    "expectedTier": "NEAR",
+    "minScore": 0.7,
+    "rationale": "Identical long vowel /aː/, tap liquid /r/ vs lateral liquid /l/"
+  },
+  {
+    "id": "cons-001",
+    "word1": "वक़्त",
+    "word2": "सख़्त",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.7,
+    "rationale": "Identical coda cluster [-kt̪/-xt̪] with schwa nucleus"
+  },
+  {
+    "id": "cons-002",
+    "word1": "तख़्त",
+    "word2": "सख़्त",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.8,
+    "rationale": "Identical coda cluster [-xt̪] with schwa nucleus"
+  },
+  {
+    "id": "cons-003",
+    "word1": "मस्त",
+    "word2": "पस्त",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.85,
+    "rationale": "Identical coda cluster [-st̪] with schwa nucleus"
+  },
+  {
+    "id": "cons-004",
+    "word1": "मस्त",
+    "word2": "दस्त",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.85,
+    "rationale": "Identical coda cluster [-st̪] with schwa nucleus"
+  },
+  {
+    "id": "cons-005",
+    "word1": "रात",
+    "word2": "गीत",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.6,
+    "rationale": "Same dental stop coda /t̪/, different vowels /aː/ vs /iː/"
+  },
+  {
+    "id": "cons-006",
+    "word1": "बात",
+    "word2": "भीत",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.6,
+    "rationale": "Same dental stop coda /t̪/, different vowels /aː/ vs /iː/"
+  },
+  {
+    "id": "cons-007",
+    "word1": "दिल",
+    "word2": "बोल",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.6,
+    "rationale": "Same lateral liquid coda /l/, different vowels /ɪ/ vs /oː/"
+  },
+  {
+    "id": "cons-008",
+    "word1": "दिल",
+    "word2": "लाल",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.6,
+    "rationale": "Same lateral liquid coda /l/, different vowels /ɪ/ vs /aː/"
+  },
+  {
+    "id": "cons-009",
+    "word1": "नाम",
+    "word2": "दम",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.65,
+    "rationale": "Same bilabial nasal coda /m/, different vowels /aː/ vs /ə/"
+  },
+  {
+    "id": "cons-010",
+    "word1": "नाम",
+    "word2": "धूम",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.6,
+    "rationale": "Same bilabial nasal coda /m/, different vowels /aː/ vs /uː/"
+  },
+  {
+    "id": "cons-011",
+    "word1": "प्यार",
+    "word2": "तीर",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.6,
+    "rationale": "Same tap liquid coda /r/, different vowels /aː/ vs /iː/"
+  },
+  {
+    "id": "cons-012",
+    "word1": "प्यार",
+    "word2": "शोर",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.6,
+    "rationale": "Same tap liquid coda /r/, different vowels /aː/ vs /oː/"
+  },
+  {
+    "id": "cons-013",
+    "word1": "आग",
+    "word2": "रोग",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.6,
+    "rationale": "Same velar stop coda /ɡ/, different vowels /aː/ vs /oː/"
+  },
+  {
+    "id": "cons-014",
+    "word1": "लफ़्ज़",
+    "word2": "नब्ज़",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.75,
+    "rationale": "Fricative sibilant codas [-fz] vs [-bz]"
+  },
+  {
+    "id": "cons-015",
+    "word1": "हर्फ़",
+    "word2": "बर्फ़",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.85,
+    "rationale": "Identical complex coda [-rf] with schwa nucleus"
+  },
+  {
+    "id": "cons-016",
+    "word1": "फर्श",
+    "word2": "अर्श",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.85,
+    "rationale": "Identical complex coda [-rʃ] with schwa nucleus"
+  },
+  {
+    "id": "cons-017",
+    "word1": "जिस्म",
+    "word2": "इस्म",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.85,
+    "rationale": "Identical complex coda [-sm] with short /ɪ/"
+  },
+  {
+    "id": "cons-018",
+    "word1": "रंग",
+    "word2": "जंग",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.85,
+    "rationale": "Identical nasal-velar coda [-ŋɡ] with schwa nucleus"
+  },
+  {
+    "id": "cons-019",
+    "word1": "खून",
+    "word2": "दिन",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.55,
+    "rationale": "Same nasal coda /n/, different vowels /uː/ vs /ɪ/"
+  },
+  {
+    "id": "cons-020",
+    "word1": "साँस",
+    "word2": "हँसी",
+    "expectedTier": "CONSONANCE",
+    "minScore": 0.5,
+    "rationale": "Nasalized sibilant resonance /s/"
+  },
+  {
+    "id": "asso-001",
+    "word1": "रात",
+    "word2": "आग",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.6,
+    "rationale": "Identical long vowel /aː/, different codas /t̪/ vs /ɡ/"
+  },
+  {
+    "id": "asso-002",
+    "word1": "रात",
+    "word2": "साफ",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.65,
+    "rationale": "Identical long vowel /aː/, different codas /t̪/ vs /f/"
+  },
+  {
+    "id": "asso-003",
+    "word1": "बात",
+    "word2": "यार",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.65,
+    "rationale": "Identical long vowel /aː/, different codas /t̪/ vs /r/"
+  },
+  {
+    "id": "asso-004",
+    "word1": "बात",
+    "word2": "हाल",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.65,
+    "rationale": "Identical long vowel /aː/, different codas /t̪/ vs /l/"
+  },
+  {
+    "id": "asso-005",
+    "word1": "नाम",
+    "word2": "आग",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.6,
+    "rationale": "Identical long vowel /aː/, different codas /m/ vs /ɡ/"
+  },
+  {
+    "id": "asso-006",
+    "word1": "दिल",
+    "word2": "गिन",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.65,
+    "rationale": "Identical short vowel /ɪ/, different codas /l/ vs /n/"
+  },
+  {
+    "id": "asso-007",
+    "word1": "दिल",
+    "word2": "सिर",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.65,
+    "rationale": "Identical short vowel /ɪ/, different codas /l/ vs /r/"
+  },
+  {
+    "id": "asso-008",
+    "word1": "शोर",
+    "word2": "चोट",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.65,
+    "rationale": "Identical mid vowel /oː/, different codas /r/ vs /ʈ/"
+  },
+  {
+    "id": "asso-009",
+    "word1": "शोर",
+    "word2": "नोट",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.65,
+    "rationale": "Identical mid vowel /oː/, different codas /r/ vs /ʈ/"
+  },
+  {
+    "id": "asso-010",
+    "word1": "खून",
+    "word2": "धूप",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.6,
+    "rationale": "Identical high back vowel /uː/, different codas /n/ vs /p/"
+  },
+  {
+    "id": "asso-011",
+    "word1": "खून",
+    "word2": "झूठ",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.6,
+    "rationale": "Identical high back vowel /uː/, different codas /n/ vs /ʈʰ/"
+  },
+  {
+    "id": "asso-012",
+    "word1": "मौत",
+    "word2": "ख़ौफ़",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.65,
+    "rationale": "Identical diphthong /ɔː/, different codas /t̪/ vs /f/"
+  },
+  {
+    "id": "asso-013",
+    "word1": "मौत",
+    "word2": "शौक़",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.65,
+    "rationale": "Identical diphthong /ɔː/, different codas /t̪/ vs /q/"
+  },
+  {
+    "id": "asso-014",
+    "word1": "सच",
+    "word2": "सब",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.6,
+    "rationale": "Identical central schwa /ə/, different codas /t͡ʃ/ vs /b/"
+  },
+  {
+    "id": "asso-015",
+    "word1": "दम",
+    "word2": "दस्त",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.6,
+    "rationale": "Identical central schwa /ə/, different codas /m/ vs /st̪/"
+  },
+  {
+    "id": "asso-016",
+    "word1": "तीर",
+    "word2": "जीत",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.6,
+    "rationale": "Identical high front vowel /iː/, different codas /r/ vs /t̪/"
+  },
+  {
+    "id": "asso-017",
+    "word1": "तीर",
+    "word2": "चीख",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.6,
+    "rationale": "Identical high front vowel /iː/, different codas /r/ vs /kʰ/"
+  },
+  {
+    "id": "asso-018",
+    "word1": "हौसला",
+    "word2": "मौका",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.55,
+    "rationale": "Matching diphthong /ɔː/ in penult syllable"
+  },
+  {
+    "id": "asso-019",
+    "word1": "शहर",
+    "word2": "वहम",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.6,
+    "rationale": "Matching /ɛːɦ/ phonetic nucleus, different codas /r/ vs /m/"
+  },
+  {
+    "id": "asso-020",
+    "word1": "ज़हर",
+    "word2": "वहश",
+    "expectedTier": "ASSONANCE",
+    "minScore": 0.6,
+    "rationale": "Matching /ɛːɦ/ phonetic nucleus, different codas /r/ vs /ʃ/"
+  },
+  {
+    "id": "non-001",
+    "word1": "रात",
+    "word2": "दिल",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Completely different vowels (/aː/ vs /ɪ/) and codas (/t̪/ vs /l/)"
+  },
+  {
+    "id": "non-002",
+    "word1": "रात",
+    "word2": "शहर",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Completely different vowels (/aː/ vs /ə/) and syllable lengths"
+  },
+  {
+    "id": "non-003",
+    "word1": "दिल",
+    "word2": "आग",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and codas"
+  },
+  {
+    "id": "non-004",
+    "word1": "पानी",
+    "word2": "आग",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels, syllables, and codas"
+  },
+  {
+    "id": "non-005",
+    "word1": "शहर",
+    "word2": "कामयाब",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Completely unrelated phonetic structures"
+  },
+  {
+    "id": "non-006",
+    "word1": "ज़िंदगी",
+    "word2": "मौत",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels, syllables, and codas"
+  },
+  {
+    "id": "non-007",
+    "word1": "इश्क़",
+    "word2": "दुनिया",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Completely different phonetics"
+  },
+  {
+    "id": "non-008",
+    "word1": "सुकून",
+    "word2": "सड़क",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and codas"
+  },
+  {
+    "id": "non-009",
+    "word1": "तन्हाई",
+    "word2": "कमरा",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowel sequences and endings"
+  },
+  {
+    "id": "non-010",
+    "word1": "हसरत",
+    "word2": "गाड़ी",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different syllables and endings"
+  },
+  {
+    "id": "non-011",
+    "word1": "ख़ुशी",
+    "word2": "दर्द",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and endings"
+  },
+  {
+    "id": "non-012",
+    "word1": "सूरज",
+    "word2": "चाँद",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Semantic antonyms with completely different phonetics"
+  },
+  {
+    "id": "non-013",
+    "word1": "दरिया",
+    "word2": "पहाड़",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different phonetics and endings"
+  },
+  {
+    "id": "non-014",
+    "word1": "रोटी",
+    "word2": "सिक्का",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and endings"
+  },
+  {
+    "id": "non-015",
+    "word1": "दूध",
+    "word2": "चाय",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and codas"
+  },
+  {
+    "id": "non-016",
+    "word1": "माइक",
+    "word2": "स्टेज",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and codas"
+  },
+  {
+    "id": "non-017",
+    "word1": "ट्रैक",
+    "word2": "हुक",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and codas"
+  },
+  {
+    "id": "non-018",
+    "word1": "किंग",
+    "word2": "बॉस",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and codas"
+  },
+  {
+    "id": "non-019",
+    "word1": "रैप",
+    "word2": "फ्लो",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and codas"
+  },
+  {
+    "id": "non-020",
+    "word1": "शराब",
+    "word2": "पानी",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and endings"
+  },
+  {
+    "id": "non-021",
+    "word1": "हथियार",
+    "word2": "ज़ुल्म",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and endings"
+  },
+  {
+    "id": "non-022",
+    "word1": "अदालत",
+    "word2": "सज़ा",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different syllables and endings"
+  },
+  {
+    "id": "non-023",
+    "word1": "बगावत",
+    "word2": "फ़ौज",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and endings"
+  },
+  {
+    "id": "non-024",
+    "word1": "खिड़की",
+    "word2": "दरवाज़ा",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and endings"
+  },
+  {
+    "id": "non-025",
+    "word1": "काग़ज़",
+    "word2": "क़लम",
+    "expectedTier": "NON_RHYME",
+    "minScore": 0,
+    "maxScore": 0.4,
+    "rationale": "Different vowels and codas"
+  }
+]

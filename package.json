@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "build-corpus": "tsx scripts/corpus/build-corpus.ts",
+    "build:gold": "tsx scripts/build-gold-datasets.ts",
     "audit": "tsx scripts/corpus/coverage-audit.ts",
+    "audit:linguistic": "tsx scripts/linguistic-audit.ts",
     "test:linguistic": "tsx src/tests/linguistic-correctness.test.ts",
     "test:verse": "tsx src/tests/verse-analysis.test.ts",
     "test": "tsx src/tests/language-engine.test.ts && tsx src/tests/corpus-regression.test.ts && tsx src/tests/rhyme-quality.test.ts && tsx src/tests/linguistic-correctness.test.ts && tsx src/tests/verse-analysis.test.ts"

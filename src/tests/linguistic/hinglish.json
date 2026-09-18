@@ -1,0 +1,1115 @@
+[
+  {
+    "id": "hinglish-001",
+    "text": "मेरे पास है mic और flow मेरा tight",
+    "englishTokens": [
+      "mic",
+      "flow",
+      "tight"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "tight",
+    "notes": "English rhyme anchor tight /taɪt/ alongside Hindustani flow"
+  },
+  {
+    "id": "hinglish-002",
+    "text": "स्टेज पे आते ही करता हूँ fight",
+    "englishTokens": [
+      "fight"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "fight",
+    "notes": "Rhymes with tight"
+  },
+  {
+    "id": "hinglish-003",
+    "text": "अंधेरे कमरे में जला दी white light",
+    "englishTokens": [
+      "white",
+      "light"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "light",
+    "notes": "English rhyme anchor light"
+  },
+  {
+    "id": "hinglish-004",
+    "text": "करते हैं बातें जो thinking is right",
+    "englishTokens": [
+      "thinking",
+      "is",
+      "right"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "right",
+    "notes": "English rhyme anchor right"
+  },
+  {
+    "id": "hinglish-005",
+    "text": "गेम में हम हैं अब number one",
+    "englishTokens": [
+      "number",
+      "one"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "one",
+    "notes": "English anchor one /wʌn/"
+  },
+  {
+    "id": "hinglish-006",
+    "text": "रैप में किया हमने पूरा fun",
+    "englishTokens": [
+      "fun"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "fun",
+    "notes": "Rhymes with one"
+  },
+  {
+    "id": "hinglish-007",
+    "text": "हाथ में अपने नहीं कोई gun",
+    "englishTokens": [
+      "gun"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "gun",
+    "notes": "Rhymes with fun"
+  },
+  {
+    "id": "hinglish-008",
+    "text": "सूरज की धूप में चमकता sun",
+    "englishTokens": [
+      "sun"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "sun",
+    "notes": "Rhymes with gun"
+  },
+  {
+    "id": "hinglish-009",
+    "text": "ट्रैक पे बीट बजी तो crowd हुआ crazy",
+    "englishTokens": [
+      "crowd",
+      "crazy"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "crazy",
+    "notes": "English anchor crazy"
+  },
+  {
+    "id": "hinglish-010",
+    "text": "राइम मेरी hard है flow नहीं lazy",
+    "englishTokens": [
+      "hard",
+      "flow",
+      "lazy"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "lazy",
+    "notes": "Rhymes with crazy"
+  },
+  {
+    "id": "hinglish-011",
+    "text": "बॉस की तरह किया पूरे scene को rule",
+    "englishTokens": [
+      "scene",
+      "rule"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "rule",
+    "notes": "English anchor rule"
+  },
+  {
+    "id": "hinglish-012",
+    "text": "दिमाग़ अपना शांत और vibe अपनी cool",
+    "englishTokens": [
+      "vibe",
+      "cool"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "cool",
+    "notes": "Rhymes with rule"
+  },
+  {
+    "id": "hinglish-013",
+    "text": "स्कूल में सीखा था जो बन गया tool",
+    "englishTokens": [
+      "tool"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "tool",
+    "notes": "Rhymes with cool"
+  },
+  {
+    "id": "hinglish-014",
+    "text": "हमको समझ ना तू कोई fool",
+    "englishTokens": [
+      "fool"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "fool",
+    "notes": "Rhymes with tool"
+  },
+  {
+    "id": "hinglish-015",
+    "text": "क्लब में जब entry ली तो spotlight on",
+    "englishTokens": [
+      "entry",
+      "spotlight",
+      "on"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "on",
+    "notes": "English anchor on"
+  },
+  {
+    "id": "hinglish-016",
+    "text": "विरोधी सारे भाग गए सब हो गए gone",
+    "englishTokens": [
+      "gone"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "gone",
+    "notes": "Rhymes with on"
+  },
+  {
+    "id": "hinglish-017",
+    "text": "सुबह से लेकर रात तक till the dawn",
+    "englishTokens": [
+      "till",
+      "the",
+      "dawn"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "dawn",
+    "notes": "Rhymes with gone"
+  },
+  {
+    "id": "hinglish-018",
+    "text": "शतरंज की बिसात पे बन गया pawn",
+    "englishTokens": [
+      "pawn"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "pawn",
+    "notes": "Rhymes with dawn"
+  },
+  {
+    "id": "hinglish-019",
+    "text": "ड्रिप मेरी fresh और style मेरा classic",
+    "englishTokens": [
+      "fresh",
+      "style",
+      "classic"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "classic",
+    "notes": "English anchor classic"
+  },
+  {
+    "id": "hinglish-020",
+    "text": "म्यूज़िक का नशा जैसे हो कोई magic",
+    "englishTokens": [
+      "magic"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "magic",
+    "notes": "Rhymes with classic"
+  },
+  {
+    "id": "hinglish-021",
+    "text": "किंग की तरह बैठा हूँ मैं अपने throne पे",
+    "englishTokens": [
+      "throne"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "throne",
+    "notes": "English anchor throne"
+  },
+  {
+    "id": "hinglish-022",
+    "text": "कॉल आ रहे हैं दिन भर मेरे phone पे",
+    "englishTokens": [
+      "phone"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "phone",
+    "notes": "Rhymes with throne"
+  },
+  {
+    "id": "hinglish-023",
+    "text": "क्रू मेरा ready है करने को blast",
+    "englishTokens": [
+      "ready",
+      "blast"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "blast",
+    "notes": "English anchor blast"
+  },
+  {
+    "id": "hinglish-024",
+    "text": "चलते हैं आगे हम super fast",
+    "englishTokens": [
+      "super",
+      "fast"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "fast",
+    "notes": "Rhymes with blast"
+  },
+  {
+    "id": "hinglish-025",
+    "text": "पीछे जो छूट गया वो था past",
+    "englishTokens": [
+      "past"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "past",
+    "notes": "Rhymes with fast"
+  },
+  {
+    "id": "hinglish-026",
+    "text": "अपनी ये legacy रहेगी to the last",
+    "englishTokens": [
+      "legacy",
+      "to",
+      "the",
+      "last"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "last",
+    "notes": "Rhymes with past"
+  },
+  {
+    "id": "hinglish-027",
+    "text": "नो cap ब्रो सिर्फ़ facts बोलते हैं",
+    "englishTokens": [
+      "cap",
+      "facts"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "बोलते हैं",
+    "notes": "Hindi verb end-anchor with English slang inside"
+  },
+  {
+    "id": "hinglish-028",
+    "text": "अंदर के सारे secrets अब खोलते हैं",
+    "englishTokens": [
+      "secrets"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "खोलते हैं",
+    "notes": "Hindi verb end-anchor with English loan inside"
+  },
+  {
+    "id": "hinglish-029",
+    "text": "ट्रैप beat पे जब bass करता drop",
+    "englishTokens": [
+      "beat",
+      "bass",
+      "drop"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "drop",
+    "notes": "English anchor drop"
+  },
+  {
+    "id": "hinglish-030",
+    "text": "गाना मेरा बजता है non stop",
+    "englishTokens": [
+      "non",
+      "stop"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "stop",
+    "notes": "Rhymes with drop"
+  },
+  {
+    "id": "hinglish-031",
+    "text": "फ्लो ऐसा दिया कि चार्ट्स पे top",
+    "englishTokens": [
+      "top"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "top",
+    "notes": "Rhymes with stop"
+  },
+  {
+    "id": "hinglish-032",
+    "text": "करते हैं डांस सब hip hop",
+    "englishTokens": [
+      "hip",
+      "hop"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "hop",
+    "notes": "Rhymes with top"
+  },
+  {
+    "id": "hinglish-033",
+    "text": "गाने सारे अपने super hit",
+    "englishTokens": [
+      "super",
+      "hit"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "hit",
+    "notes": "English anchor hit"
+  },
+  {
+    "id": "hinglish-034",
+    "text": "बॉडी अपनी पूरी तरह से fit",
+    "englishTokens": [
+      "fit"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "fit",
+    "notes": "Rhymes with hit"
+  },
+  {
+    "id": "hinglish-035",
+    "text": "स्टेज पे जब आए तो माहौल lit",
+    "englishTokens": [
+      "lit"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "lit",
+    "notes": "Rhymes with fit"
+  },
+  {
+    "id": "hinglish-036",
+    "text": "रुकते नहीं हम even a bit",
+    "englishTokens": [
+      "even",
+      "a",
+      "bit"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "bit",
+    "notes": "Rhymes with lit"
+  },
+  {
+    "id": "hinglish-037",
+    "text": "लाइफ अपनी बन गई जैसे movie scene",
+    "englishTokens": [
+      "movie",
+      "scene"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "scene",
+    "notes": "English anchor scene"
+  },
+  {
+    "id": "hinglish-038",
+    "text": "दिल अपना रखा हमने neat and clean",
+    "englishTokens": [
+      "neat",
+      "and",
+      "clean"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "clean",
+    "notes": "Rhymes with scene"
+  },
+  {
+    "id": "hinglish-039",
+    "text": "ख्वाब अपने सारे हैं big and green",
+    "englishTokens": [
+      "big",
+      "and",
+      "green"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "green",
+    "notes": "Rhymes with clean"
+  },
+  {
+    "id": "hinglish-040",
+    "text": "हम हैं इस महफ़िल के king and queen",
+    "englishTokens": [
+      "king",
+      "and",
+      "queen"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "queen",
+    "notes": "Rhymes with green"
+  },
+  {
+    "id": "hinglish-041",
+    "text": "इंटरनेट पे चल रहा है drama",
+    "englishTokens": [
+      "drama"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "drama",
+    "notes": "Loanword drama"
+  },
+  {
+    "id": "hinglish-042",
+    "text": "याद आती है मुझको मेरी mama",
+    "englishTokens": [
+      "mama"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "mama",
+    "notes": "Rhymes with drama"
+  },
+  {
+    "id": "hinglish-043",
+    "text": "शहर में बजता है मेरा sound",
+    "englishTokens": [
+      "sound"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "sound",
+    "notes": "English anchor sound"
+  },
+  {
+    "id": "hinglish-044",
+    "text": "सारे शहर में घूमते around",
+    "englishTokens": [
+      "around"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "around",
+    "notes": "Rhymes with sound"
+  },
+  {
+    "id": "hinglish-045",
+    "text": "पैर अपने टिके हैं on the ground",
+    "englishTokens": [
+      "on",
+      "the",
+      "ground"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "ground",
+    "notes": "Rhymes with around"
+  },
+  {
+    "id": "hinglish-046",
+    "text": "असली सुकून हमने लिया find and found",
+    "englishTokens": [
+      "find",
+      "and",
+      "found"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "found",
+    "notes": "Rhymes with ground"
+  },
+  {
+    "id": "hinglish-047",
+    "text": "पॉकेट में रखा है सारा cash",
+    "englishTokens": [
+      "cash"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "cash",
+    "notes": "English anchor cash"
+  },
+  {
+    "id": "hinglish-048",
+    "text": "पार्टी में करते हैं पूरी aish and bash",
+    "englishTokens": [
+      "and",
+      "bash"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "bash",
+    "notes": "Rhymes with cash"
+  },
+  {
+    "id": "hinglish-049",
+    "text": "विरोधी का सिस्टम कर दिया crash",
+    "englishTokens": [
+      "crash"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "crash",
+    "notes": "Rhymes with bash"
+  },
+  {
+    "id": "hinglish-050",
+    "text": "सारे झूठे वादे हो गए ash and trash",
+    "englishTokens": [
+      "ash",
+      "and",
+      "trash"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "trash",
+    "notes": "Rhymes with crash"
+  },
+  {
+    "id": "hinglish-051",
+    "text": "हाथ में अपने coffee का cup",
+    "englishTokens": [
+      "cup"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "cup",
+    "notes": "English anchor cup"
+  },
+  {
+    "id": "hinglish-052",
+    "text": "सुबह जल्दी हम तो जाते wake up",
+    "englishTokens": [
+      "wake",
+      "up"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "up",
+    "notes": "Rhymes with cup"
+  },
+  {
+    "id": "hinglish-053",
+    "text": "मेहनत से किया हमने सारा setup",
+    "englishTokens": [
+      "setup"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "setup",
+    "notes": "Rhymes with up"
+  },
+  {
+    "id": "hinglish-054",
+    "text": "बातें जो फिजूल हैं shut up",
+    "englishTokens": [
+      "shut",
+      "up"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "up",
+    "notes": "Rhymes with setup"
+  },
+  {
+    "id": "hinglish-055",
+    "text": "स्ट्रीट्स पे अपनी चलती है car",
+    "englishTokens": [
+      "car"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "car",
+    "notes": "English anchor car"
+  },
+  {
+    "id": "hinglish-056",
+    "text": "मंजिल अपनी अभी है very far",
+    "englishTokens": [
+      "very",
+      "far"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "far",
+    "notes": "Rhymes with car"
+  },
+  {
+    "id": "hinglish-057",
+    "text": "रात के अंधेरे में चमके shining star",
+    "englishTokens": [
+      "shining",
+      "star"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "star",
+    "notes": "Rhymes with far"
+  },
+  {
+    "id": "hinglish-058",
+    "text": "हाथ में पकड़ा हुआ acoustic guitar",
+    "englishTokens": [
+      "acoustic",
+      "guitar"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "guitar",
+    "notes": "Rhymes with star"
+  },
+  {
+    "id": "hinglish-059",
+    "text": "दिल में हमारे भरा है fear and pain",
+    "englishTokens": [
+      "fear",
+      "and",
+      "pain"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "pain",
+    "notes": "English anchor pain"
+  },
+  {
+    "id": "hinglish-060",
+    "text": "मेहनत अपनी नहीं जाएगी in vain",
+    "englishTokens": [
+      "in",
+      "vain"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "vain",
+    "notes": "Rhymes with pain"
+  },
+  {
+    "id": "hinglish-061",
+    "text": "सफ़र में आ गई फिर से heavy rain",
+    "englishTokens": [
+      "heavy",
+      "rain"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "rain",
+    "notes": "Rhymes with vain"
+  },
+  {
+    "id": "hinglish-062",
+    "text": "पटरी पे दौड़ती है अपनी super train",
+    "englishTokens": [
+      "super",
+      "train"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "train",
+    "notes": "Rhymes with rain"
+  },
+  {
+    "id": "hinglish-063",
+    "text": "अकेले में करते हैं deep feel",
+    "englishTokens": [
+      "deep",
+      "feel"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "feel",
+    "notes": "English anchor feel"
+  },
+  {
+    "id": "hinglish-064",
+    "text": "मार्केट में साइन की लाखों की big deal",
+    "englishTokens": [
+      "big",
+      "deal"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "deal",
+    "notes": "Rhymes with feel"
+  },
+  {
+    "id": "hinglish-065",
+    "text": "वक़्त के साथ हर ज़ख़्म होगा heal",
+    "englishTokens": [
+      "heal"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "heal",
+    "notes": "Rhymes with deal"
+  },
+  {
+    "id": "hinglish-066",
+    "text": "गाड़ी के घूमते हैं silver wheel",
+    "englishTokens": [
+      "silver",
+      "wheel"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "wheel",
+    "notes": "Rhymes with heal"
+  },
+  {
+    "id": "hinglish-067",
+    "text": "सोच अपनी बिल्कुल है out of the box",
+    "englishTokens": [
+      "out",
+      "of",
+      "the",
+      "box"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "box",
+    "notes": "English anchor box"
+  },
+  {
+    "id": "hinglish-068",
+    "text": "जंगल में घूमते हैं clever fox",
+    "englishTokens": [
+      "clever",
+      "fox"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "fox",
+    "notes": "Rhymes with box"
+  },
+  {
+    "id": "hinglish-069",
+    "text": "समय की टिक-टिक करती है clocks",
+    "englishTokens": [
+      "clocks"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "clocks",
+    "notes": "Rhymes with fox"
+  },
+  {
+    "id": "hinglish-070",
+    "text": "पहाड़ों पे चढ़ते हैं hard rocks",
+    "englishTokens": [
+      "hard",
+      "rocks"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "rocks",
+    "notes": "Rhymes with clocks"
+  },
+  {
+    "id": "hinglish-071",
+    "text": "दिल में जो बात है say it direct",
+    "englishTokens": [
+      "say",
+      "it",
+      "direct"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "direct",
+    "notes": "English anchor direct"
+  },
+  {
+    "id": "hinglish-072",
+    "text": "सबको दिया हमने full respect",
+    "englishTokens": [
+      "full",
+      "respect"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "respect",
+    "notes": "Rhymes with direct"
+  },
+  {
+    "id": "hinglish-073",
+    "text": "काम अपना होता है 100 percent perfect",
+    "englishTokens": [
+      "percent",
+      "perfect"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "perfect",
+    "notes": "Rhymes with respect"
+  },
+  {
+    "id": "hinglish-074",
+    "text": "बोलने का तरीका always correct",
+    "englishTokens": [
+      "always",
+      "correct"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "correct",
+    "notes": "Rhymes with perfect"
+  },
+  {
+    "id": "hinglish-075",
+    "text": "लाइफ में नहीं चाहिए कोई extra tension",
+    "englishTokens": [
+      "extra",
+      "tension"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "tension",
+    "notes": "English anchor tension"
+  },
+  {
+    "id": "hinglish-076",
+    "text": "शायरी में किया उसका special mention",
+    "englishTokens": [
+      "special",
+      "mention"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "mention",
+    "notes": "Rhymes with tension"
+  },
+  {
+    "id": "hinglish-077",
+    "text": "क्राउड का मिला हमें full attention",
+    "englishTokens": [
+      "full",
+      "attention"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "attention",
+    "notes": "Rhymes with mention"
+  },
+  {
+    "id": "hinglish-078",
+    "text": "कला अपनी ले गई beyond dimension",
+    "englishTokens": [
+      "beyond",
+      "dimension"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "dimension",
+    "notes": "Rhymes with attention"
+  },
+  {
+    "id": "hinglish-079",
+    "text": "ख्वाबों को किया हमने reality check",
+    "englishTokens": [
+      "reality",
+      "check"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "check",
+    "notes": "English anchor check"
+  },
+  {
+    "id": "hinglish-080",
+    "text": "हाथ में पकड़ा हुआ cards का deck",
+    "englishTokens": [
+      "cards",
+      "deck"
+    ],
+    "expectedLanguageMix": [
+      "Hindi",
+      "English"
+    ],
+    "rhymeAnchor": "deck",
+    "notes": "Rhymes with check"
+  }
+]

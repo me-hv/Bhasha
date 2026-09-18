@@ -37,8 +37,8 @@ const RHYME_GROUP_COLORS: Record<string, { badge: string; text: string; bg: stri
 
 // Common grammatical particles / stop words in Hindi/Hinglish to exclude from internal rhyme matching
 const STOP_WORDS = new Set([
-  'है', 'हैं', 'हूँ', 'था', 'थी', 'थे', 'में', 'का', 'के', 'की', 'को', 'से', 'भी', 'ना', 'तो', 'पर', 'ये', 'वो', 'एक', 'जो', 'कर', 'रहे', 'रहा', 'रही', 'ने', 'पे', 'ही', 'हो', 'हुई', 'हुआ', 'हुए', 'जा', 'गई', 'गया', 'गए', 'ले', 'दी', 'दिया', 'दिए', 'सब', 'कम', 'ज़्यादा', 'हर',
-  'hai', 'hain', 'hun', 'hoon', 'tha', 'thi', 'the', 'me', 'mein', 'main', 'ka', 'ke', 'ki', 'ko', 'se', 'bhi', 'na', 'to', 'par', 'ye', 'wo', 'ek', 'jo', 'kar', 'rahe', 'raha', 'rahi', 'ne', 'pe', 'hi', 'ho', 'hui', 'hua', 'hue', 'ja', 'gai', 'gaya', 'gae', 'le', 'di', 'diya', 'diye', 'sab', 'kam', 'har', 'aur', 'or', 'par'
+  'है', 'हैं', 'हूँ', 'था', 'थी', 'थे', 'में', 'का', 'के', 'की', 'को', 'से', 'भी', 'ना', 'तो', 'पर', 'ये', 'वो', 'एक', 'जो', 'कर', 'रहे', 'रहा', 'रही', 'ने', 'पे', 'ही', 'हो', 'हुई', 'हुआ', 'हुए', 'जा', 'गई', 'गया', 'गए', 'ले', 'दी', 'दिया', 'दिए', 'और',
+  'hai', 'hain', 'hun', 'hoon', 'tha', 'thi', 'the', 'me', 'mein', 'main', 'ka', 'ke', 'ki', 'ko', 'se', 'bhi', 'na', 'to', 'par', 'ye', 'wo', 'ek', 'jo', 'kar', 'rahe', 'raha', 'rahi', 'ne', 'pe', 'hi', 'ho', 'hui', 'hua', 'hue', 'ja', 'gai', 'gaya', 'gae', 'le', 'di', 'diya', 'diye', 'aur', 'or'
 ]);
 
 /**
@@ -110,8 +110,10 @@ export function areWordsRhyming(
     (detailedScore.type === 'perfect' ||
       detailedScore.type === 'multisyllabic' ||
       detailedScore.type === 'strong' ||
-      detailedScore.type === 'assonance' ||
-      detailedScore.score >= 0.70);
+      detailedScore.type === 'near' ||
+      detailedScore.type === 'consonance' ||
+      (minScore <= 0.60 ? detailedScore.type === 'assonance' : detailedScore.score >= 0.75) ||
+      detailedScore.score >= 0.85);
 
   return {
     rhymes: isRhyming,
@@ -202,11 +204,43 @@ export function detectInternalRhymes(line: string, lineIndex = 0): InternalRhyme
   return matches;
 }
 
+const AUXILIARY_STOP_WORDS = new Set([
+  'है', 'हैं', 'हूँ', 'हूं', 'था', 'थी', 'थे',
+  'गया', 'गई', 'गए', 'गयी', 'गये',
+  'रहा', 'रहे', 'रही',
+  'हो', 'हुआ', 'हुई', 'हुए', 'होगा', 'होगी', 'होंगे',
+  'में', 'पे', 'पर', 'से', 'का', 'के', 'की', 'को', 'तक', 'ने',
+  'नहीं', 'नही', 'ना', 'मत',
+  'तू', 'मुझे', 'मेरा', 'मेरी', 'मेरे', 'तुझे', 'तेरा', 'तेरी', 'तेरे', 'हम', 'हमें', 'हमारा', 'हमारी', 'हमारे', 'आप', 'वो', 'ये', 'इस', 'उस', 'भी', 'तो', 'ही',
+  'hai', 'hain', 'hun', 'hoon', 'tha', 'thi', 'the',
+  'gaya', 'gai', 'gae',
+  'raha', 'rahe', 'rahi',
+  'hua', 'hui', 'hue', 'ho', 'hoga', 'hogi',
+  'mein', 'me', 'pe', 'par', 'se', 'ka', 'ke', 'ki', 'ko', 'tak', 'ne',
+  'nahi', 'nahin', 'na', 'mat',
+  'tu', 'mujhe', 'mera', 'meri', 'mere', 'tujhe', 'tera', 'teri', 'tere', 'hum', 'humein', 'hamara', 'hamari', 'hamare', 'aap', 'wo', 'ye', 'is', 'us', 'bhi', 'to', 'hi'
+]);
+
+export function extractLineRhymeAnchor(line: string): { endWord: string; substantiveWord: string; precedingWord?: string } | null {
+  const words = extractLineWords(line);
+  if (words.length === 0) return null;
+  const endWord = words[words.length - 1];
+
+  let idx = words.length - 1;
+  while (idx > 0 && AUXILIARY_STOP_WORDS.has(words[idx].toLowerCase())) {
+    idx--;
+  }
+
+  const substantiveWord = idx >= 0 ? words[idx] : endWord;
+  const precedingWord = idx > 0 ? words[idx - 1] : undefined;
+  return { endWord, substantiveWord, precedingWord };
+}
+
 /**
  * Automatically groups line endings into rhyme groups (A, B, C...)
  */
 export function computeRhymeGroups(
-  lines: { index: number; endWord: string | null; isBar: boolean }[],
+  lines: { index: number; endWord: string | null; isBar: boolean; line?: string }[],
   pinnedTarget?: RhymeTarget
 ): { lineGroupMap: Map<number, string>; groups: RhymeGroup[] } {
   const lineGroupMap = new Map<number, string>();
@@ -214,7 +248,17 @@ export function computeRhymeGroups(
   let nextGroupIdx = 0;
 
   // Filter to valid bars with meaningful end words
-  const validBars = lines.filter((l) => l.isBar && l.endWord);
+  const validBars = lines
+    .filter((l) => l.isBar && l.endWord)
+    .map((l) => {
+      const anchor = l.line ? extractLineRhymeAnchor(l.line) : { endWord: l.endWord!, substantiveWord: l.endWord!, precedingWord: undefined };
+      return {
+        ...l,
+        endWord: l.endWord!,
+        substantiveWord: anchor?.substantiveWord || l.endWord!,
+        precedingWord: anchor?.precedingWord,
+      };
+    });
 
   for (let i = 0; i < validBars.length; i++) {
     const current = validBars[i];
@@ -223,21 +267,86 @@ export function computeRhymeGroups(
     // Check if this line already assigned
     if (lineGroupMap.has(current.index)) continue;
 
-    // Look for matching lines (either ahead or already established)
+    // Look for matching lines
     const matchingIndices: number[] = [current.index];
 
     for (let j = i + 1; j < validBars.length; j++) {
       const candidate = validBars[j];
       if (!candidate.endWord || lineGroupMap.has(candidate.index)) continue;
 
-      const { rhymes } = areWordsRhyming(current.endWord, candidate.endWord, 0.70);
-      if (rhymes) {
+      const isCurrentStop = AUXILIARY_STOP_WORDS.has(current.endWord.toLowerCase());
+      const isCandStop = AUXILIARY_STOP_WORDS.has(candidate.endWord.toLowerCase());
+
+      let isMatch = false;
+
+      // Case 1: Both lines end in auxiliary stop words (e.g. "बात है" vs "साथ है" or "सहारा मिल गया" vs "किनारा मिल गया")
+      if (isCurrentStop && isCandStop) {
+        // Count how many lines in this stanza share the identical refrain (substantiveWord + endWord)
+        const totalWithSameRefrain = validBars.filter(
+          (b) =>
+            b.substantiveWord.toLowerCase() === current.substantiveWord.toLowerCase() &&
+            b.endWord.toLowerCase() === current.endWord.toLowerCase()
+        ).length;
+
+        // 1a. If all lines share the identical refrain (Ghazal-wide Radif across >= 4 lines), check preceding Qafiya word
+        if (
+          totalWithSameRefrain >= 4 &&
+          current.substantiveWord.toLowerCase() === candidate.substantiveWord.toLowerCase() &&
+          current.endWord.toLowerCase() === candidate.endWord.toLowerCase()
+        ) {
+          if (current.precedingWord && candidate.precedingWord) {
+            const precRes = areWordsRhyming(current.precedingWord, candidate.precedingWord, 0.65);
+            if (precRes.rhymes && precRes.score >= 0.65) {
+              isMatch = true;
+            }
+          }
+        }
+        // 1b. Couplet/alternate refrain match (e.g. 2 lines share "बदल गया" or "शुरू हुआ")
+        else if (
+          current.substantiveWord.toLowerCase() === candidate.substantiveWord.toLowerCase() &&
+          current.endWord.toLowerCase() === candidate.endWord.toLowerCase()
+        ) {
+          isMatch = true;
+        }
+        // 1c. Distinct substantive words (Qafiya) must rhyme (e.g. "मिल गया" vs "खिल गया" or "बात है" vs "साथ है")
+        else {
+          const subRes = areWordsRhyming(current.substantiveWord, candidate.substantiveWord, 0.65);
+          if (subRes.rhymes && subRes.score >= 0.65) {
+            isMatch = true;
+          }
+        }
+      }
+      // Case 2: One line ends in auxiliary stop word
+      else if (isCurrentStop) {
+        const resSub = areWordsRhyming(current.substantiveWord, candidate.endWord, 0.65);
+        if (resSub.rhymes && resSub.score >= 0.65) {
+          isMatch = true;
+        }
+      }
+      else if (isCandStop) {
+        const resSub = areWordsRhyming(current.endWord, candidate.substantiveWord, 0.65);
+        if (resSub.rhymes && resSub.score >= 0.65) {
+          isMatch = true;
+        }
+      }
+      // Case 3: Both lines end in substantive content words
+      else {
+        const res = areWordsRhyming(current.endWord, candidate.endWord, 0.65);
+        if (res.rhymes && res.score >= 0.65) {
+          isMatch = true;
+        }
+      }
+
+      if (isMatch) {
         matchingIndices.push(candidate.index);
       }
     }
 
     // Only assign a group if at least 2 lines participate, OR if it matches the pinned target
-    const matchesTarget = pinnedTarget && areWordsRhyming(current.endWord, pinnedTarget.devanagari, 0.70).rhymes;
+    const matchesTarget =
+      pinnedTarget &&
+      (areWordsRhyming(current.endWord, pinnedTarget.devanagari, 0.70).rhymes ||
+       areWordsRhyming(current.substantiveWord, pinnedTarget.devanagari, 0.70).rhymes);
 
     if (matchingIndices.length > 1 || matchesTarget) {
       const letter = RHYME_GROUP_LETTERS[nextGroupIdx % RHYME_GROUP_LETTERS.length];
@@ -315,7 +424,7 @@ export function parseSongContent(
 
   // 2. Rhyme Group Assignment
   const { lineGroupMap, groups: rhymeGroups } = computeRhymeGroups(
-    preLines.map((l) => ({ index: l.index, endWord: l.endWord, isBar: l.isBar })),
+    preLines.map((l) => ({ index: l.index, endWord: l.endWord, isBar: l.isBar, line: l.line })),
     pinnedTarget
   );
 

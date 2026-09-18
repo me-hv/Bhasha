@@ -1,0 +1,824 @@
+export interface MultisyllabicGoldCase {
+  id: string;
+  word1: string;
+  word2: string;
+  syllableCounts: [number, number];
+  matchingSyllableSpan: number;
+  expectedTier: 'MULTISYLLABIC' | 'STRONG' | 'PERFECT';
+  minScore: number;
+  rationale: string;
+}
+
+export const MULTISYLLABIC_CASES: MultisyllabicGoldCase[] = [
+  // =========================================================================
+  // 1. 2-TO-2 SYLLABLE POLYSYLLABIC RHYMES (25 CASES)
+  // =========================================================================
+  {
+    id: 'multi-case-001',
+    word1: 'सवेरा',
+    word2: 'अंधेरा',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: 'Backwards alignment of 2 final syllables: [-eː.raː] / [-d̪ʱeː.raː]'
+  },
+  {
+    id: 'multi-case-002',
+    word1: 'किनारा',
+    word2: 'सहारा',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: 'Backwards alignment of 2 final syllables: [-aː.raː]'
+  },
+  {
+    id: 'multi-case-003',
+    word1: 'सितारा',
+    word2: 'इशारा',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: 'Backwards alignment of 2 final syllables: [-aː.raː]'
+  },
+  {
+    id: 'multi-case-004',
+    word1: 'सहारा',
+    word2: 'नज़ारा',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: 'Backwards alignment of 2 final syllables: [-aː.raː]'
+  },
+  {
+    id: 'multi-case-005',
+    word1: 'हौसला',
+    word2: 'फ़ैसला',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 2,
+    expectedTier: 'PERFECT',
+    minScore: 0.92,
+    rationale: '2-syllable equisyllabic open cadence [-sə.laː]'
+  },
+  {
+    id: 'multi-case-006',
+    word1: 'मंज़िल',
+    word2: 'साहिल',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'PERFECT',
+    minScore: 0.95,
+    rationale: 'Equisyllabic closed syllable coda [-ɪl]'
+  },
+  {
+    id: 'multi-case-007',
+    word1: 'महफ़िल',
+    word2: 'क़ातिल',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'PERFECT',
+    minScore: 0.95,
+    rationale: 'Equisyllabic closed syllable coda [-ɪl]'
+  },
+  {
+    id: 'multi-case-008',
+    word1: 'सुकून',
+    word2: 'कानून',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'PERFECT',
+    minScore: 0.95,
+    rationale: 'Equisyllabic closed syllable coda [-uːn]'
+  },
+  {
+    id: 'multi-case-009',
+    word1: 'फ़ुरसत',
+    word2: 'क़ुदरत',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'PERFECT',
+    minScore: 0.95,
+    rationale: 'Equisyllabic closed syllable coda [-ət̪] with schwa syncope'
+  },
+  {
+    id: 'multi-case-010',
+    word1: 'फ़ुरसत',
+    word2: 'हसरत',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'PERFECT',
+    minScore: 0.95,
+    rationale: 'Equisyllabic closed syllable coda [-ət̪]'
+  },
+  {
+    id: 'multi-case-011',
+    word1: 'कसरत',
+    word2: 'हसरत',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.95,
+    rationale: '2-syllable rhyming span: [-əs.rət̪]'
+  },
+  {
+    id: 'multi-case-012',
+    word1: 'हरकत',
+    word2: 'बरकत',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.95,
+    rationale: '2-syllable rhyming span: [-ər.kət̪]'
+  },
+  {
+    id: 'multi-case-013',
+    word1: 'शोहरत',
+    word2: 'नफ़रत',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'PERFECT',
+    minScore: 0.95,
+    rationale: 'Equisyllabic closed syllable coda [-ət̪]'
+  },
+  {
+    id: 'multi-case-014',
+    word1: 'जन्नत',
+    word2: 'मन्नत',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.95,
+    rationale: '2-syllable geminate nasal cadence [-ən.nət̪]'
+  },
+  {
+    id: 'multi-case-015',
+    word1: 'हिम्मत',
+    word2: 'क़िस्मत',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'PERFECT',
+    minScore: 0.95,
+    rationale: 'Equisyllabic closed syllable coda [-ət̪]'
+  },
+  {
+    id: 'multi-case-016',
+    word1: 'दौलत',
+    word2: 'शौकत',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'PERFECT',
+    minScore: 0.92,
+    rationale: 'Equisyllabic diphthong initial /ɔː/ with coda [-ət̪]'
+  },
+  {
+    id: 'multi-case-017',
+    word1: 'आदत',
+    word2: 'इबादत',
+    syllableCounts: [2, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '2-syllable tail match [-aː.d̪ət̪]'
+  },
+  {
+    id: 'multi-case-018',
+    word1: 'शिकायत',
+    word2: 'हिदायत',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '2-syllable tail match [-aː.jət̪]'
+  },
+  {
+    id: 'multi-case-019',
+    word1: 'अमानत',
+    word2: 'ज़मानत',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '2-syllable tail match [-maː.nət̪]'
+  },
+  {
+    id: 'multi-case-020',
+    word1: 'सियासत',
+    word2: 'रियासत',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '2-syllable tail match [-jaː.sət̪]'
+  },
+  {
+    id: 'multi-case-021',
+    word1: 'क़यामत',
+    word2: 'सलामत',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '2-syllable tail match [-aː.mət̪]'
+  },
+  {
+    id: 'multi-case-022',
+    word1: 'मलाल',
+    word2: 'हलाल',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.95,
+    rationale: '2-syllable liquid match [-ə.laːl]'
+  },
+  {
+    id: 'multi-case-023',
+    word1: 'हलाल',
+    word2: 'जलाल',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.95,
+    rationale: '2-syllable liquid match [-ə.laːl]'
+  },
+  {
+    id: 'multi-case-024',
+    word1: 'मिसाल',
+    word2: 'विसाल',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.95,
+    rationale: '2-syllable sibilant match [-ɪ.saːl]'
+  },
+  {
+    id: 'multi-case-025',
+    word1: 'पलक',
+    word2: 'झलक',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '2-syllable liquid-velar match [-ə.lək]'
+  },
+
+  // =========================================================================
+  // 2. 3-TO-3 SYLLABLE POLYSYLLABIC RHYMES (30 CASES)
+  // =========================================================================
+  {
+    id: 'multi-case-026',
+    word1: 'तन्हाई',
+    word2: 'जुदाई',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable match with identical open vowel sequence [-aː.iː]'
+  },
+  {
+    id: 'multi-case-027',
+    word1: 'तन्हाई',
+    word2: 'रुसवाई',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable match with identical open vowel sequence [-aː.iː]'
+  },
+  {
+    id: 'multi-case-028',
+    word1: 'तन्हाई',
+    word2: 'गहराई',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable match with identical open vowel sequence [-aː.iː]'
+  },
+  {
+    id: 'multi-case-029',
+    word1: 'तन्हाई',
+    word2: 'सच्चाई',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable match with identical open vowel sequence [-aː.iː]'
+  },
+  {
+    id: 'multi-case-030',
+    word1: 'जुदाई',
+    word2: 'रुसवाई',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable match with identical open vowel sequence [-aː.iː]'
+  },
+  {
+    id: 'multi-case-031',
+    word1: 'जुदाई',
+    word2: 'गहराई',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable match with identical open vowel sequence [-aː.iː]'
+  },
+  {
+    id: 'multi-case-032',
+    word1: 'जुदाई',
+    word2: 'सच्चाई',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable match with identical open vowel sequence [-aː.iː]'
+  },
+  {
+    id: 'multi-case-033',
+    word1: 'ज़िंदगी',
+    word2: 'बंदगी',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 3,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.95,
+    rationale: '3-to-3 exact equisyllabic cadence match [-ɪn.d̪ə.ɡiː]'
+  },
+  {
+    id: 'multi-case-034',
+    word1: 'दीवाना',
+    word2: 'परवाना',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable matching tail [-ʋaː.naː]'
+  },
+  {
+    id: 'multi-case-035',
+    word1: 'दीवाना',
+    word2: 'मस्ताना',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable matching tail [-aː.naː]'
+  },
+  {
+    id: 'multi-case-036',
+    word1: 'दीवाना',
+    word2: 'फ़साना',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable matching tail [-aː.naː]'
+  },
+  {
+    id: 'multi-case-037',
+    word1: 'दीवाना',
+    word2: 'ज़माना',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable matching tail [-aː.naː]'
+  },
+  {
+    id: 'multi-case-038',
+    word1: 'दीवाना',
+    word2: 'निशाना',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable matching tail [-aː.naː]'
+  },
+  {
+    id: 'multi-case-039',
+    word1: 'दीवाना',
+    word2: 'बहाना',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable matching tail [-aː.naː]'
+  },
+  {
+    id: 'multi-case-040',
+    word1: 'दीवाना',
+    word2: 'तराना',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable matching tail [-aː.naː]'
+  },
+  {
+    id: 'multi-case-041',
+    word1: 'परवाना',
+    word2: 'मस्ताना',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable matching tail [-aː.naː]'
+  },
+  {
+    id: 'multi-case-042',
+    word1: 'परवाना',
+    word2: 'फ़साना',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable matching tail [-aː.naː]'
+  },
+  {
+    id: 'multi-case-043',
+    word1: 'मयख़ाना',
+    word2: 'पैमाना',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable matching tail [-aː.naː]'
+  },
+  {
+    id: 'multi-case-044',
+    word1: 'सिकंदर',
+    word2: 'समंदर',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable matching tail [-ən.d̪ər]'
+  },
+  {
+    id: 'multi-case-045',
+    word1: 'सिकंदर',
+    word2: 'कलंदर',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable matching tail [-ən.d̪ər]'
+  },
+  {
+    id: 'multi-case-046',
+    word1: 'समंदर',
+    word2: 'कलंदर',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable matching tail [-ən.d̪ər]'
+  },
+  {
+    id: 'multi-case-047',
+    word1: 'जवानी',
+    word2: 'कहानी',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable matching open tail [-aː.niː]'
+  },
+  {
+    id: 'multi-case-048',
+    word1: 'जवानी',
+    word2: 'रवानी',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable matching open tail [-aː.niː]'
+  },
+  {
+    id: 'multi-case-049',
+    word1: 'कहानी',
+    word2: 'निशानी',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable matching open tail [-aː.niː]'
+  },
+  {
+    id: 'multi-case-050',
+    word1: 'रूहानी',
+    word2: 'ज़ुबानी',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable matching open tail [-aː.niː]'
+  },
+  {
+    id: 'multi-case-051',
+    word1: 'दरिया',
+    word2: 'ज़रिया',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable matching open tail [-rɪ.jaː]'
+  },
+  {
+    id: 'multi-case-052',
+    word1: 'आज़ादी',
+    word2: 'बरबादी',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable matching tail [-baː.d̪iː] / [-zaː.d̪iː]'
+  },
+  {
+    id: 'multi-case-053',
+    word1: 'बरबादी',
+    word2: 'आबादी',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.95,
+    rationale: '3-to-3 syllable matching tail [-baː.d̪iː]'
+  },
+  {
+    id: 'multi-case-054',
+    word1: 'बगावत',
+    word2: 'सखावत',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable matching tail [-aː.ʋət̪]'
+  },
+  {
+    id: 'multi-case-055',
+    word1: 'इंक़लाब',
+    word2: 'मुस्तराब',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: '3-to-3 syllable matching tail [-laːb] / [-raːb]'
+  },
+
+  // =========================================================================
+  // 3. CROSS-LENGTH 4-TO-3 & 3-TO-2 SPANS (25 CASES)
+  // =========================================================================
+  {
+    id: 'multi-case-056',
+    word1: 'दीवाना',
+    word2: 'आशियाना',
+    syllableCounts: [3, 4],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: 'Cross-length 3-to-4 backward aligned tail [-aː.naː]'
+  },
+  {
+    id: 'multi-case-057',
+    word1: 'परवाना',
+    word2: 'आशियाना',
+    syllableCounts: [3, 4],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: 'Cross-length 3-to-4 backward aligned tail [-aː.naː]'
+  },
+  {
+    id: 'multi-case-058',
+    word1: 'ज़िंदगी',
+    word2: 'सादगी',
+    syllableCounts: [3, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'STRONG',
+    minScore: 0.88,
+    rationale: 'Cross-length 3-to-2 root cadence match [-ɡiː]'
+  },
+  {
+    id: 'multi-case-059',
+    word1: 'ज़िंदगी',
+    word2: 'ताज़गी',
+    syllableCounts: [3, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'STRONG',
+    minScore: 0.88,
+    rationale: 'Cross-length 3-to-2 root cadence match [-ɡiː]'
+  },
+  {
+    id: 'multi-case-060',
+    word1: 'बंदगी',
+    word2: 'सादगी',
+    syllableCounts: [3, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'STRONG',
+    minScore: 0.88,
+    rationale: 'Cross-length 3-to-2 root cadence match [-ɡiː]'
+  },
+  {
+    id: 'multi-case-061',
+    word1: 'बंदगी',
+    word2: 'ताज़गी',
+    syllableCounts: [3, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'STRONG',
+    minScore: 0.88,
+    rationale: 'Cross-length 3-to-2 root cadence match [-ɡiː]'
+  },
+  {
+    id: 'multi-case-062',
+    word1: 'हालात',
+    word2: 'मुलाक़ात',
+    syllableCounts: [2, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: 'Cross-length 2-to-3 backward aligned tail [-laː.t̪]'
+  },
+  {
+    id: 'multi-case-063',
+    word1: 'औक़ात',
+    word2: 'मुलाक़ात',
+    syllableCounts: [2, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: 'Cross-length 2-to-3 backward aligned tail [-qaː.t̪]'
+  },
+  {
+    id: 'multi-case-064',
+    word1: 'जज़्बात',
+    word2: 'मुलाक़ात',
+    syllableCounts: [2, 3],
+    matchingSyllableSpan: 1,
+    expectedTier: 'STRONG',
+    minScore: 0.88,
+    rationale: 'Cross-length 2-to-3 root match [-aːt̪]'
+  },
+  {
+    id: 'multi-case-065',
+    word1: 'बरसात',
+    word2: 'मुलाक़ात',
+    syllableCounts: [2, 3],
+    matchingSyllableSpan: 1,
+    expectedTier: 'STRONG',
+    minScore: 0.88,
+    rationale: 'Cross-length 2-to-3 root match [-aːt̪]'
+  },
+  {
+    id: 'multi-case-066',
+    word1: 'हवाबाज़ी',
+    word2: 'दगाबाज़ी',
+    syllableCounts: [4, 4],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '4-to-4 matching compound suffix [-baː.ziː]'
+  },
+  {
+    id: 'multi-case-067',
+    word1: 'शानदार',
+    word2: 'जानदार',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: 'Matching compound suffix [-daːr]'
+  },
+  {
+    id: 'multi-case-068',
+    word1: 'शानदार',
+    word2: 'वफ़ादार',
+    syllableCounts: [2, 3],
+    matchingSyllableSpan: 1,
+    expectedTier: 'STRONG',
+    minScore: 0.88,
+    rationale: 'Cross-length matching compound suffix [-daːr]'
+  },
+  {
+    id: 'multi-case-069',
+    word1: 'जानदार',
+    word2: 'असरदार',
+    syllableCounts: [2, 3],
+    matchingSyllableSpan: 1,
+    expectedTier: 'STRONG',
+    minScore: 0.88,
+    rationale: 'Cross-length matching compound suffix [-daːr]'
+  },
+  {
+    id: 'multi-case-070',
+    word1: 'सन्नाटा',
+    word2: 'तमाचा',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 1,
+    expectedTier: 'STRONG',
+    minScore: 0.80,
+    rationale: '3-to-3 syllable open-vowel rhyme [-aː]'
+  },
+  {
+    id: 'multi-case-071',
+    word1: 'उजाला',
+    word2: 'निराला',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable liquid open tail [-aː.laː]'
+  },
+  {
+    id: 'multi-case-072',
+    word1: 'दिवाला',
+    word2: 'मसाला',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable liquid open tail [-aː.laː]'
+  },
+  {
+    id: 'multi-case-073',
+    word1: 'गवाला',
+    word2: 'हवाला',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 syllable liquid open tail [-aː.laː]'
+  },
+  {
+    id: 'multi-case-074',
+    word1: 'दरिया',
+    word2: 'नज़रिया',
+    syllableCounts: [3, 4],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: 'Cross-length 3-to-4 matching tail [-rɪ.jaː]'
+  },
+  {
+    id: 'multi-case-075',
+    word1: 'ज़रिया',
+    word2: 'नज़रिया',
+    syllableCounts: [3, 4],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.90,
+    rationale: 'Cross-length 3-to-4 matching tail [-rɪ.jaː]'
+  },
+  {
+    id: 'multi-case-076',
+    word1: 'मचलना',
+    word2: 'संभलना',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.92,
+    rationale: '3-to-3 verb infinitive multisyllabic rhyme [-əl.naː]'
+  },
+  {
+    id: 'multi-case-077',
+    word1: 'सुधारना',
+    word2: 'बिगाड़ना',
+    syllableCounts: [3, 3],
+    matchingSyllableSpan: 1,
+    expectedTier: 'STRONG',
+    minScore: 0.85,
+    rationale: '3-to-3 verb infinitive rhyme [-aːr.naː] vs [-aːɽ.naː]'
+  },
+  {
+    id: 'multi-case-078',
+    word1: 'खल्लास',
+    word2: 'एहसास',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'PERFECT',
+    minScore: 0.95,
+    rationale: '2-syllable equisyllabic sibilant coda [-aːs]'
+  },
+  {
+    id: 'multi-case-079',
+    word1: 'भौकाल',
+    word2: 'बवाल',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 1,
+    expectedTier: 'PERFECT',
+    minScore: 0.95,
+    rationale: '2-syllable equisyllabic liquid coda [-aːl]'
+  },
+  {
+    id: 'multi-case-080',
+    word1: 'धमाल',
+    word2: 'कमाल',
+    syllableCounts: [2, 2],
+    matchingSyllableSpan: 2,
+    expectedTier: 'MULTISYLLABIC',
+    minScore: 0.95,
+    rationale: '2-syllable equisyllabic full cadence [-maːl]'
+  }
+];

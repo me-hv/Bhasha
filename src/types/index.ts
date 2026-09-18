@@ -59,20 +59,25 @@ export interface PhoneticSequence {
   lastSyllable: PhoneticSyllable;
   penultimateSyllable?: PhoneticSyllable;
   rhymeEnding: string;
+  pronunciations?: string[];
+  alternateSequences?: PhoneticSequence[];
 }
 
 export interface DetailedRhymeScore {
   score: number;                 // 0.00 to 1.00 overall score
   quality: number;               // 0.00 to 1.00 acoustic similarity
+  rhymeQuality?: number;         // Explicit alias for acoustic tightness (0.0 to 1.0)
   phoneticSimilarity: number;    // Vowel & coda weighted distance
   matchingSyllables: number;     // 1, 2, 3, etc.
   rhymeLength: number;           // Syllable span of rhyming cadence
+  metricLength?: number;         // Syllable count span of the rhyme
   category: RhymeCategory;       // Acoustic tightness tier: 'perfect' | 'strong' | 'near' | 'assonance' | 'consonance'
   multisyllabic: boolean;        // True if matchingSyllables >= 2
   type: RhymeType;               // Backwards compatibility alias
   confidence: number;
   explanation?: string;
   phoneticDistance?: number;
+  isUnrhymed?: boolean;
 }
 
 export interface PhoneticKey {
@@ -125,6 +130,8 @@ export interface LexicalEntry {
   aliases: string[];
   normalizedSearchForms?: string[];
   pronunciation: string;
+  pronunciations?: string[];
+  alternatePhonetics?: PhoneticSequence[];
   phonemes?: string[];
   syllables: number;
   syllableBreakdown?: string[];
