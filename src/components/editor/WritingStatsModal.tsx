@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React from 'react';
 import { X, BarChart3, Flame, Layers, Hash, Activity } from 'lucide-react';
@@ -27,32 +27,32 @@ export const WritingStatsModal: React.FC<WritingStatsModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in select-none"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/85 backdrop-blur-md animate-fade-in select-none"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg bg-obsidian-925 border border-obsidian-700/80 rounded-xl shadow-2xl overflow-hidden flex flex-col"
+        className="w-full max-w-lg bg-obsidian-925 border border-obsidian-700/80 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[92dvh] sm:max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-obsidian-700/60 bg-obsidian-950">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-obsidian-700/60 bg-obsidian-950">
           <div className="flex items-center gap-2.5">
             <div className="p-1.5 rounded bg-accent/15 border border-accent/30 text-accent">
               <BarChart3 className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-sm font-mono font-bold tracking-wider text-obsidian-100 uppercase">
+              <h2 className="text-xs sm:text-sm font-mono font-bold tracking-wider text-obsidian-100 uppercase truncate max-w-[200px] sm:max-w-xs">
                 Writing Analytics · {songTitle || 'Verse'}
               </h2>
-              <p className="text-[11px] font-mono text-obsidian-500">
-                Non-destructive phonetic metrics and cadence statistics.
+              <p className="text-[10px] sm:text-[11px] font-mono text-obsidian-500">
+                Non-destructive phonetic metrics and statistics.
               </p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded text-obsidian-400 hover:text-white hover:bg-obsidian-850 transition-fast"
+            className="p-2 rounded text-obsidian-400 hover:text-white hover:bg-obsidian-850 transition-fast touch-manipulation"
           >
             <X className="w-4 h-4" />
           </button>

@@ -95,31 +95,31 @@ export const WordDetailModal: React.FC<WordDetailModalProps> = ({
     : word.multiSyllableRhymes || [];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/85 backdrop-blur-sm animate-in fade-in duration-150 select-none">
       <div 
-        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-obsidian-900 border border-obsidian-700 rounded-lg shadow-2xl p-6 text-obsidian-50"
+        className="relative w-full max-w-2xl max-h-[92dvh] sm:max-h-[90vh] overflow-y-auto bg-obsidian-900 border border-obsidian-700 rounded-lg shadow-2xl p-4 sm:p-6 text-obsidian-50"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Section */}
-        <div className="flex items-start justify-between pb-4 border-b border-obsidian-700">
-          <div>
-            <div className="flex items-baseline gap-3 flex-wrap">
-              <h2 className="text-3xl font-bold font-devanagari text-white tracking-wide">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 pb-4 border-b border-obsidian-700">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-baseline gap-2 sm:gap-3 flex-wrap">
+              <h2 className="text-2xl sm:text-3xl font-bold font-devanagari text-white tracking-wide">
                 {word.devanagari}
               </h2>
               {word.urdu && (
-                <span className="text-xl font-serif text-amber-200/80 px-1.5 py-0.5 rounded bg-obsidian-950 border border-obsidian-800" title="Urdu Script">
+                <span className="text-lg sm:text-xl font-serif text-amber-200/80 px-1.5 py-0.5 rounded bg-obsidian-950 border border-obsidian-800" title="Urdu Script">
                   {word.urdu}
                 </span>
               )}
-              <span className="text-lg font-mono text-obsidian-400">
+              <span className="text-base sm:text-lg font-mono text-obsidian-400">
                 {word.roman}
               </span>
               <span className="text-xs font-mono px-2 py-0.5 rounded bg-obsidian-800 text-accent border border-obsidian-700">
                 {word.pronunciation}
               </span>
             </div>
-            <p className="text-sm text-obsidian-300 mt-1.5 font-sans">
+            <p className="text-xs sm:text-sm text-obsidian-300 mt-1.5 font-sans">
               {word.meaning}
             </p>
             {word.hindiMeaning && (
@@ -129,10 +129,10 @@ export const WordDetailModal: React.FC<WordDetailModalProps> = ({
             )}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0">
             <button
               onClick={toggleSave}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded border transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded border transition-all touch-manipulation ${
                 saved
                   ? 'bg-accent/15 border-accent text-accent'
                   : 'bg-obsidian-800 border-obsidian-700 text-obsidian-300 hover:text-white hover:border-obsidian-600'
@@ -153,7 +153,7 @@ export const WordDetailModal: React.FC<WordDetailModalProps> = ({
 
             <button
               onClick={onClose}
-              className="p-1.5 text-obsidian-400 hover:text-white rounded hover:bg-obsidian-800 transition"
+              className="p-2 text-obsidian-400 hover:text-white rounded hover:bg-obsidian-800 transition touch-manipulation"
             >
               <X className="w-5 h-5" />
             </button>

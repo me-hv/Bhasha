@@ -68,7 +68,7 @@ export const SongVersionsDrawer: React.FC<SongVersionsDrawerProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-xs animate-fade-in select-none"
+      className="fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-xs animate-fade-in select-none"
       onClick={onClose}
     >
       <div
@@ -76,14 +76,14 @@ export const SongVersionsDrawer: React.FC<SongVersionsDrawerProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-4 sm:p-5 border-b border-obsidian-700/60 bg-obsidian-950 flex items-center justify-between">
+        <div className="p-3.5 sm:p-5 border-b border-obsidian-700/60 bg-obsidian-950 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <History className="w-4 h-4 text-accent" />
             <div>
               <h2 className="text-sm sm:text-base font-mono font-bold text-obsidian-50">
                 Version History
               </h2>
-              <p className="text-[11px] text-obsidian-400 font-mono">
+              <p className="text-[11px] text-obsidian-400 font-mono truncate max-w-[180px] sm:max-w-xs">
                 {song.title} · {versions.length} {versions.length === 1 ? 'snapshot' : 'snapshots'}
               </p>
             </div>
@@ -92,14 +92,14 @@ export const SongVersionsDrawer: React.FC<SongVersionsDrawerProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsCreating(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-accent hover:bg-accent-dark text-obsidian-950 text-xs font-mono font-bold transition-fast shadow-glow-subtle active:scale-95"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-accent hover:bg-accent-dark text-obsidian-950 text-xs font-mono font-bold transition-fast shadow-glow-subtle active:scale-95 touch-manipulation whitespace-nowrap"
             >
               <Plus className="w-3.5 h-3.5 stroke-[3]" />
               <span>Save Version</span>
             </button>
             <button
               onClick={onClose}
-              className="p-1.5 text-obsidian-400 hover:text-white rounded hover:bg-obsidian-900 transition-fast"
+              className="p-2 text-obsidian-400 hover:text-white rounded hover:bg-obsidian-900 transition-fast touch-manipulation"
             >
               <X className="w-4 h-4" />
             </button>

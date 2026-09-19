@@ -76,8 +76,8 @@ export default function WordsDirectoryPage() {
   };
 
   return (
-    <div className="h-full flex flex-col bg-obsidian-950 overflow-y-auto p-6 sm:p-12 md:p-16 select-none animate-fade-in">
-      <div className="max-w-4xl mx-auto w-full space-y-8">
+    <div className="h-full flex flex-col bg-obsidian-950 overflow-y-auto px-4 sm:px-10 md:px-16 py-6 sm:py-10 md:py-16 pb-24 md:pb-16 select-none animate-fade-in">
+      <div className="max-w-4xl mx-auto w-full space-y-6 sm:space-y-8">
         {/* Header */}
         <div className="pb-6 border-b border-obsidian-700/60">
           <span className="text-xs font-mono text-obsidian-500 uppercase tracking-widest block mb-1">

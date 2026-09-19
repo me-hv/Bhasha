@@ -98,24 +98,31 @@ export const RhymeDrawer: React.FC<RhymeDrawerProps> = ({
   };
 
   return (
-    <div className="w-80 sm:w-88 md:w-96 h-full bg-obsidian-925 border-l border-obsidian-700/60 flex flex-col justify-between shadow-panel select-none z-20 animate-fade-in">
-      {/* Top Header & Search */}
-      <div>
-        <div className="flex items-center justify-between px-4 py-3 border-b border-obsidian-700/60 bg-obsidian-950">
-          <div className="flex items-center gap-2">
-            <Flame className="w-3.5 h-3.5 text-rhyme-perfect" />
-            <span className="text-xs font-mono font-semibold text-obsidian-200 tracking-wider">
-              RHYME RACK
-            </span>
+    <>
+      {/* Mobile Backdrop Overlay */}
+      <div
+        className="fixed inset-0 z-40 bg-black/75 backdrop-blur-sm md:hidden animate-fade-in"
+        onClick={onClose}
+      />
+
+      <div className="fixed inset-y-0 right-0 z-50 w-full sm:max-w-md md:relative md:w-96 md:inset-auto h-full bg-obsidian-925 border-l border-obsidian-700/60 flex flex-col justify-between shadow-2xl select-none animate-slide-up md:animate-fade-in">
+        {/* Top Header & Search */}
+        <div>
+          <div className="flex items-center justify-between px-4 py-3.5 border-b border-obsidian-700/60 bg-obsidian-950">
+            <div className="flex items-center gap-2">
+              <Flame className="w-4 h-4 text-rhyme-perfect" />
+              <span className="text-xs font-mono font-semibold text-obsidian-200 tracking-wider">
+                RHYME RACK
+              </span>
+            </div>
+            <button
+              onClick={onClose}
+              className="p-2 text-obsidian-400 hover:text-white rounded-lg hover:bg-obsidian-850 transition-fast touch-target flex items-center justify-center"
+              title="Close Drawer (Esc or ⌘B)"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
-          <button
-            onClick={onClose}
-            className="p-1 text-obsidian-500 hover:text-white rounded hover:bg-obsidian-850 transition-fast"
-            title="Close Drawer (Esc or ⌘B)"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
 
         {/* Search Input */}
         <div className="p-3 border-b border-obsidian-700/50 bg-obsidian-925">
@@ -640,5 +647,6 @@ export const RhymeDrawer: React.FC<RhymeDrawerProps> = ({
         Click any word to insert at cursor · ESC to close
       </div>
     </div>
+    </>
   );
 };

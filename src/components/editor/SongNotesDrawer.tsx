@@ -75,7 +75,7 @@ export const SongNotesDrawer: React.FC<SongNotesDrawerProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-xs animate-fade-in select-none"
+      className="fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-xs animate-fade-in select-none"
       onClick={onClose}
     >
       <div
@@ -83,14 +83,14 @@ export const SongNotesDrawer: React.FC<SongNotesDrawerProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-4 sm:p-5 border-b border-obsidian-700/60 bg-obsidian-950 flex items-center justify-between">
+        <div className="p-3.5 sm:p-5 border-b border-obsidian-700/60 bg-obsidian-950 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <FileText className="w-4 h-4 text-accent" />
             <div>
               <h2 className="text-sm sm:text-base font-mono font-bold text-obsidian-50">
                 Creative Notes & Memory
               </h2>
-              <p className="text-[11px] text-obsidian-400 font-mono">
+              <p className="text-[11px] text-obsidian-400 font-mono truncate max-w-[200px] sm:max-w-xs">
                 {song.title}
               </p>
             </div>
@@ -98,17 +98,17 @@ export const SongNotesDrawer: React.FC<SongNotesDrawerProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 text-obsidian-400 hover:text-white rounded hover:bg-obsidian-900 transition-fast"
+            className="p-2 text-obsidian-400 hover:text-white rounded hover:bg-obsidian-900 transition-fast touch-manipulation"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Tab Switcher */}
-        <div className="px-4 pt-3 pb-2 border-b border-obsidian-800 bg-obsidian-950 flex items-center gap-2">
+        <div className="px-3 sm:px-4 pt-2.5 pb-2 border-b border-obsidian-800 bg-obsidian-950 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
           <button
             onClick={() => setActiveTab('notes')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono transition-fast ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono transition-fast touch-manipulation whitespace-nowrap ${
               activeTab === 'notes'
                 ? 'bg-obsidian-800 text-white font-semibold border border-obsidian-600'
                 : 'text-obsidian-400 hover:text-obsidian-200'
@@ -120,7 +120,7 @@ export const SongNotesDrawer: React.FC<SongNotesDrawerProps> = ({
 
           <button
             onClick={() => setActiveTab('sections')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono transition-fast ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono transition-fast touch-manipulation whitespace-nowrap ${
               activeTab === 'sections'
                 ? 'bg-obsidian-800 text-white font-semibold border border-obsidian-600'
                 : 'text-obsidian-400 hover:text-obsidian-200'
@@ -132,14 +132,14 @@ export const SongNotesDrawer: React.FC<SongNotesDrawerProps> = ({
 
           <button
             onClick={() => setActiveTab('vocabulary')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono transition-fast ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono transition-fast touch-manipulation whitespace-nowrap ${
               activeTab === 'vocabulary'
                 ? 'bg-obsidian-800 text-white font-semibold border border-obsidian-600'
                 : 'text-obsidian-400 hover:text-obsidian-200'
             }`}
           >
             <Bookmark className="w-3 h-3 text-accent" />
-            <span>Song Vocabulary ({song.songVocabulary?.length || 0})</span>
+            <span>Vocabulary ({song.songVocabulary?.length || 0})</span>
           </button>
         </div>
 

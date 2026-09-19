@@ -124,40 +124,40 @@ export const StuckModal: React.FC<StuckModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in select-none"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/85 backdrop-blur-md animate-fade-in select-none"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-2xl bg-obsidian-925 border border-obsidian-700/80 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+        className="w-full max-w-2xl bg-obsidian-925 border border-obsidian-700/80 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[92dvh] sm:max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-obsidian-700/60 bg-obsidian-950">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-obsidian-700/60 bg-obsidian-950">
           <div className="flex items-center gap-2.5">
             <div className="p-1.5 rounded bg-accent/15 border border-accent/30 text-accent">
               <Sparkles className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-sm font-mono font-bold tracking-wider text-obsidian-100 uppercase">
+              <h2 className="text-xs sm:text-sm font-mono font-bold tracking-wider text-obsidian-100 uppercase">
                 Creative Catalyst · I&apos;m Stuck
               </h2>
-              <p className="text-[11px] font-mono text-obsidian-500">
-                Unlock the next bar with structured concept seeds and sensory imagery.
+              <p className="text-[10px] sm:text-[11px] font-mono text-obsidian-500">
+                Unlock the next bar with concept seeds and imagery.
               </p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded text-obsidian-400 hover:text-white hover:bg-obsidian-850 transition-fast"
+            className="p-2 rounded text-obsidian-400 hover:text-white hover:bg-obsidian-850 transition-fast touch-manipulation"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex items-center gap-1.5 px-6 py-2.5 bg-obsidian-900 border-b border-obsidian-700/50 overflow-x-auto text-xs font-mono">
-          <span className="text-[10px] text-obsidian-500 uppercase tracking-wider mr-1">Need:</span>
+        <div className="flex items-center gap-1.5 px-3 sm:px-6 py-2 sm:py-2.5 bg-obsidian-900 border-b border-obsidian-700/50 overflow-x-auto no-scrollbar text-xs font-mono">
+          <span className="text-[10px] text-obsidian-500 uppercase tracking-wider mr-1 hidden xs:inline">Need:</span>
           {(
             [
               { id: 'ALL', label: 'Surprise Me' },
@@ -173,7 +173,7 @@ export const StuckModal: React.FC<StuckModalProps> = ({
             <button
               key={cat.id}
               onClick={() => handleCategoryChange(cat.id)}
-              className={`px-3 py-1 rounded text-xs font-mono transition-fast whitespace-nowrap ${
+              className={`px-3 py-1.5 rounded text-xs font-mono transition-fast whitespace-nowrap touch-manipulation ${
                 selectedCategory === cat.id
                   ? 'bg-accent/20 text-accent border border-accent/50 font-semibold'
                   : 'bg-obsidian-950 text-obsidian-400 hover:text-white border border-obsidian-700/60 hover:bg-obsidian-850'
@@ -185,7 +185,7 @@ export const StuckModal: React.FC<StuckModalProps> = ({
         </div>
 
         {/* Body Content */}
-        <div className="p-6 space-y-5 overflow-y-auto max-h-[calc(90vh-160px)]">
+        <div className="p-3.5 sm:p-6 space-y-4 sm:space-y-5 overflow-y-auto flex-1">
           {/* 1. A WORD MODE: Quick Vocabulary Sparks */}
           {selectedCategory === 'WORD' ? (
             <div className="p-5 rounded-lg bg-obsidian-950 border border-obsidian-700/70 space-y-4">

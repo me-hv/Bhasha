@@ -86,8 +86,8 @@ export default function StudioHomePage() {
   }
 
   return (
-    <div className="h-full w-full bg-obsidian-950 overflow-y-auto select-none px-6 sm:px-12 md:px-20 py-12 md:py-16 animate-fade-in">
-      <div className="max-w-3xl mx-auto space-y-10">
+    <div className="h-full w-full bg-obsidian-950 overflow-y-auto select-none px-4 sm:px-10 md:px-20 py-6 sm:py-12 md:py-16 pb-24 md:pb-16 animate-fade-in">
+      <div className="max-w-3xl mx-auto space-y-8 sm:space-y-10">
         {/* Editorial Greeting Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-6 border-b border-obsidian-700/60">
           <div className="space-y-1.5">

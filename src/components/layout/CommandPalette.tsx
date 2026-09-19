@@ -92,40 +92,43 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 p-4 bg-black/80 backdrop-blur-sm animate-fade-in select-none"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-4 sm:pt-20 p-2.5 sm:p-4 bg-black/85 backdrop-blur-sm animate-fade-in select-none"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-xl bg-obsidian-925 border border-obsidian-700/80 rounded-lg shadow-panel overflow-hidden text-obsidian-50"
+        className="w-full max-w-xl bg-obsidian-925 border border-obsidian-700/80 rounded-lg shadow-panel overflow-hidden text-obsidian-50 max-h-[88dvh] sm:max-h-[80vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Bar Input */}
-        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-obsidian-700/60 bg-obsidian-950">
-          <Search className="w-4 h-4 text-accent" />
+        <div className="flex items-center gap-3 px-3.5 sm:px-4 py-3 sm:py-3.5 border-b border-obsidian-700/60 bg-obsidian-950">
+          <Search className="w-4 h-4 text-accent shrink-0" />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search songs, lyrics, lexicon, ideas or commands... (⌘P / ⌘K)"
+            placeholder="Search songs, lyrics, lexicon, ideas... (⌘P)"
             className="flex-1 bg-transparent text-sm text-obsidian-100 placeholder-obsidian-500 focus:outline-none font-mono"
           />
           {query ? (
             <button
               onClick={() => setQuery('')}
-              className="p-1 text-obsidian-500 hover:text-white rounded"
+              className="p-1.5 text-obsidian-500 hover:text-white rounded touch-manipulation"
             >
-              <X className="w-3.5 h-3.5" />
+              <X className="w-4 h-4" />
             </button>
           ) : (
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-obsidian-900 text-obsidian-500 border border-obsidian-700/50">
+            <button
+              onClick={onClose}
+              className="text-[10px] font-mono px-2 py-1 rounded bg-obsidian-900 text-obsidian-500 border border-obsidian-700/50 touch-manipulation"
+            >
               ESC
-            </span>
+            </button>
           )}
         </div>
 
         {/* Results / Navigation Body */}
-        <div className="max-h-[55vh] overflow-y-auto p-2 space-y-3">
+        <div className="flex-1 overflow-y-auto p-2 space-y-3">
           {/* Live Global Search Results */}
           {globalResults && (
             <div className="space-y-3">

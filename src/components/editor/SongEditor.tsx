@@ -477,9 +477,9 @@ export const SongEditor: React.FC<SongEditorProps> = ({
       <div className="flex-1 flex overflow-hidden relative">
         {/* Editor Main Content Area */}
         <div className="flex-1 flex flex-col h-full overflow-hidden">
-          <div className="flex-1 flex overflow-y-auto px-4 sm:px-10 md:px-16 py-8 max-w-5xl mx-auto w-full">
+          <div className="flex-1 flex overflow-y-auto px-2 sm:px-6 md:px-16 py-4 sm:py-8 max-w-5xl mx-auto w-full">
             {/* Left Gutter: Bar Number, Rhyme Group Badge (A, B..), Syllable Counter, Cadence Pattern */}
-            <div className="flex flex-col pr-4 select-none text-right font-mono text-xs border-r border-obsidian-700/40 mr-5 space-y-0 leading-[2.2] pt-[2px] min-w-[90px]">
+            <div className="flex flex-col pr-1.5 sm:pr-4 select-none text-right font-mono text-xs border-r border-obsidian-700/40 mr-2 sm:mr-5 space-y-0 leading-[2.2] pt-[2px] min-w-[48px] sm:min-w-[70px] md:min-w-[90px] shrink-0">
               {analysis.lines.map((item) => {
                 const isCurrent = activeLineIndex === item.index;
                 const formattedNum = item.barNumber !== null ? String(item.barNumber).padStart(2, '0') : '';
@@ -487,7 +487,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                 return (
                   <div
                     key={item.index}
-                    className={`h-[35.2px] flex items-center justify-end gap-2 transition-fast ${
+                    className={`h-[35.2px] flex items-center justify-end gap-1 sm:gap-2 transition-fast ${
                       isCurrent ? 'text-accent font-medium' : 'text-obsidian-500'
                     }`}
                   >
@@ -495,7 +495,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                     {writingMode === 'rhyme' ? (
                       item.rhymeGroup ? (
                         <span
-                          className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded border shadow-sm ${
+                          className={`text-[9px] sm:text-[10px] font-mono font-bold px-1 sm:px-1.5 py-0.2 rounded border shadow-sm ${
                             item.rhymeGroupColor || 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50'
                           }`}
                           title={`Rhyme Group ${item.rhymeGroup}`}
@@ -504,17 +504,17 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                         </span>
                       ) : item.barNumber !== null ? (
                         <span
-                          className="text-[10px] font-mono text-obsidian-600 px-1 rounded border border-obsidian-800/40 bg-obsidian-950/60"
+                          className="text-[9px] sm:text-[10px] font-mono text-obsidian-600 px-0.5 sm:px-1 rounded border border-obsidian-800/40 bg-obsidian-950/60"
                           title="Unrhymed bar"
                         >
                           —
                         </span>
                       ) : (
-                        <span className="w-4" />
+                        <span className="w-3 sm:w-4" />
                       )
                     ) : item.rhymeGroup ? (
                       <span
-                        className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded border shadow-sm ${
+                        className={`text-[9px] sm:text-[10px] font-mono font-bold px-1 sm:px-1.5 py-0.2 rounded border shadow-sm ${
                           item.rhymeGroupColor || 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50'
                         }`}
                         title={`Rhyme Group ${item.rhymeGroup}`}
@@ -522,22 +522,22 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                         {item.rhymeGroup}
                       </span>
                     ) : (
-                      <span className="w-4" />
+                      <span className="w-3 sm:w-4" />
                     )}
 
                     {/* Bar Number */}
                     {item.barNumber !== null ? (
-                      <span className="text-[11px] font-mono tracking-tighter w-5 opacity-75">
+                      <span className="text-[10px] sm:text-[11px] font-mono tracking-tighter w-4 sm:w-5 opacity-75">
                         {formattedNum}
                       </span>
                     ) : (
-                      <span className="w-5" />
+                      <span className="w-4 sm:w-5" />
                     )}
 
                     {/* Syllable Counter / Target Ratio */}
                     {item.syllables !== null ? (
                       <span
-                        className={`text-[10px] px-1 rounded font-mono ${
+                        className={`text-[9px] sm:text-[10px] px-1 rounded font-mono ${
                           writingMode === 'flow'
                             ? item.flow?.isDense
                               ? 'bg-rose-500/20 text-rose-400 font-bold'
@@ -555,7 +555,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                         {writingMode === 'flow' ? `${item.syllables}/${targetSyllables}` : writingMode === 'write' && !isCurrent ? '' : item.syllables}
                       </span>
                     ) : (
-                      <span className="w-3" />
+                      <span className="w-2.5 sm:w-3" />
                     )}
                   </div>
                 );
@@ -563,7 +563,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
             </div>
 
             {/* Main Seamless Writing Canvas */}
-            <div className="flex-1 relative">
+            <div className="flex-1 relative min-w-0">
               <textarea
                 ref={textareaRef}
                 value={content}
@@ -573,7 +573,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                 onClick={handleCursorMove}
                 onSelect={handleCursorMove}
                 placeholder="Start writing your verse in Hindi or Hinglish...&#10;&#10;रात में जागता, सवाल मेरे साथ&#10;शहर सो रहा लेकिन आँखों में रात"
-                className="w-full h-full min-h-[650px] text-obsidian-50 font-devanagari text-base sm:text-lg focus:outline-none resize-none leading-[2.2] tracking-wide placeholder-obsidian-600 lyrics-canvas-textarea"
+                className="w-full h-full min-h-[500px] sm:min-h-[650px] text-obsidian-50 font-devanagari text-base sm:text-lg focus:outline-none resize-none leading-[2.2] tracking-wide placeholder-obsidian-600 lyrics-canvas-textarea touch-manipulation pb-16"
                 autoFocus
                 spellCheck={false}
               />
@@ -581,17 +581,17 @@ export const SongEditor: React.FC<SongEditorProps> = ({
           </div>
 
           {/* Bottom Fast Rhyme Discovery & Status Bar */}
-          <div className="border-t border-obsidian-700/60 bg-obsidian-925/95 backdrop-blur-md px-4 sm:px-8 py-2.5 flex items-center justify-between select-none">
-            <div className="flex items-center gap-2.5 overflow-x-auto min-w-0">
+          <div className="border-t border-obsidian-700/60 bg-obsidian-925/95 backdrop-blur-md px-3 sm:px-8 py-2 sm:py-2.5 flex items-center justify-between select-none gap-2">
+            <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto no-scrollbar min-w-0 flex-1">
               {/* Active / Detected Rhyme Word Trigger */}
               <button
                 onClick={() => setIsRhymeDrawerOpen(!isRhymeDrawerOpen)}
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-obsidian-950 hover:bg-obsidian-900 border border-obsidian-700/60 hover:border-rhyme-perfect text-xs font-mono text-accent transition-fast whitespace-nowrap"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-obsidian-950 hover:bg-obsidian-900 border border-obsidian-700/60 hover:border-rhyme-perfect text-xs font-mono text-accent transition-fast whitespace-nowrap shrink-0 touch-manipulation"
                 title="Toggle Rhyme Rack (⌘B)"
               >
                 <Flame className="w-3.5 h-3.5 text-rhyme-perfect" />
                 <span className="font-bold font-devanagari text-white">{effectiveSearchWord || 'Rhymes'}</span>
-                <span className="text-[10px] text-obsidian-500 font-mono">⌘B</span>
+                <span className="text-[10px] text-obsidian-500 font-mono hidden sm:inline">⌘B</span>
               </button>
 
               {/* Pin Rhyme Target Button */}
@@ -604,7 +604,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                       handleSetRhymeTarget(effectiveSearchWord);
                     }
                   }}
-                  className={`p-1 rounded border transition-fast text-xs ${
+                  className={`p-1.5 rounded border transition-fast text-xs shrink-0 touch-manipulation ${
                     pinnedTarget?.devanagari === effectiveSearchWord
                       ? 'bg-amber-500/20 border-amber-500 text-amber-400'
                       : 'bg-obsidian-950 border-obsidian-700/60 text-obsidian-400 hover:text-amber-400 hover:bg-obsidian-900'
@@ -620,12 +620,12 @@ export const SongEditor: React.FC<SongEditorProps> = ({
               )}
 
               {/* Quick Rhyme Chips */}
-              <div className="flex items-center gap-1.5 overflow-x-auto">
+              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
                 {activeRhymes.map((r) => (
                   <button
                     key={r.word}
                     onClick={() => handleInsertWord(r.word)}
-                    className="group flex items-center gap-1 px-2.5 py-0.5 rounded bg-obsidian-950 hover:bg-obsidian-900 border border-obsidian-700/50 hover:border-accent text-xs font-devanagari text-obsidian-300 hover:text-white transition-fast whitespace-nowrap"
+                    className="group flex items-center gap-1 px-2.5 py-1 rounded bg-obsidian-950 hover:bg-obsidian-900 border border-obsidian-700/50 hover:border-accent text-xs font-devanagari text-obsidian-300 hover:text-white transition-fast whitespace-nowrap touch-manipulation"
                     title={`Click to insert "${r.word}"`}
                   >
                     <span>{r.word}</span>
@@ -638,11 +638,11 @@ export const SongEditor: React.FC<SongEditorProps> = ({
             </div>
 
             {/* Right Status, Catalyst & Drawer Toggles */}
-            <div className="flex items-center gap-2.5 flex-shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
               {/* I'M STUCK Trigger */}
               <button
                 onClick={() => setIsStuckModalOpen(true)}
-                className="flex items-center gap-1 px-2.5 py-1 rounded bg-accent/15 hover:bg-accent/25 border border-accent/40 text-xs font-mono text-accent transition-fast"
+                className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded bg-accent/15 hover:bg-accent/25 border border-accent/40 text-xs font-mono text-accent transition-fast touch-manipulation"
                 title="I'm Stuck Creative Catalyst (⌘Shift+I)"
               >
                 <Sparkles className="w-3.5 h-3.5" />
@@ -658,7 +658,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                   if (isVersionsDrawerOpen) setIsVersionsDrawerOpen(false);
                   if (isScratchpadOpen) setIsScratchpadOpen(false);
                 }}
-                className={`flex items-center gap-1 px-2.5 py-1 rounded border text-xs font-mono transition-fast ${
+                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded border text-xs font-mono transition-fast touch-manipulation ${
                   isNotesDrawerOpen
                     ? 'bg-accent/15 border-accent text-accent'
                     : 'bg-obsidian-950 border-obsidian-700/60 text-obsidian-400 hover:text-white hover:bg-obsidian-900'
@@ -678,7 +678,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                   if (isNotesDrawerOpen) setIsNotesDrawerOpen(false);
                   if (isScratchpadOpen) setIsScratchpadOpen(false);
                 }}
-                className={`flex items-center gap-1 px-2.5 py-1 rounded border text-xs font-mono transition-fast ${
+                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded border text-xs font-mono transition-fast touch-manipulation ${
                   isVersionsDrawerOpen
                     ? 'bg-accent/15 border-accent text-accent'
                     : 'bg-obsidian-950 border-obsidian-700/60 text-obsidian-400 hover:text-white hover:bg-obsidian-900'
@@ -698,7 +698,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
                   if (isNotesDrawerOpen) setIsNotesDrawerOpen(false);
                   if (isVersionsDrawerOpen) setIsVersionsDrawerOpen(false);
                 }}
-                className={`flex items-center gap-1 px-2.5 py-1 rounded border text-xs font-mono transition-fast ${
+                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded border text-xs font-mono transition-fast touch-manipulation ${
                   isRhymeDrawerOpen
                     ? 'bg-rhyme-perfect/15 border-rhyme-perfect text-rhyme-perfect'
                     : 'bg-obsidian-950 border-obsidian-700/60 text-obsidian-400 hover:text-white hover:bg-obsidian-900'
