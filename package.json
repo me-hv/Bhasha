@@ -18,7 +18,8 @@
     "test:workspace": "tsx src/tests/workspace/workspace.test.ts",
     "test:e2e": "tsx src/tests/workspace/e2e-writer-workflow.test.ts",
     "test:reliability": "tsx src/tests/reliability/reliability.test.ts",
-    "test": "tsx src/tests/language-engine.test.ts && tsx src/tests/corpus-regression.test.ts && tsx src/tests/rhyme-quality.test.ts && tsx src/tests/linguistic-correctness.test.ts && tsx src/tests/verse-analysis.test.ts && tsx src/tests/workflow/writer-workflow.test.ts && tsx src/tests/ux/interaction-friction.test.ts && tsx src/tests/workspace/workspace.test.ts && tsx src/tests/workspace/e2e-writer-workflow.test.ts && tsx src/tests/reliability/reliability.test.ts"
+    "test:writing-session": "tsx src/tests/writing-session/writing-session.test.ts",
+    "test": "tsx src/tests/language-engine.test.ts && tsx src/tests/corpus-regression.test.ts && tsx src/tests/rhyme-quality.test.ts && tsx src/tests/linguistic-correctness.test.ts && tsx src/tests/verse-analysis.test.ts && tsx src/tests/workflow/writer-workflow.test.ts && tsx src/tests/ux/interaction-friction.test.ts && tsx src/tests/workspace/workspace.test.ts && tsx src/tests/workspace/e2e-writer-workflow.test.ts && tsx src/tests/reliability/reliability.test.ts && tsx src/tests/writing-session/writing-session.test.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

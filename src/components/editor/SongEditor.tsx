@@ -237,7 +237,43 @@ export const SongEditor: React.FC<SongEditorProps> = ({
       e.preventDefault();
       setIsStructureDrawerOpen((prev) => !prev);
       if (isRhymeDrawerOpen) setIsRhymeDrawerOpen(false);
-      if (isScratchpadOpen) setIsScratchpadOpen(false);
+      return;
+    }
+
+    // ⌘/Ctrl + Enter -> Insert New Bar (Newline)
+    if (isCmdOrCtrl && (e.key === 'Enter')) {
+      e.preventDefault();
+      const textarea = textareaRef.current;
+      if (!textarea) return;
+      const startPos = textarea.selectionStart;
+      const endPos = textarea.selectionEnd;
+      const newContent = content.substring(0, startPos) + '\n' + content.substring(endPos);
+      handleContentChange(newContent);
+      setTimeout(() => {
+        textarea.focus();
+        textarea.setSelectionRange(startPos + 1, startPos + 1);
+        handleCursorMove();
+      }, 10);
+      return;
+    }
+
+    // ⌘/Ctrl + Shift + V -> Toggle Version Snapshots Drawer
+    if (isCmdOrCtrl && e.shiftKey && (e.key === 'v' || e.key === 'V')) {
+      e.preventDefault();
+      setIsVersionsDrawerOpen((prev) => !prev);
+      if (isRhymeDrawerOpen) setIsRhymeDrawerOpen(false);
+      if (isStructureDrawerOpen) setIsStructureDrawerOpen(false);
+      if (isNotesDrawerOpen) setIsNotesDrawerOpen(false);
+      return;
+    }
+
+    // ⌘/Ctrl + Shift + N -> Toggle Creative Notes Drawer
+    if (isCmdOrCtrl && e.shiftKey && (e.key === 'n' || e.key === 'N')) {
+      e.preventDefault();
+      setIsNotesDrawerOpen((prev) => !prev);
+      if (isRhymeDrawerOpen) setIsRhymeDrawerOpen(false);
+      if (isStructureDrawerOpen) setIsStructureDrawerOpen(false);
+      if (isVersionsDrawerOpen) setIsVersionsDrawerOpen(false);
       return;
     }
 
@@ -246,6 +282,32 @@ export const SongEditor: React.FC<SongEditorProps> = ({
       e.preventDefault();
       setIsStuckModalOpen((prev) => !prev);
       return;
+    }
+
+    // Escape -> Close any active overlay and return focus to cursor
+    if (e.key === 'Escape') {
+      if (
+        isRhymeDrawerOpen ||
+        isStructureDrawerOpen ||
+        isNotesDrawerOpen ||
+        isVersionsDrawerOpen ||
+        isStuckModalOpen ||
+        isStatsModalOpen ||
+        isScratchpadOpen ||
+        inspectingWord
+      ) {
+        e.preventDefault();
+        setIsRhymeDrawerOpen(false);
+        setIsStructureDrawerOpen(false);
+        setIsNotesDrawerOpen(false);
+        setIsVersionsDrawerOpen(false);
+        setIsStuckModalOpen(false);
+        setIsStatsModalOpen(false);
+        setIsScratchpadOpen(false);
+        setInspectingWord(null);
+        setTimeout(() => textareaRef.current?.focus(), 20);
+        return;
+      }
     }
 
     // ⌘/Ctrl + S -> Trigger manual save indicator
@@ -271,7 +333,7 @@ export const SongEditor: React.FC<SongEditorProps> = ({
     return [...res.perfect.slice(0, 5), ...res.strong.slice(0, 4)];
   }, [effectiveSearchWord]);
 
-  // Insert word at current cursor position
+  // Insert word at current cursor position with strict whitespace & punctuation preservation
   const handleInsertWord = (wordToInsert: string) => {
     if (!textareaRef.current) return;
     const textarea = textareaRef.current;
@@ -279,15 +341,19 @@ export const SongEditor: React.FC<SongEditorProps> = ({
     const endPos = textarea.selectionEnd;
 
     const charBefore = startPos > 0 ? content[startPos - 1] : '';
-    const prefix = charBefore && charBefore !== ' ' && charBefore !== '\n' ? ' ' : '';
+    const charAfter = endPos < content.length ? content[endPos] : '';
 
-    const newContent = content.substring(0, startPos) + prefix + wordToInsert + ' ' + content.substring(endPos);
+    const prefix = charBefore && charBefore !== ' ' && charBefore !== '\n' ? ' ' : '';
+    const suffix = charAfter && charAfter !== ' ' && charAfter !== '\n' && !/[.,/#!$%^&*;:{}=\-_`~()?"'<>।॥]/.test(charAfter) ? ' ' : '';
+
+    const newContent = content.substring(0, startPos) + prefix + wordToInsert + suffix + content.substring(endPos);
     handleContentChange(newContent);
 
     setTimeout(() => {
       textarea.focus();
-      const newCursor = startPos + prefix.length + wordToInsert.length + 1;
+      const newCursor = startPos + prefix.length + wordToInsert.length + suffix.length;
       textarea.setSelectionRange(newCursor, newCursor);
+      handleCursorMove();
     }, 10);
   };
 
