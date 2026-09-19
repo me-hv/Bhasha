@@ -94,22 +94,38 @@ export const CONSONANT_FAMILIES: Record<string, { family: string; ipa: string }>
   'ण': { family: 'nasal', ipa: 'ɳ' },
 };
 
+const SYLLABLES_CACHE = new Map<string, number>();
+const WORD_SYLLABLES_CACHE = new Map<string, number>();
+
 /**
  * Counts syllables accurately for Hindi / Hinglish text
  */
 export function countSyllables(text: string): number {
   if (!text || !text.trim()) return 0;
-  const words = text.trim().split(/\s+/);
+  const trimmed = text.trim();
+  if (SYLLABLES_CACHE.has(trimmed)) {
+    return SYLLABLES_CACHE.get(trimmed)!;
+  }
+
+  const words = trimmed.split(/\s+/);
   let total = 0;
   for (const word of words) {
     total += countWordSyllables(word);
   }
+  SYLLABLES_CACHE.set(trimmed, total);
   return total;
 }
 
 export function countWordSyllables(word: string): number {
   if (!word) return 0;
-  return toPhoneticSequence(word).syllableCount;
+  const clean = word.trim();
+  if (!clean) return 0;
+  if (WORD_SYLLABLES_CACHE.has(clean)) {
+    return WORD_SYLLABLES_CACHE.get(clean)!;
+  }
+  const count = toPhoneticSequence(clean).syllableCount;
+  WORD_SYLLABLES_CACHE.set(clean, count);
+  return count;
 }
 
 /**

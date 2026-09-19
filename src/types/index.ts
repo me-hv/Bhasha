@@ -233,14 +233,15 @@ export interface Song {
   key: string;
   timeSignature: string;
   status: SongStatus;
+  revision?: number;
   genre?: string;
   mood?: string;
   tags: string[];
   notes?: string; // Private creative notes / theme / hook / emotional direction
   sectionNotes?: Record<string, string>; // Section-level notes keyed by section header or ID
   songVocabulary?: string[]; // Words intentionally saved for this specific song
-  scratchpadNotes: string;
-  stashedRhymes: string[];
+  scratchpadNotes?: string;
+  stashedRhymes?: string[];
   pinnedPromptId?: string;
   createdAt: string;
   updatedAt: string;
@@ -261,7 +262,7 @@ export interface SongVersion {
   isAutoSafetySnapshot?: boolean;
 }
 
-export type IdeaType = 'CONCEPT' | 'IMAGE' | 'EMOTION' | 'CONTRAST' | 'SCENE' | 'PHRASE' | 'THEME';
+export type IdeaType = 'CONCEPT' | 'IMAGE' | 'EMOTION' | 'CONTRAST' | 'SCENE' | 'PHRASE' | 'THEME' | 'COUPLET';
 export type IdeaStatus = 'UNUSED' | 'IN PROGRESS' | 'USED';
 
 export interface CreativeIdea {
@@ -281,12 +282,88 @@ export interface BhashaProjectBackup {
   schemaVersion: number;
   exportedAt: string;
   bhashaVersion: string;
+  generator?: string;
   songs: Song[];
   versions: SongVersion[];
   lexicon: SavedWord[];
   collections: string[];
   ideas: CreativeIdea[];
   recentWords?: string[];
+  preferences?: AppPreferences;
+}
+
+export interface ValidationError {
+  code: string;
+  entity: 'Song' | 'SongVersion' | 'SavedWord' | 'CreativeIdea' | 'Collection' | 'Project' | 'Storage';
+  id?: string;
+  field?: string;
+  message: string;
+  fatal: boolean;
+}
+
+export interface ValidationWarning {
+  code: string;
+  entity: 'Song' | 'SongVersion' | 'SavedWord' | 'CreativeIdea' | 'Collection' | 'Project' | 'Storage';
+  id?: string;
+  field?: string;
+  message: string;
+  autoRepairable: boolean;
+}
+
+export interface ValidationDiagnostic {
+  valid: boolean;
+  errors: ValidationError[];
+  warnings: ValidationWarning[];
+}
+
+export interface ProjectIntegrityReport {
+  valid: boolean;
+  schemaVersion: number;
+  errors: ValidationError[];
+  warnings: ValidationWarning[];
+  orphans: {
+    versions: string[];
+    ideas: string[];
+    vocabulary: string[];
+    collections: string[];
+  };
+  stats: {
+    totalSongs: number;
+    totalVersions: number;
+    totalLexiconWords: number;
+    totalCollections: number;
+    totalIdeas: number;
+  };
+  isRepairable: boolean;
+}
+
+export interface ImportPreviewResult {
+  valid: boolean;
+  schemaVersion: number;
+  migrationRequired: boolean;
+  targetSchemaVersion: number;
+  counts: {
+    songs: number;
+    versions: number;
+    lexicon: number;
+    collections: number;
+    ideas: number;
+  };
+  warnings: ValidationWarning[];
+  errors: ValidationError[];
+  conflicts: {
+    duplicateSongTitles: string[];
+    overwritingExistingIds: string[];
+  };
+}
+
+export interface MigrationResult {
+  success: boolean;
+  fromVersion: number;
+  toVersion: number;
+  data?: BhashaProjectBackup;
+  error?: string;
+  stepsApplied: string[];
 }
 
 export type DiffChangeType = 'added' | 'removed' | 'changed' | 'unchanged';

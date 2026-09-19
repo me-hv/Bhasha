@@ -35,6 +35,7 @@ export const INITIAL_SAMPLE_SONG: Song = {
   scratchpadNotes: `Key themes: Midnight hunger, independent hustle, fake friends.
 Anchor rhyme words: रात, बात, साथ, हाथ, हालात, जज़्बात.`,
   stashedRhymes: ['जज़्बात', 'हालात', 'बरसात', 'मुलाक़ात', 'औकात'],
+  revision: 1,
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
 };
@@ -56,8 +57,16 @@ export function saveSong(song: Song): Song[] {
   const songs = getStoredSongs();
   const index = songs.findIndex(s => s.id === song.id);
   
+  const prevRevision = index >= 0 && typeof songs[index].revision === 'number'
+    ? songs[index].revision
+    : (typeof song.revision === 'number' && song.revision >= 1 ? song.revision : 0);
+
+  const nextRevision = index >= 0 ? prevRevision + 1 : (prevRevision || 1);
+  song.revision = nextRevision;
+
   const updatedSong: Song = {
     ...song,
+    revision: nextRevision,
     updatedAt: new Date().toISOString(),
   };
 
@@ -141,6 +150,7 @@ export function duplicateSong(songId: string, customTitle?: string): Song | null
     scratchpadNotes: source.scratchpadNotes ? `${source.scratchpadNotes}` : '',
     stashedRhymes: source.stashedRhymes ? [...source.stashedRhymes] : [],
     pinnedPromptId: source.pinnedPromptId,
+    revision: 1,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
@@ -165,6 +175,7 @@ export function createNewSong(title = 'UNTITLED TRACK', bpm = 92, key = 'Am'): S
     songVocabulary: [],
     scratchpadNotes: '',
     stashedRhymes: [],
+    revision: 1,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };

@@ -48,19 +48,27 @@ export function cleanWord(raw: string): string {
   if (!raw) return '';
   return raw
     .trim()
-    .replace(/^[.,/#!$%^&*;:{}=\-_`~()?"'<>।॥]+|[.,/#!$%^&*;:{}=\-_`~()?"'<>।॥]+$/g, '')
+    .replace(/^[.,/#!$%^&*;:{}=\-_`~()?"'<>।॥0-9]+|[.,/#!$%^&*;:{}=\-_`~()?"'<>।॥0-9]+$/g, '')
     .trim();
 }
+
+const LINE_WORDS_CACHE = new Map<string, string[]>();
 
 /**
  * Extracts list of clean words from a line
  */
 export function extractLineWords(line: string): string[] {
   if (!line || !line.trim()) return [];
-  return line
+  const trimmed = line.trim();
+  if (LINE_WORDS_CACHE.has(trimmed)) return LINE_WORDS_CACHE.get(trimmed)!;
+
+  const result = trimmed
     .split(/\s+/)
     .map(cleanWord)
-    .filter((w) => w.length > 0);
+    .filter((w) => w.length > 0 && /[a-zA-Z\u0900-\u097F]/.test(w));
+
+  LINE_WORDS_CACHE.set(trimmed, result);
+  return result;
 }
 
 /**
@@ -71,6 +79,8 @@ export function extractLineEndWord(line: string): string | null {
   if (words.length === 0) return null;
   return words[words.length - 1];
 }
+
+const WORDS_RHYME_CACHE = new Map<string, { rhymes: boolean; score: number; type: string }>();
 
 /**
  * Checks if two words rhyme with high confidence
@@ -90,11 +100,18 @@ export function areWordsRhyming(
     return { rhymes: true, score: 1.0, type: 'perfect' };
   }
 
+  const cacheKey = cleanA < cleanB ? `${cleanA}__${cleanB}__${minScore}` : `${cleanB}__${cleanA}__${minScore}`;
+  if (WORDS_RHYME_CACHE.has(cacheKey)) {
+    return WORDS_RHYME_CACHE.get(cacheKey)!;
+  }
+
   // Check dictionary variants (e.g. कुदरत ↔ क़ुदरत)
   const normA = normalizeRomanHindi(cleanA);
   const normB = normalizeRomanHindi(cleanB);
   if (normA === normB) {
-    return { rhymes: true, score: 1.0, type: 'perfect' };
+    const res = { rhymes: true, score: 1.0, type: 'perfect' };
+    WORDS_RHYME_CACHE.set(cacheKey, res);
+    return res;
   }
 
   const { devanagari: devA } = resolveToDevanagari(normA);
@@ -115,12 +132,17 @@ export function areWordsRhyming(
       (minScore <= 0.60 ? detailedScore.type === 'assonance' : detailedScore.score >= 0.75) ||
       detailedScore.score >= 0.85);
 
-  return {
+  const result = {
     rhymes: isRhyming,
     score: detailedScore.score,
     type: detailedScore.type,
   };
+
+  WORDS_RHYME_CACHE.set(cacheKey, result);
+  return result;
 }
+
+const LINE_CADENCE_CACHE = new Map<string, string>();
 
 /**
  * Generates visual rhythm cadence pattern (e.g. "● — ● ● — ●")
@@ -128,21 +150,22 @@ export function areWordsRhyming(
 export function generateCadencePattern(line: string): string {
   const words = extractLineWords(line);
   if (words.length === 0) return '';
+  const trimmed = line.trim();
+  if (LINE_CADENCE_CACHE.has(trimmed)) return LINE_CADENCE_CACHE.get(trimmed)!;
 
   const symbols: string[] = [];
   for (const word of words) {
-    const norm = normalizeRomanHindi(word);
-    const { devanagari } = resolveToDevanagari(norm);
+    const { devanagari } = resolveToDevanagari(word);
     const seq = toPhoneticSequence(devanagari || word);
-
     for (const syl of seq.syllables) {
-      // Long vowels / codas marked as heavy '—', short as '●'
-      const isLong = /aː|iː|uː|eː|oː|ɔː|ɛː/.test(syl.nucleus) || Boolean(syl.coda && syl.coda.length > 1);
+      const isLong = ['aː', 'iː', 'uː', 'eː', 'ɛː', 'oː', 'ɔː'].includes(syl.nucleus);
       symbols.push(isLong ? '—' : '●');
     }
   }
 
-  return symbols.join(' ');
+  const result = symbols.join(' ');
+  LINE_CADENCE_CACHE.set(trimmed, result);
+  return result;
 }
 
 /**
@@ -165,6 +188,8 @@ export function analyzeFlow(line: string, bpm = 92, targetSyllables = 10): FlowA
   };
 }
 
+const INTERNAL_RHYMES_CACHE = new Map<string, { wordA: string; wordB: string; score: number; type: any }[]>();
+
 /**
  * Detects internal rhymes within a single line
  */
@@ -172,19 +197,24 @@ export function detectInternalRhymes(line: string, lineIndex = 0): InternalRhyme
   const words = extractLineWords(line);
   if (words.length < 2) return [];
 
+  const wordsKey = words.join(' ');
+  if (INTERNAL_RHYMES_CACHE.has(wordsKey)) {
+    return INTERNAL_RHYMES_CACHE.get(wordsKey)!.map((m) => ({ ...m, lineIndex }));
+  }
+
   const matches: InternalRhymeMatch[] = [];
   const seenPairs = new Set<string>();
 
   for (let i = 0; i < words.length; i++) {
     const wordA = words[i];
-    if (STOP_WORDS.has(wordA.toLowerCase()) || wordA.length < 2) continue;
+    if (STOP_WORDS.has(wordA.toLowerCase()) || wordA.length < 2 || !/[a-zA-Z\u0900-\u097F]/.test(wordA)) continue;
 
     for (let j = i + 1; j < words.length; j++) {
       const wordB = words[j];
-      if (STOP_WORDS.has(wordB.toLowerCase()) || wordB.length < 2) continue;
-      if (wordA === wordB) continue; // Skip exact same word
+      if (STOP_WORDS.has(wordB.toLowerCase()) || wordB.length < 2 || !/[a-zA-Z\u0900-\u097F]/.test(wordB)) continue;
+      if (wordA.toLowerCase() === wordB.toLowerCase()) continue; // Skip exact same word
 
-      const pairKey = [wordA, wordB].sort().join(':::');
+      const pairKey = wordA < wordB ? `${wordA}:::${wordB}` : `${wordB}:::${wordA}`;
       if (seenPairs.has(pairKey)) continue;
 
       const { rhymes, score, type } = areWordsRhyming(wordA, wordB, 0.55);
@@ -201,6 +231,10 @@ export function detectInternalRhymes(line: string, lineIndex = 0): InternalRhyme
     }
   }
 
+  INTERNAL_RHYMES_CACHE.set(
+    wordsKey,
+    matches.map((m) => ({ wordA: m.wordA, wordB: m.wordB, score: m.score, type: m.type }))
+  );
   return matches;
 }
 
@@ -260,6 +294,25 @@ export function computeRhymeGroups(
       };
     });
 
+  // Precalculate refrain counts once (O(N)) instead of re-filtering inside nested loop
+  const refrainCounts = new Map<string, number>();
+  for (const b of validBars) {
+    const key = `${b.substantiveWord.toLowerCase()}_${b.endWord.toLowerCase()}`;
+    refrainCounts.set(key, (refrainCounts.get(key) || 0) + 1);
+  }
+
+  // Local rhyme pair cache to avoid redundant phonetics calls on repeated words
+  const rhymePairCache = new Map<string, { rhymes: boolean; score: number }>();
+  const checkRhymeCached = (w1: string, w2: string, minScore = 0.65) => {
+    const cacheKey = `${w1}__${w2}__${minScore}`;
+    if (rhymePairCache.has(cacheKey)) return rhymePairCache.get(cacheKey)!;
+    const res = areWordsRhyming(w1, w2, minScore);
+    rhymePairCache.set(cacheKey, res);
+    return res;
+  };
+
+  const MAX_RHYME_HORIZON = 64; // Max bars lookahead for rhyme scheme grouping
+
   for (let i = 0; i < validBars.length; i++) {
     const current = validBars[i];
     if (!current.endWord) continue;
@@ -267,10 +320,11 @@ export function computeRhymeGroups(
     // Check if this line already assigned
     if (lineGroupMap.has(current.index)) continue;
 
-    // Look for matching lines
+    // Look for matching lines within the rhyme horizon
     const matchingIndices: number[] = [current.index];
+    const maxJ = Math.min(validBars.length, i + MAX_RHYME_HORIZON);
 
-    for (let j = i + 1; j < validBars.length; j++) {
+    for (let j = i + 1; j < maxJ; j++) {
       const candidate = validBars[j];
       if (!candidate.endWord || lineGroupMap.has(candidate.index)) continue;
 
@@ -279,14 +333,10 @@ export function computeRhymeGroups(
 
       let isMatch = false;
 
-      // Case 1: Both lines end in auxiliary stop words (e.g. "बात है" vs "साथ है" or "सहारा मिल गया" vs "किनारा मिल गया")
+      // Case 1: Both lines end in auxiliary stop words
       if (isCurrentStop && isCandStop) {
-        // Count how many lines in this stanza share the identical refrain (substantiveWord + endWord)
-        const totalWithSameRefrain = validBars.filter(
-          (b) =>
-            b.substantiveWord.toLowerCase() === current.substantiveWord.toLowerCase() &&
-            b.endWord.toLowerCase() === current.endWord.toLowerCase()
-        ).length;
+        const refrainKey = `${current.substantiveWord.toLowerCase()}_${current.endWord.toLowerCase()}`;
+        const totalWithSameRefrain = refrainCounts.get(refrainKey) || 0;
 
         // 1a. If all lines share the identical refrain (Ghazal-wide Radif across >= 4 lines), check preceding Qafiya word
         if (
@@ -295,22 +345,22 @@ export function computeRhymeGroups(
           current.endWord.toLowerCase() === candidate.endWord.toLowerCase()
         ) {
           if (current.precedingWord && candidate.precedingWord) {
-            const precRes = areWordsRhyming(current.precedingWord, candidate.precedingWord, 0.65);
+            const precRes = checkRhymeCached(current.precedingWord, candidate.precedingWord, 0.65);
             if (precRes.rhymes && precRes.score >= 0.65) {
               isMatch = true;
             }
           }
         }
-        // 1b. Couplet/alternate refrain match (e.g. 2 lines share "बदल गया" or "शुरू हुआ")
+        // 1b. Couplet/alternate refrain match
         else if (
           current.substantiveWord.toLowerCase() === candidate.substantiveWord.toLowerCase() &&
           current.endWord.toLowerCase() === candidate.endWord.toLowerCase()
         ) {
           isMatch = true;
         }
-        // 1c. Distinct substantive words (Qafiya) must rhyme (e.g. "मिल गया" vs "खिल गया" or "बात है" vs "साथ है")
+        // 1c. Distinct substantive words (Qafiya) must rhyme
         else {
-          const subRes = areWordsRhyming(current.substantiveWord, candidate.substantiveWord, 0.65);
+          const subRes = checkRhymeCached(current.substantiveWord, candidate.substantiveWord, 0.65);
           if (subRes.rhymes && subRes.score >= 0.65) {
             isMatch = true;
           }
@@ -318,20 +368,20 @@ export function computeRhymeGroups(
       }
       // Case 2: One line ends in auxiliary stop word
       else if (isCurrentStop) {
-        const resSub = areWordsRhyming(current.substantiveWord, candidate.endWord, 0.65);
+        const resSub = checkRhymeCached(current.substantiveWord, candidate.endWord, 0.65);
         if (resSub.rhymes && resSub.score >= 0.65) {
           isMatch = true;
         }
       }
       else if (isCandStop) {
-        const resSub = areWordsRhyming(current.endWord, candidate.substantiveWord, 0.65);
+        const resSub = checkRhymeCached(current.endWord, candidate.substantiveWord, 0.65);
         if (resSub.rhymes && resSub.score >= 0.65) {
           isMatch = true;
         }
       }
       // Case 3: Both lines end in substantive content words
       else {
-        const res = areWordsRhyming(current.endWord, candidate.endWord, 0.65);
+        const res = checkRhymeCached(current.endWord, candidate.endWord, 0.65);
         if (res.rhymes && res.score >= 0.65) {
           isMatch = true;
         }
@@ -531,3 +581,6 @@ export function parseSongContent(
     rhymeGroups,
   };
 }
+
+export const analyzeVerse = parseSongContent;
+

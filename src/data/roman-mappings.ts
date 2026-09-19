@@ -58,6 +58,16 @@ export const ROMAN_TO_HINDI_DICTIONARY: Record<string, string> = {
   'shaamil': 'शामिल',
   'shamil': 'शामिल',
 
+  'kismat': 'क़िस्मत',
+  'qismat': 'क़िस्मत',
+  'gair': 'ग़ैर',
+  'ghair': 'ग़ैर',
+  'faulad': 'फ़ौलाद',
+  'faulaad': 'फ़ौलाद',
+  'foulad': 'फ़ौलाद',
+  'foullaad': 'फ़ौलाद',
+  'shikwa': 'शिकवा',
+
   'pyaar': 'प्यार',
   'pyar': 'प्यार',
   'piyaar': 'प्यार',

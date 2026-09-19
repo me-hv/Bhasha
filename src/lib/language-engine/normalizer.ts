@@ -61,6 +61,8 @@ export function stripDiacritics(text: string): string {
     .replace(/[z़]/g, 'z');
 }
 
+const NORMALIZE_ROMAN_CACHE = new Map<string, string>();
+
 /**
  * Normalizes Roman Hindi input by:
  * 1. Lowercasing & trimming
@@ -70,13 +72,20 @@ export function stripDiacritics(text: string): string {
  */
 export function normalizeRomanHindi(input: string): string {
   if (!input) return '';
+  const trimmed = input.trim();
+  if (!trimmed) return '';
+  if (NORMALIZE_ROMAN_CACHE.has(trimmed)) {
+    return NORMALIZE_ROMAN_CACHE.get(trimmed)!;
+  }
   
   // 1. Lowercase & trim
-  let clean = input.trim().toLowerCase();
+  let clean = trimmed.toLowerCase();
 
   // If input is Devanagari, strip punctuation and return
   if (isDevanagari(clean)) {
-    return clean.replace(/[.,/#!$%^&*;:{}=\-_`~()?"'<>।॥]/g, '').trim();
+    const res = clean.replace(/[.,/#!$%^&*;:{}=\-_`~()?"'<>।॥]/g, '').trim();
+    NORMALIZE_ROMAN_CACHE.set(trimmed, res);
+    return res;
   }
 
   // 2. Strip diacritics
@@ -100,31 +109,51 @@ export function normalizeRomanHindi(input: string): string {
     .replace(/z{2,}/g, 'z')
     .replace(/h{3,}/g, 'h');
 
+  NORMALIZE_ROMAN_CACHE.set(trimmed, clean);
   return clean;
 }
+
+const RESOLVE_DEVANAGARI_CACHE = new Map<string, { devanagari: string; isDirectMatch: boolean }>();
 
 /**
  * Resolves any Roman Hindi, Hinglish, or Devanagari input to canonical Devanagari representation.
  */
 export function resolveToDevanagari(query: string): { devanagari: string; isDirectMatch: boolean } {
-  const normalized = normalizeRomanHindi(query);
-  if (!normalized) return { devanagari: '', isDirectMatch: false };
+  if (!query) return { devanagari: '', isDirectMatch: false };
+  const trimmed = query.trim();
+  if (!trimmed) return { devanagari: '', isDirectMatch: false };
+  if (RESOLVE_DEVANAGARI_CACHE.has(trimmed)) {
+    return RESOLVE_DEVANAGARI_CACHE.get(trimmed)!;
+  }
+
+  const normalized = normalizeRomanHindi(trimmed);
+  if (!normalized) {
+    const empty = { devanagari: '', isDirectMatch: false };
+    RESOLVE_DEVANAGARI_CACHE.set(trimmed, empty);
+    return empty;
+  }
 
   // 1. If Devanagari, check database or return cleaned Devanagari
   if (isDevanagari(normalized)) {
     const lexWord = lexicalDatabase.getByDevanagari(normalized);
-    return { devanagari: lexWord?.devanagari || normalized, isDirectMatch: true };
+    const res = { devanagari: lexWord?.devanagari || normalized, isDirectMatch: true };
+    RESOLVE_DEVANAGARI_CACHE.set(trimmed, res);
+    return res;
   }
 
   // 2. Exact match in Roman Hindi mapping table
   if (ROMAN_TO_HINDI_DICTIONARY[normalized]) {
-    return { devanagari: ROMAN_TO_HINDI_DICTIONARY[normalized], isDirectMatch: true };
+    const res = { devanagari: ROMAN_TO_HINDI_DICTIONARY[normalized], isDirectMatch: true };
+    RESOLVE_DEVANAGARI_CACHE.set(trimmed, res);
+    return res;
   }
 
   // 3. Check in-memory indexed LexicalDatabase
   const lexWord = lexicalDatabase.getBySearchForm(normalized);
   if (lexWord) {
-    return { devanagari: lexWord.devanagari, isDirectMatch: true };
+    const res = { devanagari: lexWord.devanagari, isDirectMatch: true };
+    RESOLVE_DEVANAGARI_CACHE.set(trimmed, res);
+    return res;
   }
 
   // 4. Heuristic phonetic fallback variations:
@@ -154,13 +183,19 @@ export function resolveToDevanagari(query: string): { devanagari: string; isDire
   for (const variant of variantRules) {
     const vMatch = lexicalDatabase.getBySearchForm(variant);
     if (vMatch) {
-      return { devanagari: vMatch.devanagari, isDirectMatch: true };
+      const res = { devanagari: vMatch.devanagari, isDirectMatch: true };
+      RESOLVE_DEVANAGARI_CACHE.set(trimmed, res);
+      return res;
     }
     if (ROMAN_TO_HINDI_DICTIONARY[variant]) {
-      return { devanagari: ROMAN_TO_HINDI_DICTIONARY[variant], isDirectMatch: true };
+      const res = { devanagari: ROMAN_TO_HINDI_DICTIONARY[variant], isDirectMatch: true };
+      RESOLVE_DEVANAGARI_CACHE.set(trimmed, res);
+      return res;
     }
   }
 
   // 5. Return the normalized input as fallback
-  return { devanagari: normalized, isDirectMatch: false };
+  const fallback = { devanagari: normalized, isDirectMatch: false };
+  RESOLVE_DEVANAGARI_CACHE.set(trimmed, fallback);
+  return fallback;
 }

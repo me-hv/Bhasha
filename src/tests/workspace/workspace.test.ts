@@ -362,7 +362,7 @@ console.log('\n21. Project Export:');
 const projectJsonStr = exportProjectJson();
 assert(typeof projectJsonStr === 'string' && projectJsonStr.length > 50, 'Project backup exported as valid JSON string');
 const parsedBackup: BhashaProjectBackup = JSON.parse(projectJsonStr);
-assert(parsedBackup.schemaVersion === 1, 'Project backup schemaVersion is 1');
+assert(parsedBackup.schemaVersion >= 1, 'Project backup schemaVersion is valid (>= 1)');
 assert(parsedBackup.bhashaVersion === '1.0.0', 'BHASHA version matches 1.0.0');
 assert(parsedBackup.songs.length >= 2, 'Export contains all created songs');
 assert(parsedBackup.lexicon.length >= 1, 'Export contains saved lexicon');

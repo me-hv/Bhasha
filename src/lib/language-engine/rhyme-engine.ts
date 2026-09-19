@@ -74,14 +74,20 @@ function buildRhymeMatch(
   };
 }
 
+const RHYMES_CACHE = new Map<string, RhymeResult>();
+
 /**
- * Primary Rhyme Discovery API: getRhymes(query)
- * 5-Stage deterministic pipeline for Hindustani lyricists.
+ * 5-Stage Rhyme Discovery and Ranking Engine
  */
 export function getRhymes(query: string): RhymeResult {
+  const cacheKey = query ? query.trim().toLowerCase() : '';
+  if (RHYMES_CACHE.has(cacheKey)) {
+    return RHYMES_CACHE.get(cacheKey)!;
+  }
+
   const normalized = normalizeRomanHindi(query);
   if (!normalized) {
-    return {
+    const emptyResult: RhymeResult = {
       query,
       resolvedDevanagari: '',
       perfect: [],
@@ -94,6 +100,8 @@ export function getRhymes(query: string): RhymeResult {
       multiSyllable: [],
       totalMatches: 0,
     };
+    if (cacheKey) RHYMES_CACHE.set(cacheKey, emptyResult);
+    return emptyResult;
   }
 
   const { devanagari: resolvedDevanagari } = resolveToDevanagari(normalized);
@@ -235,7 +243,7 @@ export function getRhymes(query: string): RhymeResult {
     consonanceList.length +
     cadenceList.length;
 
-  return {
+  const result: RhymeResult = {
     query,
     resolvedWord: wordEntry || undefined,
     resolvedDevanagari: effectiveDeva,
@@ -249,6 +257,12 @@ export function getRhymes(query: string): RhymeResult {
     multiSyllable: wordEntry?.multiSyllableRhymes || [],
     totalMatches,
   };
+
+  if (cacheKey) {
+    RHYMES_CACHE.set(cacheKey, result);
+  }
+
+  return result;
 }
 
 /**

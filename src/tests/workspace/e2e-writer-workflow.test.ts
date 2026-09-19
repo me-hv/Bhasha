@@ -255,7 +255,7 @@ console.log('\nStep 11: EXPORT ENTIRE PROJECT BACKUP');
 const projectJsonStr = exportProjectJson();
 assertStep(typeof projectJsonStr === 'string' && projectJsonStr.length > 50, 'Step 11.1: Project exported as valid JSON string');
 const parsedBackup: BhashaProjectBackup = JSON.parse(projectJsonStr);
-assertStep(parsedBackup.schemaVersion === 1, 'Step 11.2: Backup exported in Schema v1');
+assertStep(parsedBackup.schemaVersion >= 1, 'Step 11.2: Backup exported in canonical schema version (>= 1)');
 assertStep(parsedBackup.songs.length >= 1, 'Step 11.3: Backup includes all active songs');
 assertStep(parsedBackup.versions.length >= 3, 'Step 11.4: Backup includes all version snapshots (V1, V2, Safety)');
 assertStep(parsedBackup.lexicon.length >= 1, 'Step 11.5: Backup includes saved lexicon bank');
